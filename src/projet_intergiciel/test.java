@@ -1,5 +1,5 @@
 package projet_intergiciel;
 
-public class tetst {
+public class test {
 
 }
