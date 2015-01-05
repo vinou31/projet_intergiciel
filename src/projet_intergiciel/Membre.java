@@ -18,13 +18,14 @@ public class Membre {
 	private Collection<Article> propose;
 	private Map<Article, Troc> convoite;
 	private Collection<Avis> estNote;
+	private String motDePasse;
 	
 	//constructeur vide
 	public Membre(){}
 	
 	
 	//constructeur avec tous les attributs
-	public Membre(String nom, int identifiant, String mail, String adresse, int telephone, String pseudonyme, int porteMonnaie, Date dateInscription) {
+	public Membre(String nom, int identifiant, String mail, String adresse, int telephone, String pseudonyme, int porteMonnaie, Date dateInscription, String mdp) {
 		super();
 		this.nom = nom;
 		this.identifiant = identifiant;
@@ -34,6 +35,7 @@ public class Membre {
 		this.pseudonyme = pseudonyme;
 		this.porteMonnaie = porteMonnaie;
 		this.dateInscription = dateInscription;
+		this.motDePasse = mdp;
 	}
 	
 	//a mettre dans la facade
@@ -116,5 +118,17 @@ public class Membre {
 	public void setDateInscription(Date dateInscription) {
 		this.dateInscription = dateInscription;
 	}
+
+
+	public String getMotDePasse() {
+		return motDePasse;
+	}
+
+
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
+	
+	
 
 }
