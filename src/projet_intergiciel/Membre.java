@@ -4,9 +4,19 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.Map;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Membre {
 	
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int ID;
+	
 	private String nom;
 	private int identifiant;
 	private String mail;
@@ -15,8 +25,10 @@ public class Membre {
 	private String pseudonyme;
 	private int porteMonnaie;
 	private Date dateInscription;
+	@OneToMany
 	private Collection<Article> propose;
 	private Map<Article, Troc> convoite;
+	@OneToMany
 	private Collection<Avis> estNote;
 	private String motDePasse;
 	

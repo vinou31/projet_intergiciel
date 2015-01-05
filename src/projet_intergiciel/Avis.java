@@ -2,11 +2,20 @@ package projet_intergiciel;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Avis {
 	private int note;
 	private String critique;
 	private Date datePublication;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int ID;
 	//constructeur vide
 	public Avis(){}
 	

@@ -7,14 +7,26 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Article extends Troc{
 private String description;
 private Image image;
 private Date dateDepot;
+@ManyToOne
 private Membre possesseur;
+@ManyToMany
 private Collection<Categorie> estdeType;
 private Map<String, Troc> offres;
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO)
+private int ID;
 
 
  
