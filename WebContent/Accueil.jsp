@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body> 
 <header>
 	<div id="titre_principal">
 	<img src="images/zozor_logo.png" alt="Logo de Zozor" id="logo" />
