@@ -1,5 +1,8 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="java.util.Collection"%>
+<%@page import="intergiciel.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body> 
+<body>
 <header>
 	<div id="titre_principal">
 	<img src="images/zozor_logo.png" alt="Logo de Zozor" id="logo" />
@@ -31,9 +34,17 @@
 		<p>info comptes</p>
 	</aside>
 	<article>
-	<form action="Accueil" method="get">
+	<form action="Accueil" method="post">
 		<h1><img src="images/ico_epingle.png" alt="Catégorie voyage" class="ico_categorie" />les articles</h1>
-		<%=  %>
+		<% Collection<Article> listArticle = (Collection<Article>)request.getAttribute("article"); 
+		if(listArticle.isEmpty()){}
+		else{
+			int i = 1;%>
+			<% for(Article article : listArticle) { %>
+			<img alt="article_"+<%=i%> src=<%=article.getImage()%> >
+			<%i++;
+			}
+			}%>
 		</form>
 	</article>
 	

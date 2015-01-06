@@ -1,7 +1,8 @@
-package projet_intergiciel;
+package intergiciel;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/Accueil")
 public class Accueil extends HttpServlet {
+	
+	@EJB
+	FacadeAccueil facade;
+	
 	public Accueil() {
 		super();
 	}
@@ -25,11 +30,14 @@ public class Accueil extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String op = req.getParameter("op");
+		
+		req.setAttribute("article", facade.getArticles());
+		req.getRequestDispatcher("Accueil.jsp").forward(req, resp);
+		/*String op = req.getParameter("op");
 		switch (op){
 		case "":
 			break;
-		}
+		}*/
 	}
 
 

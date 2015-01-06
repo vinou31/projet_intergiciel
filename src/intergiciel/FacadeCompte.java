@@ -1,4 +1,4 @@
-package projet_intergiciel;
+package intergiciel;
 
 import java.sql.Date;
 import java.util.Collection;

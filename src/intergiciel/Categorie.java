@@ -1,4 +1,4 @@
-package projet_intergiciel;
+package intergiciel;
 
 public class Categorie {
 

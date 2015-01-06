@@ -1,4 +1,4 @@
-package projet_intergiciel;
+package intergiciel;
 
 import java.util.Collection;
 import java.util.List;

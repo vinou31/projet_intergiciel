@@ -1,4 +1,4 @@
-package projet_intergiciel;
+package intergiciel;
 
 import java.sql.Date;
 import java.util.Collection;
@@ -27,7 +27,7 @@ public class Membre {
 	private Date dateInscription;
 	@OneToMany
 	private Collection<Article> propose;
-	private Map<Article, Troc> convoite;
+	//private Map<Article, Troc> convoite;
 	@OneToMany
 	private Collection<Avis> estNote;
 	private String motDePasse;
@@ -73,12 +73,12 @@ public class Membre {
 	public void setPropose(Collection<Article> propose) {
 		this.propose = propose;
 	}
-	public Map<Article, Troc> getConvoite() {
+	/*public Map<Article, Troc> getConvoite() {
 		return convoite;
 	}
 	public void setConvoite(Map<Article, Troc> convoite) {
 		this.convoite = convoite;
-	}
+	}*/
 	public Collection<Avis> getEstNote() {
 		return estNote;
 	}
