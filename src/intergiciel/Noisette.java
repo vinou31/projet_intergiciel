@@ -2,7 +2,7 @@ package intergiciel;
 
 import javax.persistence.Entity;
 
-@Entity
+
 public class Noisette extends Troc {
 	private int quantite;
 

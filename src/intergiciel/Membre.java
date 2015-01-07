@@ -2,7 +2,7 @@ package intergiciel;
 
 import java.sql.Date;
 import java.util.Collection;
-import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,12 +25,12 @@ public class Membre {
 	private String pseudonyme;
 	private int porteMonnaie;
 	private Date dateInscription;
-	@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
-	private Collection<Article> propose;
-	@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
-	private Collection<Troc> mesTrocs;
-	@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
-	private Collection<Avis> estNote;
+	@OneToMany(mappedBy="possesseur", fetch=FetchType.EAGER)
+	private Set<Article> propose;
+	@OneToMany(mappedBy="membre", fetch=FetchType.EAGER)
+	private Set<Troc> mesTrocs;
+	@OneToMany(mappedBy="membre", fetch=FetchType.EAGER)
+	private Set<Avis> estNote;
 	private String motDePasse;
 	
 	//constructeur vide
@@ -67,17 +67,17 @@ public class Membre {
 	public String getNom() {
 		return nom;
 	}
-	public Collection<Article> getPropose() {
+	public Set<Article> getPropose() {
 		return propose;
 	}
-	public void setPropose(Collection<Article> propose) {
+	public void setPropose(Set<Article> propose) {
 		this.propose = propose;
 	}
 
 	public Collection<Avis> getEstNote() {
 		return estNote;
 	}
-	public void setEstNote(Collection<Avis> estNote) {
+	public void setEstNote(Set<Avis> estNote) {
 		this.estNote = estNote;
 	}
 	public void setNom(String nom) {
@@ -137,8 +137,18 @@ public class Membre {
 	}
 
 
-	public void setMesTrocs(Collection<Troc> mesTrocs) {
+	public void setMesTrocs(Set<Troc> mesTrocs) {
 		this.mesTrocs = mesTrocs;
+	}
+
+
+	public int getID() {
+		return ID;
+	}
+
+
+	public void setID(int iD) {
+		ID = iD;
 	}
 	
 	

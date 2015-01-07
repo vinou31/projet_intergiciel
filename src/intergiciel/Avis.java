@@ -6,12 +6,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Avis {
 	private int note;
 	private String critique;
 	private Date datePublication;
+	
+	@ManyToOne
+	private Article article;
+	
+	@ManyToOne
+	private Membre membre;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

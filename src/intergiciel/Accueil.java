@@ -38,13 +38,13 @@ public class Accueil extends HttpServlet {
 		
 		req.setAttribute("article", facadeAccueil.getArticles());
 		req.getRequestDispatcher("Accueil.jsp").forward(req, resp);
-		String op = req.getParameter("op");
+		/*String op = req.getParameter("op");
 		switch (op){
 		case "compte": 
-			Collection<Membre> listMembre = facadeCompte.getCompte();
+			Collection<Membre> listMembre = facadeCompte.getMembre();
 			req.getRequestDispatcher("Compte.jsp").forward(req, resp);
 			break;
-		}
+		}*/
 	}
 
 

@@ -7,14 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Compte extends HttpServlet {
+public class ServCompte extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4842750767803720120L;
 
-	public Compte() {
+	public ServCompte() {
 		// TODO Auto-generated constructor stub
 	}
 
