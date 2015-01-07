@@ -2,6 +2,7 @@ package intergiciel;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,18 +14,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Article extends Troc{
+public class Article {
 private String description;
 private String image;//Url de l'emplacement de l'image
 private Date dateDepot;
 @ManyToOne
 private Membre possesseur;
-@ManyToMany
-private Collection<AvisArticle> avis;
-@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
-private Collection<Categorie> estdeType;
-@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
-private Collection<Troc> offres;
+@OneToMany(mappedBy="article", fetch=FetchType.EAGER)
+private Set<Avis> avis;
+@ManyToMany(mappedBy="articles", fetch=FetchType.EAGER)
+private Set<Categorie> estdeType;
+@OneToMany(mappedBy="article", fetch=FetchType.EAGER)
+private Set<Troc> offres;
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
 private int ID;
@@ -35,8 +36,7 @@ private int ID;
 public Article(){}
 
 //constructeur classique
-public Article(String nom, double prixreel, double tauxChange, String description, String image, Date dateDepot, Membre possesseur) {
-	super(nom, prixreel, tauxChange);
+public Article(String nom, double tauxChange, String description, String image, Date dateDepot, Membre possesseur) {
 	this.description = description;
 	this.image = image;
 	this.dateDepot = dateDepot;

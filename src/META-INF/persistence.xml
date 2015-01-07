@@ -14,10 +14,9 @@
                 
                <class>intergiciel.Article</class>
                <class>intergiciel.Avis</class>
-               <class>intergiciel.AvisArticle</class>
-               <class>intergiciel.AvisMembre</class>
                <class>intergiciel.Membre</class>
                <class>intergiciel.Troc</class>
+               <class>intergiciel.Categorie</class>
 
                 
                 <properties>

@@ -17,7 +17,7 @@ public class FacadeAccueil {
 		return em.createQuery("from Article", Article.class).getResultList();		
 	}
 	
-	public Collection<AvisArticle> getAvisArticle(Article article){
-		return em.createQuery("from AvisArticle", AvisArticle.class).getResultList();
+	public Collection<Avis> getAvisArticle(Article article){
+		return em.createQuery("from Avis", Avis.class).getResultList();
 	}
 }

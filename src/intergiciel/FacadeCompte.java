@@ -2,51 +2,47 @@ package intergiciel;
 
 import java.sql.Date;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
+import javax.ejb.Singleton;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+@Singleton
 public class FacadeCompte {
-	private Collection<Membre> compte;
 	
+	@PersistenceContext
+	EntityManager em;
 	
-	public FacadeCompte() {
-		this.compte = new HashSet<Membre>();
+	public FacadeCompte(){
+		
 	}
-
-	public void creerCompte(String nom, int identifiant, String mail, String adresse, int telephone, String pseudonyme, int porteMonnaie, Date dateInscription, String mdp){
-		Membre m = new Membre(nom, identifiant, mail, adresse, telephone, pseudonyme, porteMonnaie, dateInscription, mdp);
-		if (this.compte.contains(m)){
-			throw new membreExisteException();
-		}
-		this.compte.add(m);
+	
+	public void creerMembre(String nom, String mail, String adresse, int telephone, String pseudonyme, int porteMonnaie, Date dateInscription, String mdp){
+		Membre m = new Membre(nom, mail, adresse, telephone, pseudonyme, porteMonnaie, dateInscription, mdp);
+		em.persist(m);
+		
 	}
 
 	public void modifierMotDePasse(Membre m, String newMDP){
-		Iterator<Membre> it = compte.iterator();
-		boolean trouve = false;
-		while (it.hasNext() && !trouve){
-			trouve = it.equals(m);
-			it.next();
-		}
-		m.setMotDePasse(newMDP);;
+		em.find(Membre.class, m.getID()).setMotDePasse(newMDP);
 		
 	}
 	
-	public void resilierCompte(Membre m){
-		compte.remove(m);
+	public void resilierMembre(Membre m){
+		em.remove(m);
 	}
 	
-	public void modifierCompte(){
+	public void modifierMembre(){
 		
 	}
 
-	public Collection<Membre> getCompte() {
-		return compte;
+	public List<Membre> getMembre() {
+		return em.createQuery("from Membre", Membre.class).getResultList();
 	}
 
-	public void setCompte(Collection<Membre> compte) {
-		this.compte = compte;
-	}
+
 
 
 
