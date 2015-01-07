@@ -1,6 +1,8 @@
 package intergiciel;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -13,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 public class Accueil extends HttpServlet {
 	
 	@EJB
-	FacadeAccueil facade;
+	FacadeAccueil facadeAccueil;
+	
+	@EJB
+	FacadeCompte facadeCompte;
 	
 	public Accueil() {
 		super();
@@ -31,13 +36,15 @@ public class Accueil extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		req.setAttribute("article", facade.getArticles());
+		req.setAttribute("article", facadeAccueil.getArticles());
 		req.getRequestDispatcher("Accueil.jsp").forward(req, resp);
-		/*String op = req.getParameter("op");
+		String op = req.getParameter("op");
 		switch (op){
-		case "":
+		case "compte": 
+			Collection<Membre> listMembre = facadeCompte.getCompte();
+			req.getRequestDispatcher("Compte.jsp").forward(req, resp);
 			break;
-		}*/
+		}
 	}
 
 

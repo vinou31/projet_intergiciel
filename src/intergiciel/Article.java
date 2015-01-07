@@ -1,18 +1,16 @@
 package intergiciel;
 
-import java.awt.Image;
 import java.sql.Date;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Article extends Troc{
@@ -23,8 +21,10 @@ private Date dateDepot;
 private Membre possesseur;
 @ManyToMany
 private Collection<AvisArticle> avis;
-//private Collection<Categorie> estdeType;
-//private Map<String, Troc> offres;
+@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
+private Collection<Categorie> estdeType;
+@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
+private Collection<Troc> offres;
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
 private int ID;

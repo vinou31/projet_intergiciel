@@ -1,11 +1,25 @@
 package intergiciel;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public abstract class Troc {
 	private String nom;
 	private double prixreel;
 	private double tauxChange;
 	private double prixNoisettes;
+	@ManyToOne
+	private Article article;
+	@ManyToOne
+	private Membre membre;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int ID;
 	
 	public Troc(){}
 	
