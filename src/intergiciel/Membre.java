@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,17 +19,17 @@ public class Membre {
 	private int ID;
 	
 	private String nom;
-	private int identifiant;
 	private String mail;
 	private String adresse;
 	private int telephone;
 	private String pseudonyme;
 	private int porteMonnaie;
 	private Date dateInscription;
-	@OneToMany
+	@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
 	private Collection<Article> propose;
-	//private Map<Article, Troc> convoite;
-	@OneToMany
+	@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
+	private Collection<Troc> mesTrocs;
+	@OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
 	private Collection<Avis> estNote;
 	private String motDePasse;
 	
@@ -37,10 +38,9 @@ public class Membre {
 	
 	
 	//constructeur avec tous les attributs
-	public Membre(String nom, int identifiant, String mail, String adresse, int telephone, String pseudonyme, int porteMonnaie, Date dateInscription, String mdp) {
+	public Membre(String nom, String mail, String adresse, int telephone, String pseudonyme, int porteMonnaie, Date dateInscription, String mdp) {
 		super();
 		this.nom = nom;
-		this.identifiant = identifiant;
 		this.mail = mail;
 		this.adresse = adresse;
 		this.telephone = telephone;
@@ -73,12 +73,7 @@ public class Membre {
 	public void setPropose(Collection<Article> propose) {
 		this.propose = propose;
 	}
-	/*public Map<Article, Troc> getConvoite() {
-		return convoite;
-	}
-	public void setConvoite(Map<Article, Troc> convoite) {
-		this.convoite = convoite;
-	}*/
+
 	public Collection<Avis> getEstNote() {
 		return estNote;
 	}
@@ -88,12 +83,7 @@ public class Membre {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public int getIdentifiant() {
-		return identifiant;
-	}
-	public void setIdentifiant(int identifiant) {
-		this.identifiant = identifiant;
-	}
+
 	public String getMail() {
 		return mail;
 	}
@@ -139,6 +129,16 @@ public class Membre {
 
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
+	}
+
+
+	public Collection<Troc> getMesTrocs() {
+		return mesTrocs;
+	}
+
+
+	public void setMesTrocs(Collection<Troc> mesTrocs) {
+		this.mesTrocs = mesTrocs;
 	}
 	
 	
