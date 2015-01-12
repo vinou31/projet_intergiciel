@@ -1,7 +1,10 @@
 package intergiciel;
 
-import java.sql.Date;
+//import java.sql.Date;
+
+
 import java.util.Collection;
+import java.sql.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -21,34 +24,47 @@ public class Membre {
 	private String nom;
 	private String mail;
 	private String adresse;
-	private int telephone;
+	private String telephone;
 	private String pseudonyme;
 	private int porteMonnaie;
 	private Date dateInscription;
+	private String motDePasse;
 	@OneToMany(mappedBy="possesseur", fetch=FetchType.EAGER)
 	private Set<Article> propose;
 	@OneToMany(mappedBy="membre", fetch=FetchType.EAGER)
 	private Set<Troc> mesTrocs;
 	@OneToMany(mappedBy="membre", fetch=FetchType.EAGER)
 	private Set<Avis> estNote;
-	private String motDePasse;
+	
 	
 	//constructeur vide
 	public Membre(){}
 	
 	
 	//constructeur avec tous les attributs
-	public Membre(String nom, String mail, String adresse, int telephone, String pseudonyme, int porteMonnaie, Date dateInscription, String mdp) {
-		super();
-		this.nom = nom;
-		this.mail = mail;
-		this.adresse = adresse;
-		this.telephone = telephone;
-		this.pseudonyme = pseudonyme;
-		this.porteMonnaie = porteMonnaie;
-		this.dateInscription = dateInscription;
-		this.motDePasse = mdp;
-	}
+//	public Membre(String nom, String mail, String adresse, String telephone, String pseudonyme, int porteMonnaie, Date dateInscription, String mdp) {
+//		super();
+//		this.nom = nom;
+//		this.mail = mail;
+//		this.adresse = adresse;
+//		this.telephone = telephone;
+//		this.pseudonyme = pseudonyme;
+//		this.porteMonnaie = porteMonnaie;
+//		this.dateInscription = dateInscription;
+//		this.motDePasse = mdp;
+//	}
+//	
+//	public Membre(Membre m) {
+//		super();
+//		this.nom = m.nom;
+//		this.mail = m.mail;
+//		this.adresse = m.adresse;
+//		this.telephone = m.telephone;
+//		this.pseudonyme = m.pseudonyme;
+//		this.porteMonnaie = m.porteMonnaie;
+//		this.dateInscription = m.dateInscription;
+//		this.motDePasse = m.motDePasse;
+//	}
 	
 	//a mettre dans la facade
 	public void acheter(int montant, Membre vendeur){
@@ -96,10 +112,10 @@ public class Membre {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 	public String getPseudonyme() {
