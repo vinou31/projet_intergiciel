@@ -1,0 +1,9 @@
+Ajouter un onglet contact avec les noms des créateurs versions styles
+Jquerry pour l'auompletion
+Prendre template stylé pour les menus
+Faire une petite animation
+Faire Dropdown Login Form
+
+
+Voir securite, mot de passe
+Stocker et upload les images(Api FILE?)
