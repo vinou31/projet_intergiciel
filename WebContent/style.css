@@ -67,10 +67,12 @@ nav a:hover
 }
 
 body{
-	background: url('images/fond_jaune.png');
+	/*background: url('images/fond_jaune.png');*/
 	color:#181818;
 	width:900px;
 	margin:auto;
+	/*background-color: red;*/
+	
 }
 
 /* Corps */

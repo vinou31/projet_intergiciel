@@ -1,4 +1,5 @@
 
+<%@page import="javax.enterprise.context.SessionScoped"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="java.util.Collection"%>
@@ -21,11 +22,26 @@
 	<ul>
 		<li><a href="#">Accueil</a>
 		<li><a href="#">Articles</a>
-		<li><a href="#">Compte</a>
+		
+		<% 
+		Membre m =  (Membre)session.getAttribute("session");
+		if(m == null){
+			out.print("<li><a href=\"testInscription.jsp\">Compte</a>");
+			out.print("<li><a href=\"testConnexion.jsp\">Connexion</a>");
+		}
+		%>
+		
 	</ul>
 </nav>
 </header>
+		<% 
+		//Membre m = (Membre)session.getAttribute("session");
+		if(m!=null){
+			out.print("Bonjour " + m.getNom() +", votre pseudo est "+ m.getPseudonyme()+ "</br>");
+			out.print("<a href=\"ServDeconnexion\">Deconnexion</a> </br>");
+		}
 
+		%>
 <section>
 <aside>
 		<h1>mon compte</h1>

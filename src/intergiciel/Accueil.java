@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/Accueil")
 public class Accueil extends HttpServlet {
@@ -35,7 +36,7 @@ public class Accueil extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+		HttpSession session = req.getSession();
 		req.setAttribute("article", facadeAccueil.getArticles());
 		req.getRequestDispatcher("Accueil.jsp").forward(req, resp);
 		/*String op = req.getParameter("op");

@@ -10,6 +10,7 @@
 <body>
 <p>
 <%Membre m = (Membre)request.getAttribute("utilisateur"); %>
+
 	Vous etes inscrit en tant que : </br>
 	Nom : <%=m.getNom() %></br>
 	Adresse : <%=m.getAdresse() %></br>
@@ -18,6 +19,9 @@
 	porte monnaie : <%=m.getPorteMonnaie() %></br>
 	mail :<%=m.getMail() %> </br>
 	mot de passe : <%=m.getMotDePasse() %></br>
+	
+	
+	
 	
 	
 	

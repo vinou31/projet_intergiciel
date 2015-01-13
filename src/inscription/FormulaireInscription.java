@@ -1,8 +1,7 @@
-package intergiciel;
+package inscription;
 
-//import java.sql.Date;
-import java.util.Collection;
-import java.sql.Date;
+import intergiciel.Membre;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,65 +9,8 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
-
 @Stateful
-public class FacadeCompte {
-	
-	@PersistenceContext
-	EntityManager em;
-	
-	public FacadeCompte(){
-		
-	}
-	
-	public void creerMembre(String nom, String mail, String adresse, String telephone, String pseudonyme, Date dateInscription, String mdp){
-		//Membre m = new Membre(nom, mail, adresse, telephone, pseudonyme, 0, dateInscription, mdp);
-		Membre m = new Membre();
-		m.setNom(nom);
-		m.setMail(mail);
-		m.setAdresse(adresse);
-		m.setTelephone(telephone);
-		m.setPseudonyme(pseudonyme);
-		m.setPorteMonnaie(0);
-		java.util.Date d1 = new java.util.Date();
-		java.sql.Date d2 = new java.sql.Date(d1.getTime());
-		m.setDateInscription(d2);
-		m.setMotDePasse(mdp);
-		em.persist(m);
-		
-	}
-	
-	public void creerMembre(Membre m){
-		em.persist(m);
-		
-	}
-
-	public void modifierMotDePasse(Membre m, String newMDP){
-		em.find(Membre.class, m.getID()).setMotDePasse(newMDP);
-		
-	}
-	
-	public void resilierMembre(Membre m){
-		em.remove(m);
-	}
-	
-	public void modifierMembre(){
-		
-	}
-
-	public Collection<Membre> getMembres() {
-		//return (List<Membre>)em.createQuery("from Membre", Membre.class).getResultList();
-		return em.createNativeQuery("SELECT * FROM Membre;").getResultList();
-	}
-	
-	public boolean estDejaPresent(String pseudo){
-		Collection<String> ls = (Collection<String>) em.createNativeQuery("SELECT pseudonyme FROM Membre WHERE pseudonyme='"+pseudo+"';").getResultList();
-		return(ls.size()!=0);
-	}
-
-	/////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////Verification données entrees///////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
+public class FormulaireInscription {
 	private static final String CHAMP_NOM    = "nom";
 	private static final String CHAMP_MAIL  = "mail";
     private static final String CHAMP_PASS   = "motdepasse";
@@ -79,6 +21,14 @@ public class FacadeCompte {
 	private static final String CHAMP_PSEUDONYME    = "pseudonyme";
 	private static final String CHAMP_PORTEMONNAIE    = "portemonnaie";
 	
+//	@EJB
+//	private FacadeCompte f;
+	
+	@PersistenceContext (unitName="cours")
+	EntityManager em;
+	
+//	@PersistenceUnit 
+//	EntityManagerFactory emf;
     
     //renvoie le resultat de l'inscription
     private String resultat;
@@ -91,10 +41,6 @@ public class FacadeCompte {
 
     public Map<String, String> getErreurs() {
         return erreurs;
-    }
-    
-    public int nbMemePseudo(String pseudo){
-    	return em.createNativeQuery("SELECT pseudonyme FROM Membre WHERE pseudonyme='"+pseudo+"';").getResultList().size();
     }
     
 
@@ -171,9 +117,6 @@ public class FacadeCompte {
         utilisateur.setNom( nom );
         
         utilisateur.setPorteMonnaie(0);
-        java.util.Date d1 = new java.util.Date();
-		java.sql.Date d2 = new java.sql.Date(d1.getTime());
-        utilisateur.setDateInscription(d2);
 
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'inscription.";
@@ -183,7 +126,7 @@ public class FacadeCompte {
         }
         System.out.print(resultat);
         //f.creerMembre(utilisateur);
-        creerMembre(utilisateur);
+        em.persist(utilisateur);
         return utilisateur;
     }
     //////////////////////////////////////////////////////////////////////////////////
@@ -233,12 +176,9 @@ public class FacadeCompte {
 //        }
     }
     
-    private void validationPseudonyme( String pseudo ) throws Exception {
-        if ( pseudo != null && pseudo.length() < 3 ) {
+    private void validationPseudonyme( String nom ) throws Exception {
+        if ( nom != null && nom.length() < 3 ) {
             throw new Exception( "Le pseudonyme doit contenir au moins 3 caractères." );
-        }
-        if(estDejaPresent(pseudo)){
-        	throw new Exception("Le pseudonyme est déja enregistré");
         }
     }
 //////////////////////////////////////////////////////////////////////////////////
@@ -263,13 +203,8 @@ public class FacadeCompte {
         }
     }
     
-/////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-    
-    
-/////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-	
+    public boolean estDanslaBD(String pseudo){
+    	return true;
+    }
+
 }
