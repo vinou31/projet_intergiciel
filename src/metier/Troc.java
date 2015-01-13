@@ -1,4 +1,4 @@
-package intergiciel;
+package metier;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

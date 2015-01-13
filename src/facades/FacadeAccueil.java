@@ -1,4 +1,4 @@
-package intergiciel;
+package facades;
 
 import java.util.Collection;
 import java.util.List;
@@ -6,6 +6,9 @@ import java.util.List;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import metier.Article;
+import metier.Avis;
 
 @Singleton
 public class FacadeAccueil {
@@ -20,4 +23,6 @@ public class FacadeAccueil {
 	public Collection<Avis> getAvisArticle(Article article){
 		return em.createQuery("from Avis", Avis.class).getResultList();
 	}
+	
+	
 }

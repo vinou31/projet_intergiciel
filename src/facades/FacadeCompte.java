@@ -1,4 +1,4 @@
-package intergiciel;
+package facades;
 
 //import java.sql.Date;
 import java.util.Collection;
@@ -10,6 +10,8 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
+
+import metier.Membre;
 
 @Stateful
 public class FacadeCompte {

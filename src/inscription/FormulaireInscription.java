@@ -1,7 +1,5 @@
 package inscription;
 
-import intergiciel.Membre;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +7,8 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
+
+import metier.Membre;
 @Stateful
 public class FormulaireInscription {
 	private static final String CHAMP_NOM    = "nom";

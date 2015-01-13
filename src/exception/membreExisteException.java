@@ -1,4 +1,4 @@
-package intergiciel;
+package exception;
 
 
 public class membreExisteException extends RuntimeException {

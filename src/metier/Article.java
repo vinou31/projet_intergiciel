@@ -1,4 +1,4 @@
-package intergiciel;
+package metier;
 
 import java.sql.Date;
 import java.util.Collection;

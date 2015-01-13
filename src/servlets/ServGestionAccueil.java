@@ -1,4 +1,4 @@
-package intergiciel;
+package servlets;
 
 import java.io.IOException;
 
@@ -7,29 +7,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ServCompte extends HttpServlet {
+public class ServGestionAccueil extends HttpServlet {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4842750767803720120L;
-
-	public ServCompte() {
-		// TODO Auto-generated constructor stub
-	}
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		this.doPost(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		String op = req.getParameter("op");
+		switch(op){
+		case "" :
+			break;
+			
+		}
+	
 	}
 
-	
 }

@@ -3,12 +3,12 @@ package connexion;
 import java.util.HashMap;
 import java.util.Map;
 
-import intergiciel.Membre;
-
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
+
+import metier.Membre;
 
 @Stateful
 public class FacadeConnexion {

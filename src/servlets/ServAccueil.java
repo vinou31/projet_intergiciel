@@ -1,8 +1,6 @@
-package intergiciel;
+package servlets;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -12,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import facades.FacadeAccueil;
+
 @WebServlet("/Accueil")
-public class Accueil extends HttpServlet {
+public class ServAccueil extends HttpServlet {
 	
 	@EJB
 	FacadeAccueil facadeAccueil;
+
 	
-	@EJB
-	FacadeCompte facadeCompte;
-	
-	public Accueil() {
+	public ServAccueil() {
 		super();
 	}
 
@@ -39,13 +37,6 @@ public class Accueil extends HttpServlet {
 		HttpSession session = req.getSession();
 		req.setAttribute("article", facadeAccueil.getArticles());
 		req.getRequestDispatcher("Accueil.jsp").forward(req, resp);
-		/*String op = req.getParameter("op");
-		switch (op){
-		case "compte": 
-			Collection<Membre> listMembre = facadeCompte.getMembre();
-			req.getRequestDispatcher("Compte.jsp").forward(req, resp);
-			break;
-		}*/
 	}
 
 

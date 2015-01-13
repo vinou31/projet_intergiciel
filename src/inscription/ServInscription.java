@@ -1,7 +1,6 @@
 package inscription;
 
-import intergiciel.FacadeCompte;
-import intergiciel.Membre;
+import facades.FacadeCompte;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -12,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import metier.Membre;
 
 /**
  * Servlet implementation class ServInscritpion
