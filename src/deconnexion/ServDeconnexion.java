@@ -43,7 +43,7 @@ public class ServDeconnexion extends HttpServlet {
 		HttpSession session  =  request.getSession();
 		session.invalidate();
 		//response.sendRedirect("/Accueil");
-		this.getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/V2/synchronous/AccueilVrai.jsp").forward(request, response);
 	}
 
 }

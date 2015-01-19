@@ -36,7 +36,15 @@ public class ServAccueil extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		req.setAttribute("article", facadeAccueil.getArticles());
-		req.getRequestDispatcher("Accueil.jsp").forward(req, resp);
+		//req.getRequestDispatcher("V2/synchronous/AccueilVrai.jsp").forward(req, resp);
+		this.getServletContext().getRequestDispatcher("/V2/synchronous/AccueilVrai.jsp").forward(req, resp);
+		/*String op = req.getParameter("op");
+		switch (op){
+		case "compte": 
+			Collection<Membre> listMembre = facadeCompte.getMembre();
+			req.getRequestDispatcher("Compte.jsp").forward(req, resp);
+			break;
+		}*/
 	}
 
 

@@ -57,11 +57,11 @@ public class ServConnexion extends HttpServlet {
 			request.setAttribute(SESSION, m);
 			session.setAttribute(SESSION, m);
 			//vue = "/testResumeConnexion.jsp";
-			vue = "/Accueil";
+			vue = "/V2/synchronous/AccueilVrai.jsp";
 		} else {
 			request.setAttribute(SESSION, null);
 			session.setAttribute(SESSION, null);
-			vue = "/testConnexion.jsp";
+			vue = "/V2/synchronous/Connexion.jsp";
 		}
 		request.setAttribute("erreurs", f.getErreurs());
 		

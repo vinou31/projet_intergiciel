@@ -22,13 +22,16 @@ public class Membre {
 	private int ID;
 	
 	private String nom;
-	private String mail;
-	private String adresse;
-	private String telephone;
+	private String prenom;
 	private String pseudonyme;
+	private String motDePasse;
+	private String adresse;
+	private String ville;
+	private String telephone;
+	private String mail;
 	private int porteMonnaie;
 	private Date dateInscription;
-	private String motDePasse;
+	
 	@OneToMany(mappedBy="possesseur", fetch=FetchType.EAGER)
 	private Set<Article> propose;
 	@OneToMany(mappedBy="membre", fetch=FetchType.EAGER)
@@ -167,6 +170,24 @@ public class Membre {
 		ID = iD;
 	}
 	
+	public String getPrenom() {
+		return prenom;
+	}
+
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+
+	public String getVille() {
+		return ville;
+	}
+
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
 	
 
 }

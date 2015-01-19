@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import metier.Membre;
 
@@ -43,13 +44,14 @@ public class ServInscription extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String op = request.getParameter("op");
-		if(op.equals("liste")){
-			//Collection<Membre> lm = f.getMembres();
-			request.setAttribute(ATT_MEMBERS, f.getMembres());
-			this.getServletContext().getRequestDispatcher( "/listeMembres.jsp" ).forward( request, response );
-		}
-		 //getServletContext ou request ?
+//		String op = request.getParameter("op");
+//		if(op.equals("liste")){
+//			//Collection<Membre> lm = f.getMembres();
+//			request.setAttribute(ATT_MEMBERS, f.getMembres());
+//			this.getServletContext().getRequestDispatcher( "/listeMembres.jsp" ).forward( request, response );
+//		}
+//		 //getServletContext ou request ?
+		this.getServletContext().getRequestDispatcher( "/V2/synchronous/AccueilVrai.jsp" ).forward( request, response );
 	}
 
 	/**
@@ -57,20 +59,28 @@ public class ServInscription extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		/* Préparation de l'objet formulaire */
-
-		
-        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
-        Membre utilisateur = f.inscrireUtilisateur( request );
-        
-        //Collection<Membre> lm = f.getMembre();
-		
-        /* Stockage du formulaire et du bean dans l'objet request */
-        request.setAttribute( ATT_FORM, f );
-        request.setAttribute( ATT_USER, utilisateur );
-        
-        
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+				/* Préparation de l'objet formulaire */
+				String vue = null;
+				
+		        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+		        Membre utilisateur = f.inscrireUtilisateur( request );
+//		        if(f.getErreurs().isEmpty()){
+		        	HttpSession session = request.getSession();
+		            session.setAttribute("membre", utilisateur);
+		            vue = "/V2/synchronous/AccueilVrai.jsp";
+		            request.setAttribute("nbPseudoIdentiques", f.estDejaPresent(utilisateur.getPseudonyme()));
+			        
+//		        }else{
+//		        	vue = "/V2/synchronous/Inscription.jsp";
+//		        }
+		        
+		        //Collection<Membre> lm = f.getMembre();
+				
+		        /* Stockage du formulaire et du bean dans l'objet request */
+		        request.setAttribute( ATT_FORM, f );
+		        request.setAttribute( ATT_USER, utilisateur );		        
+		        
+		        this.getServletContext().getRequestDispatcher( vue ).forward( request, response );
 	}
 
 }

@@ -1,9 +1,6 @@
 package inscription;
 
-import facades.FacadeCompte;
-
 import java.io.IOException;
-import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import metier.Membre;
+import facades.FacadeCompte;
 
 /**
  * Servlet implementation class ServInscritpion
@@ -25,7 +24,8 @@ public class ServInscription extends HttpServlet {
     public static final String ATT_FORM = "form";
     //public static final String VUE = "/inscription.jsp";  //a modifier 
     //public static final String VUE = "/index.html"; 
-    public static final String VUE = "/testResumeInscription.jsp";
+    //public static final String VUE = "/testResumeInscription.jsp";
+    public static final String VUE = "/V2/synchronous/AccueilVrai.jsp";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,6 +34,7 @@ public class ServInscription extends HttpServlet {
     
     public ServInscription() {
         super();
+        
         // TODO Auto-generated constructor stub
     }
 
@@ -42,12 +43,15 @@ public class ServInscription extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String op = request.getParameter("op");
-		if(op.equals("liste")){
-			//Collection<Membre> lm = f.getMembres();
-			request.setAttribute(ATT_MEMBERS, f.getMembres());
-			this.getServletContext().getRequestDispatcher( "/listeMembres.jsp" ).forward( request, response );
-		}
+//		String op = request.getParameter("op");
+//		if(op.equals("liste")){
+//			//Collection<Membre> lm = f.getMembres();
+//			request.setAttribute(ATT_MEMBERS, f.getMembres());
+//			this.getServletContext().getRequestDispatcher( "/listeMembres.jsp" ).forward( request, response );
+//		}
+//		else{
+        	this.getServletContext().getRequestDispatcher( "/V2/synchronous/inscription.html" ).forward( request, response );
+//        }
 		 //getServletContext ou request ?
 	}
 
@@ -57,10 +61,17 @@ public class ServInscription extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		/* Préparation de l'objet formulaire */
-
+		String vue = null;
 		
         /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
         Membre utilisateur = f.inscrireUtilisateur( request );
+        if(f.getErreurs().isEmpty()){
+        	HttpSession session = request.getSession();
+            session.setAttribute("membre", utilisateur);
+            vue = "/V2/synchronous/AccueilVrai.jsp";
+        }else{
+        	vue = "/V2/synchronous/Inscription.jsp";
+        }
         
         //Collection<Membre> lm = f.getMembre();
 		
@@ -70,7 +81,7 @@ public class ServInscription extends HttpServlet {
         request.setAttribute("nbPseudoIdentiques", f.estDejaPresent("speedr"));
         
         
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( vue ).forward( request, response );
 	}
 
 }
