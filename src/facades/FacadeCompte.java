@@ -2,6 +2,7 @@ package facades;
 
 //import java.sql.Date;
 import java.util.Collection;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,22 +23,22 @@ public class FacadeCompte {
 		
 	}
 	
-//	public void creerMembre(String nom, String mail, String adresse, String telephone, String pseudonyme, Date dateInscription, String mdp){
-//		//Membre m = new Membre(nom, mail, adresse, telephone, pseudonyme, 0, dateInscription, mdp);
-//		Membre m = new Membre();
-//		m.setNom(nom);
-//		m.setMail(mail);
-//		m.setAdresse(adresse);
-//		m.setTelephone(telephone);
-//		m.setPseudonyme(pseudonyme);
-//		m.setPorteMonnaie(0);
-//		java.util.Date d1 = new java.util.Date();
-//		java.sql.Date d2 = new java.sql.Date(d1.getTime());
-//		m.setDateInscription(d2);
-//		m.setMotDePasse(mdp);
-//		em.persist(m);
-//		
-//	}
+	public void creerMembre(String nom, String mail, String adresse, String telephone, String pseudonyme, Date dateInscription, String mdp){
+		//Membre m = new Membre(nom, mail, adresse, telephone, pseudonyme, 0, dateInscription, mdp);
+		Membre m = new Membre();
+		m.setNom(nom);
+		m.setMail(mail);
+		m.setAdresse(adresse);
+		m.setTelephone(telephone);
+		m.setPseudonyme(pseudonyme);
+		m.setPorteMonnaie(0);
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date d2 = new java.sql.Date(d1.getTime());
+		m.setDateInscription(d2);
+		m.setMotDePasse(mdp);
+		em.persist(m);
+		
+	}
 	
 	public void creerMembre(Membre m){
 		em.persist(m);
@@ -49,12 +50,32 @@ public class FacadeCompte {
 		
 	}
 	
+	public void modifierNom(Membre m, String newNom){
+		em.find(Membre.class, m.getID()).setNom(newNom);
+	}
+	
+	public void modifierMail(Membre m, String newMail) {
+		em.find(Membre.class, m.getID()).setMail(newMail);
+	}
+	
+	public void modifierAdresse(Membre m, String newAdresse) {
+		em.find(Membre.class, m.getID()).setAdresse(newAdresse);
+	}
+	
+	public void modifierTel(Membre m, String newTel) {
+		em.find(Membre.class, m.getID()).setTelephone(newTel);
+	}
+	
+	public void modifierPseudo(Membre m, String newPseudo) {
+		em.find(Membre.class, m.getID()).setPseudonyme(newPseudo);
+	}
+	
 	public void resilierMembre(Membre m){
 		em.remove(m);
 	}
 	
-	public void modifierMembre(){
-		
+	public Membre getMembre(Membre m){
+		return em.find(Membre.class, m.getID());
 	}
 
 	public Collection<Membre> getMembres() {
@@ -66,18 +87,25 @@ public class FacadeCompte {
 		Collection<String> ls = (Collection<String>) em.createNativeQuery("SELECT pseudonyme FROM Membre WHERE pseudonyme='"+pseudo+"';").getResultList();
 		return(ls.size()!=0);
 	}
+	
+	public void acheter(int montant, Membre vendeur){
+		vendeur.setPorteMonnaie(vendeur.getPorteMonnaie()+montant);
+		
+	}
+	
+	public void vendre(int montant, Membre acheteur){
+		acheteur.setPorteMonnaie(acheteur.getPorteMonnaie()+montant);
+	}
 
 	/////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////Verification données entrees///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 	private static final String CHAMP_NOM    = "nom";
-	private static final String CHAMP_PRENOM    = "prenom";
 	private static final String CHAMP_MAIL  = "mail";
-    private static final String CHAMP_PASS   = "motDePasse";
+    private static final String CHAMP_PASS   = "motdepasse";
     private static final String CHAMP_CONF   = "confirmation";
     
 	private static final String CHAMP_ADRESSE    = "adresse";
-	private static final String CHAMP_VILLE    = "ville";
 	private static final String CHAMP_TELEPHONE    = "telephone";
 	private static final String CHAMP_PSEUDONYME    = "pseudonyme";
 	private static final String CHAMP_PORTEMONNAIE    = "portemonnaie";
@@ -102,14 +130,14 @@ public class FacadeCompte {
     
 
     public Membre inscrireUtilisateur( HttpServletRequest request ) {
-    	this.erreurs = new HashMap<String, String>();
+    //public void inscrireUtilisateur( HttpServletRequest request ) {
+    	
     	
     	String nom = getValeurChamp( request, CHAMP_NOM );
-    	String prenom = getValeurChamp(request, CHAMP_PRENOM);
     	String mail = getValeurChamp( request, CHAMP_MAIL );
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
         String confirmation = getValeurChamp( request, CHAMP_CONF );
-        String ville = getValeurChamp(request, CHAMP_VILLE);
+        
         String adresse = getValeurChamp( request, CHAMP_ADRESSE );
     	String telephone = getValeurChamp( request, CHAMP_TELEPHONE );
     	String pseudonyme = getValeurChamp( request, CHAMP_PSEUDONYME );
@@ -120,9 +148,6 @@ public class FacadeCompte {
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FacadeCompte");
 //        EntityManager em = emf.createEntityManager();
 
-        
-        //////////////////////////////////////AJOUTER VILLE ET PRENOM/////////////////////
-        
         try {
             validationEmail( mail );
             
@@ -176,20 +201,6 @@ public class FacadeCompte {
         }
         utilisateur.setNom( nom );
         
-        try {
-            validationPrenom(prenom);
-        } catch ( Exception e ) {
-            setErreur( CHAMP_PRENOM, e.getMessage() );
-        }
-        utilisateur.setPrenom( prenom );
-        
-        try {
-            validationVille( ville );
-        } catch ( Exception e ) {
-            setErreur( CHAMP_NOM, e.getMessage() );
-        }
-        utilisateur.setVille( ville );
-        
         utilisateur.setPorteMonnaie(0);
         java.util.Date d1 = new java.util.Date();
 		java.sql.Date d2 = new java.sql.Date(d1.getTime());
@@ -236,21 +247,9 @@ public class FacadeCompte {
         }
     }
     
-    private void validationPrenom( String prenom ) throws Exception {
-        if ( prenom != null && prenom.length() < 3 ) {
-            throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
-        }
-    }
-    
     private void validationAdresse( String adresse ) throws Exception {
         if ( adresse != null && adresse.length() < 3 ) {
             throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
-        }
-    }
-    
-    private void validationVille( String ville ) throws Exception {
-        if ( ville != null && ville.length() < 3 ) {
-            throw new Exception( "La ville doit contenir au moins 3 caractères." );
         }
     }
     

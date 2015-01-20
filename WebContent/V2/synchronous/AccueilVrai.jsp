@@ -95,8 +95,7 @@
 						</div>
 					</section>
 						<%
-							if (m != null) {
-								out.print("<section>");
+							if (m != null) {								out.print("<section>");
 								out.print("<h2>Information de Compte</h2>");
 								out.print("<ul >");
 								out.print("<li >");
