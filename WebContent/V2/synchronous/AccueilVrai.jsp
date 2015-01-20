@@ -45,9 +45,8 @@
 					<div id="menu-wrapper">
 						<nav class="mobileUI-site-nav">
 							<ul>
-								<li><a href="index.html">Les articles</a></li>
-								<li><a href="threecolumn.html">Three Column</a></li>
-								<li class="current_page_item"><a href="twocolumn1.html">Two Column #1</a></li>
+								
+
 									<%
 										Membre m = (Membre) session.getAttribute("session");
 										if (m == null) {
@@ -57,6 +56,8 @@
 											out.print("<li><a href=\"/PIntergiciel/V2/synchronous/Connexion.jsp\">Connexion</a>");
 										}
 									%>
+									<li><a href="AccueilVrai.jsp">Accueil</a></li>
+									<li class="current_page_item"><a href="accueil2.jsp">A propos du site</a></li>
 									<!-- Modifier les liens -->
 									<li><form class="searchform">
 									<input class="searchfield" type="text" value="Rechercher un article..." onfocus="if (this.value == 'Rechercher un article...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Rechercher un article...';}">
