@@ -34,21 +34,23 @@ public class ServCompte extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		this.doPost(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String op = (String) req.getAttribute("op");
+		String op = (String) req.getParameter("op");
 		
 		switch(op){
 		case "gestionCompte" :
 			HttpSession session = req.getSession();
 			Membre m = (Membre)session.getAttribute("Membre");
 			req.setAttribute("Membre", m);
-			req.getRequestDispatcher("GestionCompte.jsp").forward(req, resp);
+			req.getRequestDispatcher("/GestionCompte.jsp").forward(req, resp);
 			break;
+			default : System.out.println("coucou");
 		}
 		
 	}
