@@ -51,7 +51,7 @@
 				<div class="12u" id="logo">
 					<!-- Logo -->
 					<h1>
-						<a href="AccueilVrai.jsp" class="mobileUI-site-name">TrocMania</a>
+						<a href="${pageContext.request.ContextPath}/V2/synchronous/AccueilVrai.jsp" class="mobileUI-site-name">TrocMania</a>
 					</h1>
 					<p>La première forme de commerce au monde revient en version
 						2.0</p>
@@ -70,8 +70,8 @@
 								if (m == null) {
 									//out.print("<li><a href=\"testInscription.jsp\">Inscription</a>");
 									//out.print("<li><a href=\"testConnexion.jsp\">Connexion</a>");
-									out.print("<li><a href=\"/PIntergiciel/V2/synchronous/Inscription.jsp\">Inscription</a>");
-									out.print("<li><a href=\"/PIntergiciel/V2/synchronous/Connexion.jsp\">Connexion</a>");
+									out.print("<li><a href=\"${pageContext.request.ContextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>");
+									out.print("<li><a href=\"${pageContext.request.ContextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a>");
 								}
 							%>
 
@@ -133,18 +133,27 @@
 							</li>
 							<li>
 								<p>
-									<strong>m.getPseudonyme();</strong>
+									<strong><%m.getPseudonyme();%></strong>
 								</p>
 							</li>
 							<li>
-								<p>Article en vente : <%m.getPropose().size();%> </p>
+								<form method="get", action = "ServArticles">
+									<p>Article en vente :<%m.getPropose().size();%></p>
+									<input type="hidden" , name="op" , value="articlesEnVente" />
+								</form>
 							</li>
-
+							<li>
+								<form method="get", action = "ServArticles">
+									<p>Liste des avis</p>
+									<input type="hidden" , name="op" , value="avisPersonne" />
+								</form>
+							</li>
 						</ul>
-
-						<p class="button-style">
-							<a href="#">Déconnexion</a>
-						</p>
+						
+						<form method="get", action = "ServDeconnexion">
+						<p class="button-style">Déconnexion</p>
+						<input type="hidden"/>
+						</form>
 						</section>
 						<% }%>
 					</div>
@@ -155,29 +164,26 @@
 							<div id="mainwrapper">
 
 
-			<%//HashSet<Article> art = (HashSet<Article>) request.getAttribut("listeArticles");
+			<%//HashSet<Article> art = (HashSet<Article>) m.getPropose();
 			Article Hollande = new Article("hollande", 0.1, "flamby", "P2Intergiciel/WebContent/V2/Synchronous/images/fr.jpg", new java.sql.Date(new java.util.Date().getTime()), new Membre());
 			HashSet<Article> art = new HashSet<Article>();
 			art.add(Hollande);
 				for(Article a : art){%>
+								<form method="get", action = "ServArticle">
 								<section>
 								<div id="box-6" class="box">
-									<img id="image-6" src="images/fr.jpg" /> <span
+									<img id="image-6" src= <%a.getImage();%> /> <span
 										class="caption scale-caption">
-										<h3>Francois Hollande d'occasion</h3>
-										<p>
-											Chameau de compétition, éxécute le 0 à 30km/h en 6.5s, trés
-											sympathique<br>1€ symbolique
-										</p>
+										<h3><%a.getNom(); %></h3>
+										<input type="hidden" , name="op" , value="articleEnVue" />
 									</span>
 								</div>
 								</section>
-								<%
-					out.print(a.getDescription());
+								</form>
+			<%
 				}
 			%>
 
-
 								<section>
 								<div id="box-6" class="box">
 									<img id="image-6" src="images/cham.jpg" /> <span
@@ -188,20 +194,6 @@
 									</span>
 								</div>
 								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/fr.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Francois Hollande d'occasion</h3>
-										<p>
-											Chameau de compétition, éxécute le 0 à 30km/h en 6.5s, trés
-											sympathique<br>1€ symbolique
-										</p>
-									</span>
-								</div>
-								</section>
-
 								<section>
 								<div id="box-6" class="box">
 									<img id="image-6" src="images/cham.jpg" /> <span
@@ -212,127 +204,8 @@
 									</span>
 								</div>
 								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
+								
+								
 							</div>
 						</div>
 					</div>
@@ -340,65 +213,43 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<div id="copyright" class="5grid-layout">
+	<div class="row" id="footer-content">
+	<div class="3u">
+	<section>
+		<p>&copy;TrocMania | <a ref ="">Kevin</a> | <a ref="">Ruddy</a> | <a ref="">Marianne </a>| <a ref="">Alvin</a></p>
+	</section>
+</div>
+	
+	
+	
+
+	
 	<div class="5grid-layout">
 		<div class="row" id="footer-content">
 			<div class="3u">
 				<section id="box1">
 				<h2 class="current_page_item">
-					<a href="accueil2.jsp">A propos du site</a>
+					<p>&copy;TrocMania</p>
 				</h2>
-				<ul class="style3">
-					<li class="first">
-						<p class="date">
-							<a href="#">10.03.2012</a>
-						</p>
-						<p>
-							<a href="#">Vestibulum sem magna, elementum ut, vestibulum
-								eu, facilisis. Mauris a dolor. Nulla facilisi. Cum sociis
-								natoque penatibus.</a>
-						</p>
-					</li>
-					<li>
-						<p class="date">
-							<a href="#">10.03.2012</a>
-						</p>
-						<p>
-							<a href="#">Pellentesque erat erat, tincidunt in, eleifend,
-								malesuada bibendum. Suspendisse sit amet in eros bibendum
-								condimentum. </a>
-						</p>
-					</li>
-				</ul>
 				</section>
 			</div>
 			<div class="6u">
 				<section id="box2">
-				<h2>Donec dictum metus</h2>
-				<div class="border-img">
-					<a href="#"><img src="images/pics02.jpg" alt=""></a>
-				</div>
-				<p>Nulla enim eros, porttitor eu, tempus id, varius non, nibh.
-					Duis enim nulla, luctus eu, dapibus lacinia, venenatis id, quam.
-					Vestibulum imperdiet, magna nec eleifend rutrum, nunc lectus
-					vestibulum velit, euismod lacinia quam nisl id lorem. Quisque erat.
-					Vestibulum pellentesque, justo mollis pretium suscipit, justo nulla
-					blandit libero, in blandit augue justo quis nisl.</p>
+				<h2><a href="${pageContext.request.ContextPath}/V2/synchronous/accueil2.jsp">A propos du site</a></h2>
+				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
 				</section>
 			</div>
 			<div class="3u">
 				<section id="box3">
-				<h2>Nulla luctus eleifend</h2>
+				<h2>Nous contacter</h2>
 				<ul class="style1">
-					<li class="first"><a href="#">Pellentesque quis elit non
-							lectus gravida blandit luctus eleifend purus condimentum.</a></li>
-					<li><a href="#">Lorem ipsum dolor sit amet, consectetuer
-							adipiscing dictum metus in sapien elit.</a></li>
-					<li><a href="#">Phasellus nec dictum metus in sapien erat
-							sit amet nibh pellentesque congue.</a></li>
-					<li><a href="#">Cras vitae metus aliquam risus dictum
-							metus in sapien pellentesque pharetra.</a></li>
-					<li><a href="#">Duis non dictum metus in sapien ante in
-							metus commodo euismod lobortis.</a></li>
+					<li class="first"><a href="#"></a>Kevin</li>
+					<li><a href="#">Ruddy</a></li>
+					<li><a href="#">Marianne</a></li>
+					<li><a href="#">Alvin</a></li>
 				</ul>
 				</section>
 			</div>
@@ -406,10 +257,7 @@
 	</div>
 	<div id="copyright" class="5grid-layout">
 		<section>
-		<p>
-			&copy; Your Site Name | Images: <a href="http://fotogrph.com/">Fotogrph</a>
-			| Design: <a href="http://html5templates.com/">HTML5Templates.com</a>
-		</p>
+			<p>&copy; TrocMania | Images: <a href="http://fotogrph.com/">Fotogrph</a></p>
 		</section>
 	</div>
 </body>
