@@ -20,12 +20,15 @@ private String image;//Url de l'emplacement de l'image
 private Date dateDepot;
 @ManyToOne
 private Membre possesseur;
+
 @OneToMany(mappedBy="article", fetch=FetchType.EAGER)
 private Set<Avis> avis;
+
 @ManyToMany(mappedBy="articles", fetch=FetchType.EAGER)
 private Set<Categorie> estdeType;
+
 @OneToMany(mappedBy="article", fetch=FetchType.EAGER)
-private Set<Troc> offres;
+private Set<Troc> articles;
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
 private int ID;
