@@ -22,17 +22,17 @@
 <meta name="keywords" content="" />
 <noscript>
 	<link rel="stylesheet"
-		href="P2Intergiciel/WebContent/V2/Synchronous/css/5grid/core.css" />
+		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core.css" />
 	<link rel="stylesheet"
-		href="P2Intergiciel/WebContent/V2/Synchronous/css/5grid/core-desktop.css" />
+		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core-desktop.css" />
 	<link rel="stylesheet"
-		href="P2Intergiciel/WebContent/V2/Synchronous/css/5grid/core-1200px.css" />
+		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core-1200px.css" />
 	<link rel="stylesheet"
-		href="P2Intergiciel/WebContent/V2/Synchronous/css/5grid/core-noscript.css" />
+		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core-noscript.css" />
 	<link rel="stylesheet"
-		href="P2Intergiciel/WebContent/V2/Synchronous/css/style.css" />
+		href="${pageContext.request.ContextPath}/V2/Synchronous/css/style.css" />
 	<link rel="stylesheet"
-		href="P2Intergiciel/WebContent/V2/Synchronous/css/style-desktop.css" />
+		href="${pageContext.request.ContextPath}/WebContent/V2/Synchronous/css/style-desktop.css" />
 </noscript>
 <script src="css/5grid/jquery.js"></script>
 <script
@@ -64,12 +64,10 @@
 					<div id="menu-wrapper">
 						<nav class="mobileUI-site-nav">
 						<ul>
-							<li><a href="AccueilVrai.jsp">Accueil</a></li>
+							<li><a href="${pageContext.request.ContextPath}/V2/synchronous/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
 							<%
 								Membre m = (Membre) session.getAttribute("session");
 								if (m == null) {
-									//out.print("<li><a href=\"testInscription.jsp\">Inscription</a>");
-									//out.print("<li><a href=\"testConnexion.jsp\">Connexion</a>");
 									out.print("<li><a href=\"${pageContext.request.ContextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>");
 									out.print("<li><a href=\"${pageContext.request.ContextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a>");
 								}
@@ -148,13 +146,18 @@
 									<input type="hidden" , name="op" , value="avisPersonne" />
 								</form>
 							</li>
-						</ul>
-						
-						<form method="get", action = "ServDeconnexion">
-						<p class="button-style">Déconnexion</p>
-						<input type="hidden"/>
-						</form>
+							<li>
+								<form method="get", action = "ServDeconnexion">
+									<p class="button-style">Déconnexion</p>
+									<input type="hidden"/>
+								</form>
+							</li>
+							</ul>
 						</section>
+							
+						
+						
+
 						<% }%>
 					</div>
 
@@ -168,18 +171,23 @@
 			Article Hollande = new Article("hollande", 0.1, "flamby", "P2Intergiciel/WebContent/V2/Synchronous/images/fr.jpg", new java.sql.Date(new java.util.Date().getTime()), new Membre());
 			HashSet<Article> art = new HashSet<Article>();
 			art.add(Hollande);
+			if (art.isEmpty()){
+				out.print("auncun article  à disposition pour la catégorie demandée");
+			}
 				for(Article a : art){%>
-								<form method="get", action = "ServArticle">
+								
 								<section>
 								<div id="box-6" class="box">
+								<form method="get", action = "ServArticle">
 									<img id="image-6" src= <%a.getImage();%> /> <span
 										class="caption scale-caption">
 										<h3><%a.getNom(); %></h3>
 										<input type="hidden" , name="op" , value="articleEnVue" />
 									</span>
+									</form>
 								</div>
 								</section>
-								</form>
+								
 			<%
 				}
 			%>
@@ -215,18 +223,8 @@
 	</div>
 	
 	
-	<div id="copyright" class="5grid-layout">
-	<div class="row" id="footer-content">
-	<div class="3u">
-	<section>
-		<p>&copy;TrocMania | <a ref ="">Kevin</a> | <a ref="">Ruddy</a> | <a ref="">Marianne </a>| <a ref="">Alvin</a></p>
-	</section>
-</div>
-	
-	
-	
 
-	
+
 	<div class="5grid-layout">
 		<div class="row" id="footer-content">
 			<div class="3u">
@@ -238,7 +236,7 @@
 			</div>
 			<div class="6u">
 				<section id="box2">
-				<h2><a href="${pageContext.request.ContextPath}/V2/synchronous/accueil2.jsp">A propos du site</a></h2>
+				<h2><a href="${pageContext.request.ContextPath}/V2/synchronous/AccueilVrai.jsp">A propos du site</a></h2>
 				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
 				</section>
 			</div>

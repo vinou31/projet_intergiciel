@@ -18,12 +18,18 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <noscript>
-	<link rel="stylesheet" href="css/5grid/core.css" />
-	<link rel="stylesheet" href="css/5grid/core-desktop.css" />
-	<link rel="stylesheet" href="css/5grid/core-1200px.css" />
-	<link rel="stylesheet" href="css/5grid/core-noscript.css" />
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/style-desktop.css" />
+	<link rel="stylesheet"
+		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core.css" />
+	<link rel="stylesheet"
+		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core-desktop.css" />
+	<link rel="stylesheet"
+		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core-1200px.css" />
+	<link rel="stylesheet"
+		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core-noscript.css" />
+	<link rel="stylesheet"
+		href="${pageContext.request.ContextPath}/V2/Synchronous/css/style.css" />
+	<link rel="stylesheet"
+		href="${pageContext.request.ContextPath}/WebContent/V2/Synchronous/css/style-desktop.css" />
 </noscript>
 <script src="css/5grid/jquery.js"></script>
 <script
@@ -52,19 +58,15 @@
 							<nav class="mobileUI-site-nav">
 								<ul>
 
-									<li><a href="AccueilVrai.jsp">Accueil</a></li>
-									<%
-										Membre m = (Membre) session.getAttribute("session");
-										if (m == null) {
-											//out.print("<li><a href=\"testInscription.jsp\">Inscription</a>");
-											//out.print("<li><a href=\"testConnexion.jsp\">Connexion</a>");
-											out.print("<li><a href=\"/PIntergiciel/V2/synchronous/Inscription.jsp\">Inscription</a>");
-											out.print("<li><a href=\"/PIntergiciel/V2/synchronous/Connexion.jsp\">Connexion</a>");
-										}
-									%>
+							<li><a href="${pageContext.request.ContextPath}/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
+							<%
+								Membre m = (Membre) session.getAttribute("session");
+								if (m == null) {
+									out.print("<li><a href=\"${pageContext.request.ContextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>");
+									out.print("<li><a href=\"${pageContext.request.ContextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a>");
+								}
+							%>
 
-									<li class="current_page_item"><a href="accueil2.jsp">A
-											propos du site</a></li>
 									<!-- Modifier les liens -->
 									<li><form class="searchform">
 											<input class="searchfield" type="text"
@@ -105,41 +107,49 @@
 								</ul>
 							</div>
 						</section>
+						
 						<%
-							if (m != null) {
-								out.print("<section>");
-								out.print("<h2>Information de Compte</h2>");
-								out.print("<ul >");
-								out.print("<li >");
-								out.print("<p>Photo de profil</p>");
-								out.print("</li>");
-								out.print("<img src=\"images/197.jpg\" alt=\"\" class=\"imgprofile\">");
-								out.print("<li>");
-								out.print("<p><strong>" + m.getNom() + " " + m.getPrenom()
-										+ "</strong></p>");
-								out.print("</li>");
-								out.print("<li>");
-								out.print("<p><strong>" + m.getPseudonyme() + "</strong></p>");
-								out.print("</li>");
-								out.print("<li>");
-								out.print("<p>Article en vente : 4</p>");
-								out.print("</li>");
-								out.print("<li>");
-								out.print("<p>Transactions effectuées : 4</p>");
-								out.print("</li>");
-								out.print("<li>");
-								out.print("<p>Avis positif : 4</p>");
-								out.print("</li>");
-								out.print("<li>");
-								out.print("<p>Avis négatif: 4*10^16</p>");
-								out.print("</li>");
+						if (m != null) {
 
-								out.print("</ul>");
-
-								out.print("<p class=\"button-style\"><a href=\"/PIntergiciel/ServDeconnexion\">Déconnexion</a></p>");
-								out.print("</section>");
-							}
 						%>
+						<section>
+						<h2>Informations sur Compte</h2>
+						<ul>
+							<li>
+								<p>Photo de profil:</p>
+							</li>
+							<img src=<%m.getPhotoProfil();%> alt="" class="imgprofile">
+							<li>
+								<p>
+									<strong><%m.getPrenom(); out.print(" "); m.getNom(); %></strong>
+								</p>
+							</li>
+							<li>
+								<p>
+									<strong><%m.getPseudonyme();%></strong>
+								</p>
+							</li>
+							<li>
+								<form method="get", action = "ServArticles">
+									<p>Article en vente :<%m.getPropose().size();%></p>
+									<input type="hidden" , name="op" , value="articlesEnVente" />
+								</form>
+							</li>
+							<li>
+								<form method="get", action = "ServArticles">
+									<p>Liste des avis</p>
+									<input type="hidden" , name="op" , value="avisPersonne" />
+								</form>
+							</li>
+							<li>
+								<form method="get", action = "ServDeconnexion">
+									<p class="button-style">Déconnexion</p>
+									<input type="hidden"/>
+								</form>
+							</li>
+							</ul>
+						</section>
+						<% }%>
 					</div>
 
 
@@ -217,76 +227,39 @@
 			</div>
 		</div>
 	</div>
-	<div class="5grid-layout">
+	
+	
+		<div class="5grid-layout">
 		<div class="row" id="footer-content">
 			<div class="3u">
 				<section id="box1">
-					<h2 class="current_page_item">
-						<a href="accueil2.jsp">A propos du site</a>
-					</h2>
-					<ul class="style3">
-						<li class="first">
-							<p class="date">
-								<a href="#">10.03.2012</a>
-							</p>
-							<p>
-								<a href="#">Vestibulum sem magna, elementum ut, vestibulum
-									eu, facilisis. Mauris a dolor. Nulla facilisi. Cum sociis
-									natoque penatibus.</a>
-							</p>
-						</li>
-						<li>
-							<p class="date">
-								<a href="#">10.03.2012</a>
-							</p>
-							<p>
-								<a href="#">Pellentesque erat erat, tincidunt in, eleifend,
-									malesuada bibendum. Suspendisse sit amet in eros bibendum
-									condimentum. </a>
-							</p>
-						</li>
-					</ul>
+				<h2 class="current_page_item">
+					<p>&copy;TrocMania</p>
+				</h2>
 				</section>
 			</div>
 			<div class="6u">
 				<section id="box2">
-					<h2>Donec dictum metus</h2>
-					<div class="border-img">
-						<a href="#"><img src="images/pics02.jpg" alt=""></a>
-					</div>
-					<p>Nulla enim eros, porttitor eu, tempus id, varius non, nibh.
-						Duis enim nulla, luctus eu, dapibus lacinia, venenatis id, quam.
-						Vestibulum imperdiet, magna nec eleifend rutrum, nunc lectus
-						vestibulum velit, euismod lacinia quam nisl id lorem. Quisque
-						erat. Vestibulum pellentesque, justo mollis pretium suscipit,
-						justo nulla blandit libero, in blandit augue justo quis nisl.</p>
+				<h2><a href="${pageContext.request.ContextPath}/V2/synchronous/accueil2.jsp">A propos du site</a></h2>
+				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
 				</section>
 			</div>
 			<div class="3u">
 				<section id="box3">
-					<h2>Nulla luctus eleifend</h2>
-					<ul class="style1">
-						<li class="first"><a href="#">Pellentesque quis elit non
-								lectus gravida blandit luctus eleifend purus condimentum.</a></li>
-						<li><a href="#">Lorem ipsum dolor sit amet, consectetuer
-								adipiscing dictum metus in sapien elit.</a></li>
-						<li><a href="#">Phasellus nec dictum metus in sapien erat
-								sit amet nibh pellentesque congue.</a></li>
-						<li><a href="#">Cras vitae metus aliquam risus dictum
-								metus in sapien pellentesque pharetra.</a></li>
-						<li><a href="#">Duis non dictum metus in sapien ante in
-								metus commodo euismod lobortis.</a></li>
-					</ul>
+				<h2>Nous contacter</h2>
+				<ul class="style1">
+					<li class="first"><a href="#"></a>Kevin</li>
+					<li><a href="#">Ruddy</a></li>
+					<li><a href="#">Marianne</a></li>
+					<li><a href="#">Alvin</a></li>
+				</ul>
 				</section>
 			</div>
 		</div>
 	</div>
 	<div id="copyright" class="5grid-layout">
 		<section>
-			<p>
-				&copy; Your Site Name | Images: <a href="http://fotogrph.com/">Fotogrph</a>
-				| Design: <a href="http://html5templates.com/">HTML5Templates.com</a>
-			</p>
+			<p>&copy; TrocMania | Images: <a href="http://fotogrph.com/">Fotogrph</a></p>
 		</section>
 	</div>
 </body>
