@@ -104,7 +104,8 @@ public class FacadeCompte {
 	private static final String CHAMP_MAIL  = "mail";
     private static final String CHAMP_PASS   = "motdepasse";
     private static final String CHAMP_CONF   = "confirmation";
-    
+    private static final String CHAMP_PRENOM   = "prenom";
+    private static final String CHAMP_VILLE   = "ville";
 	private static final String CHAMP_ADRESSE    = "adresse";
 	private static final String CHAMP_TELEPHONE    = "telephone";
 	private static final String CHAMP_PSEUDONYME    = "pseudonyme";
@@ -137,7 +138,8 @@ public class FacadeCompte {
     	String mail = getValeurChamp( request, CHAMP_MAIL );
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
         String confirmation = getValeurChamp( request, CHAMP_CONF );
-        
+        String prenom = getValeurChamp( request, CHAMP_PRENOM );
+        String ville = getValeurChamp( request, CHAMP_VILLE );
         String adresse = getValeurChamp( request, CHAMP_ADRESSE );
     	String telephone = getValeurChamp( request, CHAMP_TELEPHONE );
     	String pseudonyme = getValeurChamp( request, CHAMP_PSEUDONYME );
@@ -200,6 +202,23 @@ public class FacadeCompte {
             setErreur( CHAMP_NOM, e.getMessage() );
         }
         utilisateur.setNom( nom );
+        
+        
+        try {
+            validationPrenom( prenom );
+        } catch ( Exception e ) {
+            setErreur( CHAMP_PRENOM, e.getMessage() );
+        }
+        utilisateur.setPrenom( prenom );
+        
+        
+        try {
+            validationVille(ville);
+        } catch ( Exception e ) {
+            setErreur( CHAMP_VILLE, e.getMessage() );
+        }
+        utilisateur.setVille(ville);
+        
         
         utilisateur.setPorteMonnaie(0);
         java.util.Date d1 = new java.util.Date();
@@ -272,6 +291,20 @@ public class FacadeCompte {
         	throw new Exception("Le pseudonyme est déja enregistré");
         }
     }
+    
+    
+    private void validationPrenom( String nom ) throws Exception {
+        if ( nom != null && nom.length() < 3 ) {
+            throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
+        }
+    }
+    
+    private void validationVille( String nom ) throws Exception {
+        if ( nom != null && nom.length() < 3 ) {
+            throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
+        }
+    }
+    
 //////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
     /*
