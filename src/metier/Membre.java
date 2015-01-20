@@ -31,6 +31,7 @@ public class Membre {
 	private String mail;
 	private int porteMonnaie;
 	private Date dateInscription;
+	private String photoProfil;
 	
 	@OneToMany(mappedBy="possesseur", fetch=FetchType.EAGER)
 	private Set<Article> propose;
@@ -188,6 +189,18 @@ public class Membre {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
-	
 
+
+	public String getPhotoProfil() {
+		return photoProfil;
+	}
+
+
+	public void setPhotoProfil(String photoProfil) {
+		this.photoProfil = photoProfil;
+	}
+	
+	
+	
+	
 }

@@ -37,6 +37,8 @@ public class ServAccueil extends HttpServlet {
 		HttpSession session = req.getSession();
 		req.setAttribute("article", facadeAccueil.getArticles());
 		//req.getRequestDispatcher("V2/synchronous/AccueilVrai.jsp").forward(req, resp);
+		
+		facadeAccueil.initialiserBD();
 		this.getServletContext().getRequestDispatcher("/V2/synchronous/AccueilVrai.jsp").forward(req, resp);
 		/*String op = req.getParameter("op");
 		switch (op){
