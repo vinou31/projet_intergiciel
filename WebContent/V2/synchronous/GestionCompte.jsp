@@ -101,7 +101,7 @@
 				<section id="box3">
 				<h2>Nous contacter</h2>
 				<ul class="style1">
-					<li class="first"><a href="#"></a>Kevin</li>
+					<li class="first"><a href="#">Kevin</a></li>
 					<li><a href="#">Ruddy</a></li>
 					<li><a href="#">Marianne</a></li>
 					<li><a href="#">Alvin</a></li>
