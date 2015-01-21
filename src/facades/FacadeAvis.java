@@ -33,6 +33,10 @@ public class FacadeAvis {
 		
 	}
 	
+	public Avis findAvis(int aid){
+		return (Avis) em.createNativeQuery("select * from Avis where ID ="+aid+";");
+	}
+	
 	public void supprimerAvis(Avis avis){
 		em.createNativeQuery("delete * from avis where Avis="+avis+";");
 		
