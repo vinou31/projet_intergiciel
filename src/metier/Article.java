@@ -1,7 +1,6 @@
 package metier;
 
 import java.sql.Date;
-import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -18,7 +17,8 @@ public class Article {
 private String description;
 private String image;//Url de l'emplacement de l'image
 private Date dateDepot;
-private Troc prixPropose;
+private int prixPropose;
+//private Troc prixPropose;
 private String nom;
 @ManyToOne
 private Membre possesseur;
@@ -96,13 +96,13 @@ public void setDateDepot(Date dateDepot) {
 	this.dateDepot = dateDepot;
 }
 
-public Troc getPrixPropose() {
-	return prixPropose;
-}
-
-public void setPrixPropose(Troc prixPropose) {
-	this.prixPropose = prixPropose;
-}
+//public Troc getPrixPropose() {
+//	return prixPropose;
+//}
+//
+//public void setPrixPropose(Troc prixPropose) {
+//	this.prixPropose = prixPropose;
+//}
 
 public String getNom() {
 	return nom;
@@ -111,6 +111,24 @@ public String getNom() {
 public void setNom(String nom) {
 	this.nom = nom;
 }
+
+public int getPrixPropose() {
+	return prixPropose;
+}
+
+public void setPrixPropose(int prixPropose) {
+	this.prixPropose = prixPropose;
+}
+
+public int getID() {
+	return ID;
+}
+
+public void setID(int iD) {
+	ID = iD;
+}
+
+
 
 
 

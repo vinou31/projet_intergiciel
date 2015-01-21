@@ -40,6 +40,7 @@ public class ServAccueil extends HttpServlet {
 		
 		facadeAccueil.initialiserBD();
 		this.getServletContext().getRequestDispatcher("/V2/synchronous/AccueilVrai.jsp").forward(req, resp);
+		//req.getRequestDispatcher("/V2/synchronous/AccueilVrai.jsp").forward(req, resp);
 		/*String op = req.getParameter("op");
 		switch (op){
 		case "compte": 

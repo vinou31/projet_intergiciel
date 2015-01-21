@@ -9,18 +9,18 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <noscript>
-<link rel="stylesheet" href="css/5grid/core.css" />
-<link rel="stylesheet" href="css/5grid/core-desktop.css" />
-<link rel="stylesheet" href="css/5grid/core-1200px.css" />
-<link rel="stylesheet" href="css/5grid/core-noscript.css" />
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/style-desktop.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-desktop.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-1200px.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-noscript.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style-desktop.css" />
 </noscript>
-<script src="css/5grid/jquery.js"></script>
-<script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
+<script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 <form action="ServCompte">
-<%Membre m = (Membre)request.getAttribute("Membre"); %>
+<%Membre m = (Membre)session.getAttribute("membre"); %>
 </form>
 </head><body class="homepage">
 <div id="wrapper">
@@ -56,21 +56,22 @@
 				<div class="6u mobileUI-main-content">
 				<div id="content">
 					<section>
-					<form action="ServCompte">
+					<form action="ServCompte?op=modif" method="get">
 						<div class="post">
 						<%if (m != null){%>						
 					<h2>Compte de :<%=m.getNom() %></h2>
 							<div class="attributCompte">
 							<li>Numéro de téléphone : 
-							<input class="searchfield" type="text" value=<%=m.getTelephone() %> onfocus="if (this.value == <%=m.getTelephone() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getTelephone() %>;}"></li>
+							<input class="searchfield" id="telephone" type="text" value=<%=m.getTelephone() %> onfocus="if (this.value == <%=m.getTelephone() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getTelephone() %>;}"></li>
 							<li>Pseudonyme : 
-							<input class="searchfield" type="text" value=<%=m.getPseudonyme() %> onfocus="if (this.value == <%=m.getPseudonyme() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getPseudonyme() %>;}"></li>
+							<input class="searchfield" id="pseudo" type="text" value=<%=m.getPseudonyme() %> onfocus="if (this.value == <%=m.getPseudonyme() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getPseudonyme() %>;}"></li>
 							<li>Mail : 
-							<input class="searchfield" type="text" value=<%=m.getMail() %> onfocus="if (this.value == <%=m.getMail() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMail() %>;}"></li>
+							<input class="searchfield" id="mail" type="text" value=<%=m.getMail() %> onfocus="if (this.value == <%=m.getMail() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMail() %>;}"></li>
 							<li>Adresse : 
-							<input class="searchfield" type="text"  value=<%=m.getAdresse() %> onfocus="if (this.value == <%=m.getAdresse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getAdresse() %>;}"></li>
+							<input class="searchfield" id="adresse" type="text"  value=<%=m.getAdresse() %> onfocus="if (this.value == <%=m.getAdresse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getAdresse() %>;}"></li>
 							<li>Mot de passe :
-							<input class="searchfield" type="password" value=<%=m.getMotDePasse() %> onfocus="if (this.value == <%=m.getMotDePasse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMotDePasse() %>;}"></li>
+							<input class="searchfield" id="mdp" type="password" value=<%=m.getMotDePasse() %> onfocus="if (this.value == <%=m.getMotDePasse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMotDePasse() %>;}"></li>
+							<input type="submit" id="EnregistrerModification" value="Enregistrer Modification" >
 							<%} else { %>
 								Vous allez être redirigé là où vous pouvez vous inscrire
 								<jsp:forward page="Inscription.jsp"></jsp:forward>
@@ -92,7 +93,7 @@
 			</div>
 			<div class="6u">
 				<section id="box2">
-				<h2><a href="${pageContext.request.ContextPath}/V2/synchronous/accueil2.jsp">A propos du site</a></h2>
+				<h2><a href="${pageContext.request.contextPath}/V2/synchronous/accueil2.jsp">A propos du site</a></h2>
 				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
 				</section>
 			</div>

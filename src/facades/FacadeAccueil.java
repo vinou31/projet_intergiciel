@@ -65,6 +65,14 @@ public class FacadeAccueil {
 		m3.setPrenom("Srandom");
 		m3.setVille("randomCity");
 		em.persist(m3);
+		
+		
+		Article a = new Article();
+		a.setDescription("testArtcle");
+		a.setDateDepot(d2);
+		a.setNom("testArticle");
+		a.setPossesseur(m3);
+		em.persist(a);
 	}
 	
 }

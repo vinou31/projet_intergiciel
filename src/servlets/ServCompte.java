@@ -42,14 +42,30 @@ public class ServCompte extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String op = (String) req.getParameter("op");
-		
+		HttpSession session = req.getSession();
+		Membre m = (Membre)session.getAttribute("membre");
 		switch(op){
 		case "gestionCompte" :
-			HttpSession session = req.getSession();
-			Membre m = (Membre)session.getAttribute("Membre");
-			req.setAttribute("Membre", m);
-			req.getRequestDispatcher("/GestionCompte.jsp").forward(req, resp);
+			req.setAttribute("membre", m);
+			req.getRequestDispatcher("/V2/synchronous/GestionCompte.jsp").forward(req, resp);
 			break;
+		case "modif" :
+
+			String inter = (String) req.getParameter("pseudo");
+			m.setPseudonyme(inter);
+			inter = (String) req.getParameter("telephone");
+			m.setTelephone(inter);
+			inter = (String) req.getParameter("mail");
+			m.setMail(inter);
+			inter = (String) req.getParameter("adresse");
+			m.setAdresse(inter);
+			inter = (String) req.getParameter("mdp");
+			m.setMotDePasse(inter);
+			
+			req.setAttribute("membre", m);
+			req.getRequestDispatcher("/V2/synchronous/GestionCompte.jsp").forward(req, resp);
+			break;
+			
 			default : System.out.println("coucou");
 		}
 		
