@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import facades.FacadeAccueil;
 import facades.FacadeArticle;
 import metier.Article;
 import metier.Categorie;
@@ -23,6 +24,9 @@ import metier.Membre;
 public class ServArticles extends HttpServlet {
 	@EJB
 	FacadeArticle facadeArticle;
+	
+	@EJB
+	FacadeAccueil facadeAccueil;
 	
 	private static final long serialVersionUID = 1L;
        
@@ -44,21 +48,30 @@ public class ServArticles extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Collection<Article> articles;
+		Collection<Article> articles = null;
 		//Integer op = (Integer) request.getAttribute("op");
-		String op = (String) request.getAttribute("op");
-		if(op.equals("mes articles")) {
+		HttpSession session = request.getSession();
+		Membre m = (Membre) session.getAttribute("session");
+		String op = (String) request.getParameter("op");
+		switch(op){
+		case "mes articles" :
 			//Articles de l'utilisateur
-			HttpSession session = request.getSession();
-			Membre m = (Membre) session.getAttribute("session");
 			articles = facadeArticle.getArticles(m.getID());
-		}else{
+			request.setAttribute("articles", articles);
+			request.getRequestDispatcher("articles.jsp").forward(request, response);
+			break;
+		case "ajout" :
+			request.setAttribute("categorie", facadeAccueil.getCategories());
+			request.getRequestDispatcher("/V2/synchronous/AjouterArticle.jsp").forward(request, response);
+			break;
+		default :
 			//Articles d'une categorie
 			int idCat = Integer.parseInt(request.getParameter("idCat"));
 			articles = facadeArticle.getCategories(idCat);
+			request.setAttribute("articles", articles);
+			request.getRequestDispatcher("articles.jsp").forward(request, response);
 		}
-		request.setAttribute("articles", articles);
-		request.getRequestDispatcher("articles.jsp").forward(request, response);
+
 	}
 
 }

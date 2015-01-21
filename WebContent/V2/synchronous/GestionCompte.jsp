@@ -43,7 +43,7 @@
 							<nav class="mobileUI-site-nav">
 								<ul>
 
-							<li><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
+							<li><a href="${pageContext.request.contextPath}/Accueil">Accueil</a></li>
 							<%
 								Membre m = (Membre) session.getAttribute("membre");
 								if (m == null) {
@@ -92,8 +92,9 @@
 							<input class="searchfield" name="adresse" type="text"  value=<%=m.getAdresse() %> onfocus="if (this.value == <%=m.getAdresse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getAdresse() %>;}"></li>
 							<li>Mot de passe :
 							<input class="searchfield" name="mdp" type="password" value=<%=m.getMotDePasse() %> onfocus="if (this.value == <%=m.getMotDePasse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMotDePasse() %>;}"></li>
-							<input type="submit" id="EnregistrerModification" value="Enregistrer Modification" name="op" >
-							
+							<li> Photo de profil :
+							<input type="file" name="file" id="file" size="60"/></li>
+							<input type="submit" value="Enregistrer Modification" id="EnregistrerModification" name="op"/>
 							
 							Vos articles :
 							<%if (m.getPropose().size() == 0) { %>
@@ -101,9 +102,7 @@
 							 <input type="submit" value="proposer un article" id="ProposerUnArticle" name="op">
 							
 							 <%} else { %>
-							 	<%for(Article a : m.getPropose()){%>
-							 	<img alt=<%=a.getNom() %> src=<%=a.getImage() %>>
-							 	<%}%>
+							 	<input type="submit" value="mes articles" id="ProposerUnArticle" name="op">
 							 	<%}%>	 	
 							<%} else { %>
 								Vous allez être redirigé là où vous pouvez vous inscrire
@@ -143,39 +142,5 @@
 			</div>
 		</div>
 	</div>
-			<div class="5grid-layout">
-		<div class="row" id="footer-content">
-			<div class="3u">
-				<section id="box1">
-				<h2 class="current_page_item">
-					<p>&copy;TrocMania</p>
-				</h2>
-				</section>
-			</div>
-			<div class="6u">
-				<section id="box2">
-				<h2><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">A propos du site</a></h2>
-				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
-				</section>
-			</div>
-			<div class="3u">
-				<section id="box3">
-				<h2>Nous contacter</h2>
-				<ul class="style1">
-					<li class="first"><a href="#">Kevin</a></li>
-					<li><a href="#">Ruddy</a></li>
-					<li><a href="#">Marianne</a></li>
-					<li><a href="#">Alvin</a></li>
-				</ul>
-				</section>
-			</div>
-		</div>
-	</div>
-	<div id="copyright" class="5grid-layout">
-		<section>
-			<p>&copy; TrocMania | Images: <a href="http://fotogrph.com/">Fotogrph</a></p>
-		</section>
-	</div>
-
 </body>
 </html>

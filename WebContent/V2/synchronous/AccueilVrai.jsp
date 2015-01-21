@@ -51,7 +51,7 @@
 							<nav class="mobileUI-site-nav">
 								<ul>
 
-							<li><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
+							<li><a href="${pageContext.request.contextPath}/Accueil">Accueil</a></li>
 							<%
 								Membre m = (Membre) session.getAttribute("membre");
 								if (m == null) {
@@ -59,7 +59,7 @@
 									<!-- <li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>
 									<li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a> -->
 									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Inscription.jsp">Inscription</a>
-									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Connexion.jsp">Connexion</a>
+									<li><a href="${pageContext.request.contextPath}/ServConnexion">Connexion</a>
 							
 								<%}else {								
 									%>
@@ -128,7 +128,10 @@
 							<li>
 								<p>Photo de profil:</p>
 							</li>
-							<img src="<%if(m.getPhotoProfil()!=null){m.getPhotoProfil();}else{out.println("${pageContext.request.contextPath}/V2/synchronous/images/197.jpg");}%>" alt="" class="imgprofile">
+							<img src=
+							<%if(m.getPhotoProfil()!=null){
+								out.println("\""+m.getPhotoProfil()+"\"");}else{%>
+								"${pageContext.request.contextPath}/V2/synchronous/images/197.jpg"<%} %> alt="" class="imgprofile">
 							<li>
 								<p>
 									<strong><%=m.getPrenom()%> <%=m.getNom()%></strong>
@@ -144,7 +147,7 @@
 											Article en vente :<%=m.getPropose().size()%></a>
 								</li>
 								<li>
-									<a href="${pageContext.request.contextPath}/V2/synchronous/AjouterArticle.jsp">
+									<a href="${pageContext.request.contextPath}/ServArticles?op=ajout">
 									Ajouter un article</a>
 								</li>
 								<li>

@@ -39,7 +39,7 @@
 					<div class="12u" id="logo">
 						<!-- Logo -->
 						<h1>
-							<a href="#" class="mobileUI-site-name">TrocMania</a>
+							<a href="${pageContext.request.contextPath}/Accueil" class="mobileUI-site-name">TrocMania</a>
 						</h1>
 						<p>La première forme de commerce au monde revient en version
 							2.0</p>
@@ -53,7 +53,7 @@
 							<nav class="mobileUI-site-nav">
 								<ul>
 
-							<li><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
+							<li><a href="${pageContext.request.contextPath}/Accueil">Accueil</a></li>
 							<%
 								Membre m = (Membre) session.getAttribute("membre");
 								if (m == null) {

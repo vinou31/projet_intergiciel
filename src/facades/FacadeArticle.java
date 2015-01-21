@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 
 import metier.Article;
+import metier.Categorie;
 import metier.Membre;
 
 @Stateful
@@ -51,6 +52,10 @@ public class FacadeArticle {
 	
 	public Collection<Article> getArticles(Integer idPossesseur) {
 		return (Collection<Article>)em.createNativeQuery("SELECT * FROM Article WHERE possesseur="+ idPossesseur +";", Article.class);
+	}
+	
+	public Collection<Article> getCategories(int idC){
+		return em.find(Categorie.class, idC).getArticles();
 	}
 
 }

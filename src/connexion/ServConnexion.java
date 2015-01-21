@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.validator.constraints.Email;
+
+import facades.FacadeAccueil;
 import metier.Membre;
 
 /**
@@ -25,6 +28,9 @@ public class ServConnexion extends HttpServlet {
        
 	@EJB
 	FacadeConnexion f;
+	
+	@EJB
+	FacadeAccueil facadeAccueil;
 	
    
 
@@ -64,6 +70,8 @@ public class ServConnexion extends HttpServlet {
 			vue = "/V2/synchronous/Connexion.jsp";
 		}
 		request.setAttribute("erreurs", f.getErreurs());
+		
+		request.setAttribute("categorie", facadeAccueil.getCategories());
 		
 		
 		
