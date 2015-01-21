@@ -1,5 +1,6 @@
 package metier;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -22,18 +23,19 @@ public class Categorie {
 	
 	private String nomCategorie;
 	
-	@ManyToOne
-	private Categorie parent;
+	//@ManyToOne
+	//private Categorie parent;
 	
-	@OneToMany(mappedBy="parent", fetch=FetchType.EAGER)
-	private Set<Categorie> sousCategorie;
+	//@OneToMany(mappedBy="parent", fetch=FetchType.EAGER)
+	private Set<String> sousCategorie;
 
-	@ManyToMany
-	private Set<Article> articles;
+	//@ManyToMany
+	//private Set<Article> articles;
 	
-	public Categorie(String nom){
-		this.nomCategorie = nom;
+	public Categorie(){
+		this.sousCategorie = new HashSet<String>();
 	}
+	
 
 	public String getNomCategorie() {
 		return nomCategorie;
@@ -43,37 +45,41 @@ public class Categorie {
 		this.nomCategorie = nomCategorie;
 	}
 
-	public Set<Article> getArticles() {
+	/*public Set<Article> getArticles() {
 		return articles;
-	}
+	}*/
 
-	public void ajoutArticle(Article article) throws ArticlePresent{
+	/*public void ajoutArticle(Article article) throws ArticlePresent{
 		boolean isAbsent = this.articles.add(article);
 		if (!isAbsent){
 			throw new ArticlePresent();
 		}		
-	}
+	}*/
 	
-	public void ajoutArticles(Set<Article> articles) throws ArticlePresent{
+	/*public void ajoutArticles(Set<Article> articles) throws ArticlePresent{
 		boolean isAbsent = this.articles.addAll(articles);
 		if (!isAbsent){
 			throw new ArticlePresent();
 		}	
-	}
+	}*/
 
-	public Categorie getParent() {
+	/*public Categorie getParent() {
 		return parent;
-	}
+	}*/
 
-	public Set<Categorie> getSousCategorie() {
-		return sousCategorie;
+	public Set<String> getSousCategorie() {
+		return this.sousCategorie;
 	}
 	
-	public void ajoutSousCategorie(Categorie categorie) throws SousCategoriePresent{
+	public void addSousCategorie(String nom) {
+		this.sousCategorie.add(nom);
+	}
+	
+	/*public void ajoutSousCategorie(Categorie categorie) throws SousCategoriePresent{
 		boolean isAbsent = this.sousCategorie.add(categorie);
 		if (!isAbsent){
 			throw new SousCategoriePresent();
 		}	
-		}
+	}*/
 	
 }
