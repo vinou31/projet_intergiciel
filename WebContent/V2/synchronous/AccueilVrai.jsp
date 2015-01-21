@@ -145,20 +145,35 @@
 								</p>
 							</li>
 								<li>
-								<a href="${pageContext.request.contextPath}/ServArticle?op=articlesEnVente">
-											Article en vente :<%=m.getPropose().size()%></a>
+									<form method="get" , action="ServArticles">
+										<p>
+											Article en vente :<%
+											m.getPropose().size();
+										%>
+										</p>
+										<input type="hidden" , name="op" , value="articlesEnVente" />
+									</form>
 								</li>
 								<li>
 									<a href="${pageContext.request.contextPath}/V2/synchronous/AjouterArticle.jsp">
-									Ajouter un article</a>
+										Ajouter un article
+									</a>
+								</li>
+								<li>
+									<a href="${pageContext.request.contextPath}/V2/synchronous/SupprimerArticle.jsp">
+										Supprimer un article
+									</a>
 								</li>
 								<li>
 									<a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">
-									Page de compte</a>
+										Page de compte
+									</a>
 								</li>
 								<li>
-									<a href="${pageContext.request.contextPath}/ServAvis?op=listeAvisPerso">
-									Liste des avis</a>
+									<form method="get" , action="ServArticles">
+										<p>Liste des avis</p>
+										<input type="hidden" , name="op" , value="avisPersonne" />
+									</form>
 								</li>
 								<li>
 								<!--  <form method="get", action = "ServDeconnexion">
