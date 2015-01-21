@@ -48,5 +48,9 @@ public class FacadeArticle {
 	public Collection<String> getSousCategorie(String categorie) {
 		return (Collection<String>)em.createNativeQuery("SELECT DISTINCT sousCategorie FROM Article WHERE Categorie="+categorie+";").getResultList();
 	}
+	
+	public Collection<Article> getArticles(Integer idPossesseur) {
+		return (Collection<Article>)em.createNativeQuery("SELECT * FROM Article WHERE possesseur="+ idPossesseur +";", Article.class);
+	}
 
 }
