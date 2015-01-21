@@ -101,8 +101,7 @@
 								%>
 								<ul class="niveau2">
 									<%
-										HashSet<Categorie> souscat = (HashSet<Categorie>) c
-													.getSousCategorie();
+										HashSet<Categorie> souscat = (HashSet<Categorie>) c.getSousCategorie();
 											for (Categorie c2 : souscat) {
 									%>
 									<li>
@@ -193,13 +192,25 @@
 										<li><a href="#">Chameau</a></li>
 									</ul>
 									
-								<% Article a = (Article) request.getAttribute("Article"); %>	
-								<h2><% out.println(a.getNom()); %></h2>
-								<img src= "<%a.getImage(); %>" alt="" class="imgarticle">
+									
+								<h2><% out.println(request.getAttribute("nom")); %></h2>
+								<img src= "<%out.println(request.getAttribute("img")); %>" alt="" class="imgarticle">
+								<p>Prix proposé: <%out.println(request.getAttribute( "prix" ));%></p>
+								<p>Descrpition de l'article: <%out.println("description");%></p>
 								<p>Vendeur: <%out.println(request.getAttribute( "vendeur" ));%></p>
-								<p>Descrpition de l'article: <%out.println(a.getDescription());%></p>
 								<div id="carte" style="width:800px;height:400px;"></div>
 								<div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
+								
+								<% if (m != null && m.getNom().equals(request.getAttribute("vendeur"))){ %>
+								<form method="get", action = "ServArticle">
+									<p>Liste des avis</p>
+									<input type="hidden" , name="op" , value="supprimerArticle" />
+								</form>
+								<%} %>
+								
+								
+								
+								
 								
 								
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>								
@@ -296,7 +307,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 				<section id="box3">
 				<h2>Nous contacter</h2>
 				<ul class="style1">
-					<li class="first"><a href="#"></a>Kevin</li>
+					<li class="first"><a href="#">Kevin</a></li>
 					<li><a href="#">Ruddy</a></li>
 					<li><a href="#">Marianne</a></li>
 					<li><a href="#">Alvin</a></li>
