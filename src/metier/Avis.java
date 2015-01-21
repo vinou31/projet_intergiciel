@@ -15,6 +15,9 @@ public class Avis {
 	private Date datePublication;
 	
 	@ManyToOne
+	private Article article;
+	
+	@ManyToOne
 	private Membre membre;
 	
 	@Id
@@ -50,23 +53,5 @@ public class Avis {
 	public void setDatePublication(Date datePublication) {
 		this.datePublication = datePublication;
 	}
-
-	public Membre getMembre() {
-		return membre;
-	}
-
-	public void setMembre(Membre membre) {
-		this.membre = membre;
-	}
-
-	public int getID() {
-		return ID;
-	}
-
-	public void setID(int iD) {
-		ID = iD;
-	}
-	
-	
 
 }

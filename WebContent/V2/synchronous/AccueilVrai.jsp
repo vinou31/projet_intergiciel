@@ -128,7 +128,12 @@
 							<li>
 								<p>Photo de profil:</p>
 							</li>
-							<img src="<%if(m.getPhotoProfil()!=null){m.getPhotoProfil();}else{out.println("${pageContext.request.contextPath}/V2/synchronous/images/197.jpg");}%>" alt="" class="imgprofile">
+							<img src=<%
+							if(m.getPhotoProfil()!=null){
+								out.println("\"file://"+m.getPhotoProfil()+"\"");
+								}else{%>
+									"${pageContext.request.contextPath}/V2/synchronous/images/197.jpg"
+							<%}%> alt="" class="imgprofile">
 							<li>
 								<p>
 									<strong><%=m.getPrenom()%> <%=m.getNom()%></strong>

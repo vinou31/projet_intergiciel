@@ -74,13 +74,19 @@ public class ServInscription extends HttpServlet {
 		 * Appel au traitement et à la validation de la requête, et récupération
 		 * du bean en résultant
 		 */
-		Membre utilisateur = f.inscrireUtilisateur(request);
+		Membre m = f.inscrireUtilisateur(request);
 		// if(f.getErreurs().isEmpty()){
+		
+		if(m==null){
+			System.out.print("le membre inscrit est null");
+		}else{
+			System.out.print("le membre inscrit est non null");
+		}
 		HttpSession session = request.getSession();
-		session.setAttribute("membre", utilisateur);
+		
 		request.setAttribute(ATT_FORM, f);
-		request.setAttribute("membre", utilisateur);
-		request.setAttribute("nbPseudoIdentiques", f.estDejaPresent("speedr"));
+		request.setAttribute("membre", m);
+		request.setAttribute("nbPseudoIdentiques", f.estDejaPresent(m.getPseudonyme()));
 		String vue = "/V2/synchronous/AccueilVrai.jsp";
 		// }else{
 		// vue = "/V2/synchronous/Inscription.jsp";
@@ -100,10 +106,12 @@ public class ServInscription extends HttpServlet {
 		if (response == null) {
 			System.out.println("response null");
 		}
+		
+		session.setAttribute("membre", m);
 
-		this.getServletContext()
-				.getRequestDispatcher("/V2/synchronous/AccueilVrai.jsp")
-				.forward(request, response);
+		//this.getServletContext().getRequestDispatcher("/V2/synchronous/Inscription.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/V2/synchronous/AccueilVrai.jsp").forward(request, response);
+		//this.getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
 		// this.getServletContext().getRequestDispatcher(
 		// "/V2/synchronous/AccueilVrai.jsp" ).forward( request, response );
 		// request.getRequestDispatcher( vue ).forward( request, response );
