@@ -6,8 +6,6 @@
 <%@ page import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
-
 <!--
 	Synchronous: A responsive HTML5 website template by HTML5Templates.com
 	Released for free under the Creative Commons Attribution 3.0 license (html5templates.com/license)
@@ -46,134 +44,16 @@
 
 	<div id="wrapper">
 		<header id="header">
-		<div class="5grid-layout">
-			<div class="row">
-				<div class="12u" id="logo">
-					<!-- Logo -->
-					<h1>
-						<a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp" class="mobileUI-site-name">TrocMania</a>
-					</h1>
-					<p>La première forme de commerce au monde revient en version
-						2.0</p>
-				</div>
-			</div>
-		</div>
-		<div class="5grid-layout">
-			<div class="row">
-				<div class="12u" id="menu">
-					<div id="menu-wrapper">
-						<nav class="mobileUI-site-nav">
-						<ul>
-							<li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
-							<%
-								Membre m = (Membre) session.getAttribute("session");
-								if (m == null) {
-									out.print("<li><a href=\"${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>");
-									out.print("<li><a href=\"${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a>");
-								}
-								else {								
-									%>
-									<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
-									<%} %>
-
-							<li><form class="searchform">
-									<input class="searchfield" type="text"
-										value="Rechercher un article..."
-										onfocus="if (this.value == 'Rechercher un article...') {this.value = '';}"
-										onblur="if (this.value == '') {this.value = 'Rechercher un article...';}">
-									<input class="searchbutton" type="button" value="OK">
-								</form></li>
-						</ul>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
+			<%@ include file="header.jsp" %>
 		</header>
+		
 		<div id="page">
 			<div class="5grid-layout">
 				<div class="row">
-					<div class="3u" id="sidebar1">
-					
-					
-						<section>
-						<div class="article">
-						<h2>Articles</h2>
-						<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");
-						%>
-						<ul class="niveau1">
-						<%if(cat != null){
-						
-						for (Categorie c : cat){
-							%>													
-								<li><% out.print(c.getNomCategorie()); %>
-									<ul class="niveau2">
-									<%
-									Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
-									for (Categorie c2: souscat){
-										%>
-										<li><% out.print(c2.getNomCategorie()); %></li>
-
-										<%}%>
-									</ul>
-								</li>
-							
-							<% 			
-						}
-						}
-						%>
-						</ul>			
-							</div>
-						</section>
-						<%
-						if (m != null) {
-
-						%>
-						<section>
-						<h2>Informations sur Compte</h2>
-						<ul>
-							<li>
-								<p>Photo de profil:</p>
-							</li>
-							<img src="<%if(m.getPhotoProfil()!=null){m.getPhotoProfil();}else{out.println("${pageContext.request.contextPath}/V2/synchronous/images/197.jpg");}%>" alt="" class="imgprofile">
-							<li>
-								<p>
-									<strong><%=m.getPrenom()%> <%=m.getNom()%></strong>
-								</p>
-							</li>
-							<li>
-								<p>
-									<strong><%=m.getPseudonyme()%></strong>
-								</p>
-							</li>
-								<li>
-								<a href="${pageContext.request.contextPath}/ServArticle?op=articlesEnVente">
-											Article en vente :<%=m.getPropose().size()%></a>
-								</li>
-								<li>
-									<a href="${pageContext.request.contextPath}/V2/synchronous/AjouterArticle.jsp">
-									Ajouter un article</a>
-								</li>
-								<li>
-									<a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">
-									Page de compte</a>
-								</li>
-								<li>
-									<a href="${pageContext.request.contextPath}/ServAvis?op=listeAvisPerso">
-									Liste des avis</a>
-								</li>
-								<li>
-								<!--  <form method="get", action = "ServDeconnexion">
-									<p class="button-style">Déconnexion</p>
-									<input type="hidden"/>
-								</form>-->
-								<a href="${pageContext.request.contextPath}/ServDeconnexion">Deconnexion</a>
-							</li>
-							</ul>
-						</section>
-						<% }%>
+					<div class="3u" id="sidebar1">	
+					    <%@ include file="menuArticles.jsp" %>
+					    <%@ include file="infoCompte.jsp" %>
 					</div>
-
 
 					<div class="9u mobileUI-main-content">
 						<div id="content">
@@ -195,12 +75,10 @@
 								</span>
 								</a>
 								</div>
-								</section>
-								
+								</section>	
 			<%
 			}}
 			%>
-					
 							</div>
 						</div>
 					</div>

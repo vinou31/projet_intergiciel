@@ -45,8 +45,9 @@ public class ServArticles extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Collection<Article> articles;
-		Integer op = (Integer) request.getAttribute("op");
-		if(op==0) {
+		//Integer op = (Integer) request.getAttribute("op");
+		String op = (String) request.getAttribute("op");
+		if(op.equals("mes articles")) {
 			//Articles de l'utilisateur
 			HttpSession session = request.getSession();
 			Membre m = (Membre) session.getAttribute("session");
