@@ -18,8 +18,9 @@ private String description;
 private String image;//Url de l'emplacement de l'image
 private Date dateDepot;
 private int prixPropose;
-//private Troc prixPropose;
 private String nom;
+private String categorie;
+private String sousCategorie;
 @ManyToOne
 private Membre possesseur;
 
@@ -64,22 +65,6 @@ public void setPossesseur(Membre possesseur) {
 	this.possesseur = possesseur;
 }
 
-/*public Collection<Categorie> getEstdeType() {
-	return estdeType;
-}
-
-public void setEstdeType(Collection<Categorie> estdeType) {
-	this.estdeType = estdeType;
-}
-
-/*public Map<String, Troc> getOffres() {
-	return offres;
-}
-
-public void setOffres(Map<String, Troc> offres) {
-	this.offres = offres;
-}*/
-
 public void setDescription(String description) {
 	this.description = description;
 }
@@ -94,6 +79,22 @@ public Date getDateDepot() {
 }
 public void setDateDepot(Date dateDepot) {
 	this.dateDepot = dateDepot;
+}
+
+public String getCategorie() {
+	return categorie;
+}
+
+public void setCategorie(String categorie) {
+	this.categorie = categorie;
+}
+
+public String getSousCategorie() {
+	return sousCategorie;
+}
+
+public void setSousCategorie(String sousCategorie) {
+	this.sousCategorie = sousCategorie;
 }
 
 //public Troc getPrixPropose() {
