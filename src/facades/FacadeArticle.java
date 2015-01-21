@@ -41,12 +41,12 @@ public class FacadeArticle {
 	
 	@SuppressWarnings("unchecked")
 	public Collection<String> getCategories(){
-		return (Colection<String>)em.createNativeQuery("SELECT DISTINCT Categorie FROM Article;").getResultList();
+		return (Collection<String>)em.createNativeQuery("SELECT DISTINCT Categorie FROM Article;").getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Collection<String> getSousCategorie(String categorie) {
-		return (Colection<String>)em.createNativeQuery("SELECT DISTINCT sousCategorie FROM Article WHERE Categorie="+categorie+";").getResultList();
+		return (Collection<String>)em.createNativeQuery("SELECT DISTINCT sousCategorie FROM Article WHERE Categorie="+categorie+";").getResultList();
 	}
 
 }
