@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import facades.FacadeArticle;
 import metier.Article;
+import metier.Categorie;
 import metier.Membre;
 
 /**
@@ -52,7 +53,7 @@ public class ServArticles extends HttpServlet {
 		}else{
 			String categorie = (String) request.getParameter("categorie");
 			String sousCategorie = (String) request.getParameter("sousCategorie");
-			facadeArticle.getCategories();
+			Collection<Categorie> categories = facadeArticle.getCategories();
 			facadeArticle.getSousCategorie(sousCategorie);
 		}
 		
