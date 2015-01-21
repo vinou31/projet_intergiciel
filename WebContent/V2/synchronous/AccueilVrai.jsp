@@ -128,12 +128,7 @@
 							<li>
 								<p>Photo de profil:</p>
 							</li>
-							<img src=<%
-							if(m.getPhotoProfil()!=null){
-								out.println("\"file://"+m.getPhotoProfil()+"\"");
-								}else{%>
-									"${pageContext.request.contextPath}/V2/synchronous/images/197.jpg"
-							<%}%> alt="" class="imgprofile">
+							<img src="<%if(m.getPhotoProfil()!=null){m.getPhotoProfil();}else{out.println("${pageContext.request.contextPath}/V2/synchronous/images/197.jpg");}%>" alt="" class="imgprofile">
 							<li>
 								<p>
 									<strong><%=m.getPrenom()%> <%=m.getNom()%></strong>
@@ -145,35 +140,20 @@
 								</p>
 							</li>
 								<li>
-									<form method="get" , action="ServArticles">
-										<p>
-											Article en vente :<%
-											m.getPropose().size();
-										%>
-										</p>
-										<input type="hidden" , name="op" , value="articlesEnVente" />
-									</form>
+								<a href="${pageContext.request.contextPath}/ServArticle?op=articlesEnVente">
+											Article en vente :<%=m.getPropose().size()%></a>
 								</li>
 								<li>
 									<a href="${pageContext.request.contextPath}/V2/synchronous/AjouterArticle.jsp">
-										Ajouter un article
-									</a>
-								</li>
-								<li>
-									<a href="${pageContext.request.contextPath}/V2/synchronous/SupprimerArticle.jsp">
-										Supprimer un article
-									</a>
+									Ajouter un article</a>
 								</li>
 								<li>
 									<a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">
-										Page de compte
-									</a>
+									Page de compte</a>
 								</li>
 								<li>
-									<form method="get" , action="ServArticles">
-										<p>Liste des avis</p>
-										<input type="hidden" , name="op" , value="avisPersonne" />
-									</form>
+									<a href="${pageContext.request.contextPath}/ServAvis?op=listeAvisPerso">
+									Liste des avis</a>
 								</li>
 								<li>
 								<!--  <form method="get", action = "ServDeconnexion">

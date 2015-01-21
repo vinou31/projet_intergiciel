@@ -1,3 +1,8 @@
+<%@page import="javax.enterprise.context.SessionScoped"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
+<%@page import="metier.*"%>
 <!DOCTYPE HTML>
 
 <!--
@@ -15,18 +20,15 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <noscript>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-desktop.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-1200px.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-noscript.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style-desktop.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-desktop.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-1200px.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-noscript.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style-desktop.css" />
 </noscript>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
-<script
-	src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
-<script type="text/javascript"
-	src="livevalidation_standalone.compressed.js"></script>
+<script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 </head>
 <body>
@@ -39,7 +41,7 @@
 						<h1>
 							<a href="#" class="mobileUI-site-name">TrocMania</a>
 						</h1>
-						<p>La première forme de commerce au monde revient en version
+						<p>La premiÃ¨re forme de commerce au monde revient en version
 							2.0</p>
 					</div>
 				</div>
@@ -50,8 +52,23 @@
 						<div id="menu-wrapper">
 							<nav class="mobileUI-site-nav">
 								<ul>
-									<li><a href="${pageContext.request.contextPath}/Accueil">Accueil</a></li>
-									<li><a href="${pageContext.request.contextPath}/ServArticle">Article</a></li>
+
+							<li><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
+							<%
+								Membre m = (Membre) session.getAttribute("membre");
+								if (m == null) {
+									%>
+									<!-- <li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>
+									<li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a> -->
+									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Inscription.jsp">Inscription</a>
+									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Connexion.jsp">Connexion</a>
+							
+								<%}else {								
+									%>
+									<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
+									<%} %>
+
+									<!-- Modifier les liens -->
 									<li><form class="searchform">
 											<input class="searchfield" type="text"
 												value="Rechercher un article..."
@@ -128,7 +145,7 @@
 														.add(
 																Validate.Presence,
 																{
-																	failureMessage : "   Il semblerait qu'il soit déjà utilisé"
+																	failureMessage : "   Il semblerait qu'il soit dÃ©jÃ  utilisÃ©"
 																});
 											</script>
 										</p>
@@ -136,7 +153,7 @@
 										<p>
 											Entrer un mot de passe: <input type="text" id="motDePasse" name="motDePasse" value="" size="20"	maxlength="20" /> <br> 
 											Confirmer le mot de passe: <input type="text" id="confirmation" name="confirmation" value="" size="20" maxlength="20" class="LV_invalid_field" />
-											<!--<span class=" LV_validation_message LV_invalid">Le mot de passe doit être identique</span>-->
+											<!--<span class=" LV_validation_message LV_invalid">Le mot de passe doit Ãªtre identique</span>-->
 											<script type="text/javascript">
 												var f19 = new LiveValidation(
 														'f19',
@@ -179,7 +196,7 @@
 									</fieldset>
 
 									<fieldset>
-										<legend>Vos coordonnées</legend>
+										<legend>Vos coordonnÃ©es</legend>
 										<!-- Titre du fieldset -->
 
 										<p>
@@ -194,13 +211,13 @@
 														.add(
 																Validate.Presence,
 																{
-																	failureMessage : "   Ce champs doit être rempli, sinon ca va pas le faire... du tout"
+																	failureMessage : "   Ce champs doit Ãªtre rempli, sinon ca va pas le faire... du tout"
 																});
 											</script>
 										</p>
 
 										<p>
-											Prénom: <input type="text" id="prenom" name="prenom">
+											PrÃ©nom: <input type="text" id="prenom" name="prenom">
 											<script type="text/javascript">
 												var f2 = new LiveValidation(
 														'f2',
@@ -211,13 +228,13 @@
 														.add(
 																Validate.Presence,
 																{
-																	failureMessage : "   Le prénom aussi, fait pas ton parano"
+																	failureMessage : "   Le prÃ©nom aussi, fait pas ton parano"
 																});
 											</script>
 										</p>
 
 										<p>
-											Numéro + Rue: <input type="text" id="adresse" name="adresse" size="20" maxlength="20" />
+											NumÃ©ro + Rue: <input type="text" id="adresse" name="adresse" size="20" maxlength="20" />
 											<script type="text/javascript">
 												var f4 = new LiveValidation(
 														'f4',
@@ -251,14 +268,14 @@
 										</p>
 
 
-										<label for="tel">Téléphone :</label><br> <input
+										<label for="tel">TÃ©lÃ©phone :</label><br> <input
 											type="text" id="telephone" name="telephone" size="20" maxlength="20" />
 
 										<p>
-											Faites un souhait que vous voudriez voir exaucé :<br> <input
+											Faites un souhait que vous voudriez voir exaucÃ© :<br> <input
 												type="radio" name="souhait" value="riche" id="riche">
 											Etre riche<br> <input type="radio" name="souhait"
-												value="celebre" id="celebre"> Etre célèbre <input
+												value="celebre" id="celebre"> Etre cÃ©lÃ¨bre <input
 												type="radio" name="souhait" value="intelligent"
 												id="intelligent"> Etre <strong>encore</strong> plus
 											intelligent <input type="radio" name="souhait" value="autre"
@@ -266,7 +283,7 @@
 										</p>
 
 										<p>
-											<label for="precisions">Si "Autre", veuillez préciser
+											<label for="precisions">Si "Autre", veuillez prÃ©ciser
 												:</label><br>
 											<textarea name="precisions" id="precisions" cols="40"
 												rows="4"></textarea>
@@ -293,7 +310,7 @@
 			</div>
 			<div class="6u">
 				<section id="box2">
-				<h2><a href="${pageContext.request.contextPath}/V2/synchronous/accueil2.jsp">A propos du site</a></h2>
+				<h2><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">A propos du site</a></h2>
 				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
 				</section>
 			</div>
@@ -314,6 +331,6 @@
 		<section>
 			<p>&copy; TrocMania | Images: <a href="http://fotogrph.com/">Fotogrph</a></p>
 		</section>
-</div>
+	</div>
 </body>
 </html>
