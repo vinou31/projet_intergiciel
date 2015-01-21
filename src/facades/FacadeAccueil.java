@@ -6,8 +6,10 @@ import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import exception.ArticlePresent;
 import metier.Article;
 import metier.Avis;
+import metier.Categorie;
 import metier.Membre;
 
 @Singleton
@@ -22,6 +24,10 @@ public class FacadeAccueil {
 	
 	public Collection<Avis> getAvisArticle(Article article){
 		return em.createQuery("from Avis", Avis.class).getResultList();
+	}
+	
+	public Collection<Categorie> getCategories() {
+		return em.createQuery("from Categorie where parent=null", Categorie.class).getResultList();
 	}
 	
 	public void  initialiserBD(){
@@ -73,6 +79,25 @@ public class FacadeAccueil {
 		a.setNom("testArticle");
 		a.setPossesseur(m3);
 		em.persist(a);
+		
+		Categorie c = new Categorie("ordinateur");
+		Categorie c2 = new Categorie("Acer");
+		Categorie c3 = new Categorie("AlienWare");
+		c2.setParent(c);
+		c3.setParent(c);
+		Categorie c4 = new Categorie("Electroménager");
+		Categorie c5 = new Categorie("Machine à laver");
+		c5.setParent(c4);
+		em.persist(c);
+		em.persist(c2);
+		em.persist(c3);
+		em.persist(c4);
+		em.persist(c5);
+
+		
+
+		
+		
 	}
 	
 }

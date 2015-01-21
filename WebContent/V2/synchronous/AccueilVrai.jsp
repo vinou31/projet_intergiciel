@@ -61,8 +61,10 @@
 									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Inscription.jsp">Inscription</a>
 									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Connexion.jsp">Connexion</a>
 							
-								<%}
-							%>
+								<%}else {								
+									%>
+									<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
+									<%} %>
 
 									<!-- Modifier les liens -->
 									<li><form class="searchform">
@@ -86,42 +88,33 @@
 					
 					
 						<section>
+						<div class="article">
 						<h2>Articles</h2>
-						<%Collection<Categorie> cat = (HashSet<Categorie>) request.getAttribute("categorie");
+						<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");
 						%>
 						<ul class="niveau1">
-						<%
+						<%if(cat != null){
 						
 						for (Categorie c : cat){
-							%>							
+							%>													
 								<li><% out.print(c.getNomCategorie()); %>
 									<ul class="niveau2">
 									<%
-									HashSet<Categorie> souscat = (HashSet<Categorie>) c.getSousCategorie();
+									Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
 									for (Categorie c2: souscat){
 										%>
 										<li><% out.print(c2.getNomCategorie()); %></li>
 
-										<%
-									} %>
+										<%}%>
 									</ul>
 								</li>
 							
 							<% 			
 						}
+						}
 						%>
-						</ul>
-						
-						
-						<div class="article">
-							<ul class="niveau1">
-								<li>Electroménager
-									<ul class="niveau2">
-										<li>Machine à laver</li>
-										<li>Aspirateur</li>
-									</ul>
-								</li>
-
+						</ul>			
+							</div>
 						</section>
 						
 						
@@ -177,14 +170,12 @@
 									<p class="button-style">Déconnexion</p>
 									<input type="hidden"/>
 								</form>-->
-								<a href="ServDeconnexion">Deconnexion</a>
+								<a href="${pageContext.request.contextPath}/ServDeconnexion">Deconnexion</a>
 							</li>
 							</ul>
 						</section>
 						<% }%>
 					</div>
-
-
 					<div class="9u mobileUI-main-content">
 						<div id="content">
 							<section>
@@ -236,7 +227,7 @@
 				<section id="box3">
 				<h2>Nous contacter</h2>
 				<ul class="style1">
-					<li class="first"><a href="#"></a>Kevin</li>
+					<li class="first"><a href="#">Kevin</a></li>
 					<li><a href="#">Ruddy</a></li>
 					<li><a href="#">Marianne</a></li>
 					<li><a href="#">Alvin</a></li>

@@ -1,6 +1,5 @@
 package metier;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -23,19 +22,22 @@ public class Categorie {
 	
 	private String nomCategorie;
 	
-	//@ManyToOne
-	//private Categorie parent;
+	@ManyToOne
+	private Categorie parent;
 	
-	//@OneToMany(mappedBy="parent", fetch=FetchType.EAGER)
-	private Set<String> sousCategorie;
+	@OneToMany(mappedBy="parent", fetch=FetchType.EAGER)
+	private Set<Categorie> sousCategorie;
 
-	//@ManyToMany
-	//private Set<Article> articles;
+	@ManyToMany
+	private Set<Article> articles;
 	
 	public Categorie(){
-		this.sousCategorie = new HashSet<String>();
+		
 	}
 	
+	public Categorie(String nom){
+		this.nomCategorie = nom;
+	}
 
 	public String getNomCategorie() {
 		return nomCategorie;
@@ -45,41 +47,24 @@ public class Categorie {
 		this.nomCategorie = nomCategorie;
 	}
 
-	/*public Set<Article> getArticles() {
+	public Set<Article> getArticles() {
 		return articles;
-	}*/
+	}
 
-	/*public void ajoutArticle(Article article) throws ArticlePresent{
-		boolean isAbsent = this.articles.add(article);
-		if (!isAbsent){
-			throw new ArticlePresent();
-		}		
-	}*/
-	
-	/*public void ajoutArticles(Set<Article> articles) throws ArticlePresent{
-		boolean isAbsent = this.articles.addAll(articles);
-		if (!isAbsent){
-			throw new ArticlePresent();
-		}	
-	}*/
 
-	/*public Categorie getParent() {
+	public Categorie getParent() {
 		return parent;
-	}*/
+	}
 
-	public Set<String> getSousCategorie() {
-		return this.sousCategorie;
+	public Set<Categorie> getSousCategorie() {
+		return sousCategorie;
 	}
 	
-	public void addSousCategorie(String nom) {
-		this.sousCategorie.add(nom);
+	public void setParent(Categorie c){
+		this.parent = c;
 	}
-	
-	/*public void ajoutSousCategorie(Categorie categorie) throws SousCategoriePresent{
-		boolean isAbsent = this.sousCategorie.add(categorie);
-		if (!isAbsent){
-			throw new SousCategoriePresent();
-		}	
-	}*/
-	
+
+	public int getID() {
+		return ID;
+	}
 }
