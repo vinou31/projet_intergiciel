@@ -1,5 +1,7 @@
 package facades;
 
+import java.sql.Date;
+
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,6 +23,10 @@ public class FacadeGestionArticles {
 		a.setNom(CHAMP_NOM);
 		a.setDescription(CHAMP_DESCRIPTION);
 		a.setImage(chemin);
+		a.setPossesseur(m);
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date d2 = new java.sql.Date(d1.getTime());
+		a.setDateDepot(d2);
 		em.persist(a);
 	}
 

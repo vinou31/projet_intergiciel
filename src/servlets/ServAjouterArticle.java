@@ -70,19 +70,24 @@ public class ServAjouterArticle extends HttpServlet{
 
 		String nomImage;
 		String fileName = "";
+		String chemin = "";
+		System.out.println("oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
 		for (Part part : request.getParts()) {
 			fileName = extractFileName(part);
-			String inter = savePath + File.separator + fileName;
-			part.write(inter);
+			if (!fileName.equals("")) {
+				
+				chemin = savePath + File.separator + fileName;
+				part.write(chemin);
+			}
 		}
-		String chemin =  savePath + File.separator + fileName;
-		System.out.print("chemin : " + chemin);
+//		String chemin =  savePath + File.separator + fileName;
+//		System.out.print("chemin : " + chemin);
 		
 		fga.ajouterArticle(request, m, chemin);
 
 		request.setAttribute("message", "Votre article a bien été ajouté");
 		//getServletContext().getRequestDispatcher("/resultUpload.jsp").forward(request, response);
-		request.getRequestDispatcher("/ServAccueil").forward(request, response);
+		request.getRequestDispatcher("/Accueil").forward(request, response);
 	}
 
 	/**

@@ -1,3 +1,4 @@
+
 <%@page import="javax.enterprise.context.SessionScoped"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -64,7 +65,7 @@
 										Membre m = (Membre) session.getAttribute("membre");
 										if (m == null) {
 											%>
-											
+
 											<li><a href="${pageContext.request.contextPath}/V2/synchronous/Inscription.jsp">Inscription</a>
 											<li><a href="${pageContext.request.contextPath}/V2/synchronous/Connexion.jsp">Connexion</a>
 										<%}
@@ -113,40 +114,67 @@
 							</div>
 						</section>
 						<%
-							if (m != null) {
-								out.print("<section>");
-								out.print("<h2>Information de Compte</h2>");
-								out.print("<ul >");
-								out.print("<li >");
-								out.print("<p>Photo de profil</p>");
-								out.print("</li>");
-								out.print("<img src=\"images/197.jpg\" alt=\"\" class=\"imgprofile\">");
-								out.print("<li>");
-								out.print("<p><strong>" + m.getNom() + " " + m.getPrenom()
-										+ "</strong></p>");
-								out.print("</li>");
-								out.print("<li>");
-								out.print("<p><strong>" + m.getPseudonyme() + "</strong></p>");
-								out.print("</li>");
-								out.print("<li>");
-								out.print("<p>Article en vente : 4</p>");
-								out.print("</li>");
-								out.print("<li>");
-								out.print("<p>Transactions effectuées : 4</p>");
-								out.print("</li>");
-								out.print("<li>");
-								out.print("<p>Avis positif : 4</p>");
-								out.print("</li>");
-								out.print("<li>");
-								out.print("<p>Avis négatif: 4*10^16</p>");
-								out.print("</li>");
+						if (m != null) {
 
-								out.print("</ul>");
-
-								out.print("<p class=\"button-style\"><a href=\"/PIntergiciel/ServDeconnexion\">Déconnexion</a></p>");
-								out.print("</section>");
-							}
 						%>
+						<section>
+						<h2>Informations sur Compte</h2>
+						<ul>
+							<li>
+								<p>Photo de profil:</p>
+							</li>
+							<img src=<%
+								if(m.getPhotoProfil()!=null){
+									out.println("\""+m.getPhotoProfil()+"\"");
+								}else{%>
+									"${pageContext.request.contextPath}/V2/synchronous/images/197.jpg"
+								<%}%> alt="" class="imgprofile">
+							<li>
+								<p>
+									<strong><%=m.getPrenom()%> <%=m.getNom()%></strong>
+								</p>
+							</li>
+							<li>
+								<p>
+									<strong><%=m.getPseudonyme()%></strong>
+								</p>
+							</li>
+								<li>
+									<form method="get" action="ServArticles">
+										<p>
+											Article en vente :<%
+											//m.getPropose().size();
+										%>
+										</p>
+										<input type="hidden"  name="op"  value="articlesEnVente" />
+									</form>
+								</li>
+								<li>
+									<a href="${pageContext.request.contextPath}/V2/synchronous/AjouterArticle.jsp">
+										Ajouter un article
+									</a>
+								</li>
+								<li>
+									<a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">
+										Page de compte
+									</a>
+								</li>
+								<li>
+									<form method="get"  action="ServArticles">
+										<p>Liste des avis</p>
+										<input type="hidden"  name="op"  value="avisPersonne" />
+									</form>
+								</li>
+								<li>
+								<!--  <form method="get", action = "ServDeconnexion">
+									<p class="button-style">Déconnexion</p>
+									<input type="hidden"/>
+								</form>-->
+								<a href="${pageContext.request.contextPath}/ServDeconnexion">Deconnexion</a>
+							</li>
+							</ul>
+						</section>
+						<% }%>
 					</div>
 
 
@@ -157,7 +185,7 @@
 								<fieldset>
 									<legend>Ajout d'un article</legend>
 									<!-- Titre du fieldset -->
-									
+
 									<p>
 										nom: <input type="text" id="nom"
 											name="nom" value="" />
@@ -171,11 +199,10 @@
 
 									<p>
 										Ajoutez l'image: <input type="file" name="file" size="60" /><br />
-										<br /> <input type="submit" value="Upload" /><br>
 									</p>
 
 
-									<input type="submit" value="Inscription" class="sansLabel" />
+									<input type="submit" value="Ajouter l'article" class="sansLabel" />
 								</fieldset>
 
 							</form>
@@ -260,3 +287,4 @@
 	</div>
 </body>
 </html>
+
