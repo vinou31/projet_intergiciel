@@ -49,6 +49,9 @@ public class ServArticle extends HttpServlet {
 		Article article = facadeArticle.findArticle(id);
 		request.setAttribute("vendeur",article.getPossesseur().getNom());
 		request.setAttribute("description",article.getDescription());
+		request.setAttribute("nom",article.getNom());
+		request.setAttribute("img",article.getImage());
+		request.setAttribute("prix", article.getPrixPropose());
 		HttpSession session = request.getSession();
 		Membre m = (Membre) session.getAttribute("session");
 		request.setAttribute("start",m.getVille());
