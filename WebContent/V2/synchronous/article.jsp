@@ -203,8 +203,12 @@
 								
 								<% if (m != null && m.getNom().equals(request.getAttribute("vendeur"))){ %>
 								<form method="get", action = "ServArticle">
-									<p>Liste des avis</p>
+									<p>Supprimer cet article de la vente</p>
 									<input type="hidden" , name="op" , value="supprimerArticle" />
+								</form>
+								<form method="get", action = "ServArticle">
+									<p>modifier cet article</p>
+									<input type="hidden" , name="op" , value="modifierArticle" />
 								</form>
 								<%} %>
 								
