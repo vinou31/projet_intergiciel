@@ -71,7 +71,10 @@
 									out.print("<li><a href=\"${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>");
 									out.print("<li><a href=\"${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a>");
 								}
-							%>
+								else {								
+									%>
+									<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
+									<%} %>
 
 							<li><form class="searchform">
 									<input class="searchfield" type="text"
@@ -94,91 +97,80 @@
 					
 					
 						<section>
+						<div class="article">
 						<h2>Articles</h2>
-						<%Collection<Categorie> cat = (HashSet<Categorie>) request.getAttribute("categorie");
+						<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");
 						%>
 						<ul class="niveau1">
-						<%
+						<%if(cat != null){
 						
 						for (Categorie c : cat){
-							%>							
+							%>													
 								<li><% out.print(c.getNomCategorie()); %>
 									<ul class="niveau2">
 									<%
-									HashSet<Categorie> souscat = (HashSet<Categorie>) c.getSousCategorie();
+									Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
 									for (Categorie c2: souscat){
 										%>
 										<li><% out.print(c2.getNomCategorie()); %></li>
 
-										<%
-									} %>
+										<%}%>
 									</ul>
 								</li>
 							
 							<% 			
 						}
+						}
 						%>
-						</ul>
-						
-						
-						<div class="article">
-							<ul class="niveau1">
-								<li>Electroménager
-									<ul class="niveau2">
-										<li>Machine à laver</li>
-										<li>Aspirateur</li>
-									</ul>
-								</li>
-
+						</ul>			
+							</div>
 						</section>
-
 						<%
 						if (m != null) {
 
 						%>
 						<section>
-						<h2>
-						<a href="${pageContext.request.contextPath}/V2/synchronous/GestionCompte.jsp">Informations sur le Compte</a>
-						</h2>
+						<h2>Informations sur Compte</h2>
 						<ul>
 							<li>
-								<p>Photo de profil</p>
+								<p>Photo de profil:</p>
 							</li>
-							<img src=<%m.getPhotoProfil();%> alt="" class="imgprofile">
+							<img src="<%if(m.getPhotoProfil()!=null){m.getPhotoProfil();}else{out.println("${pageContext.request.contextPath}/V2/synchronous/images/197.jpg");}%>" alt="" class="imgprofile">
 							<li>
 								<p>
-									<strong><%m.getPrenom(); out.print(" "); m.getNom(); %></strong>
+									<strong><%=m.getPrenom()%> <%=m.getNom()%></strong>
 								</p>
 							</li>
 							<li>
 								<p>
-									<strong><%m.getPseudonyme();%></strong>
+									<strong><%=m.getPseudonyme()%></strong>
 								</p>
 							</li>
-							<li>
-								<form method="get", action = "ServArticles">
-									<p>Article en vente :<%m.getPropose().size();%></p>
-									<input type="hidden" , name="op" , value="articlesEnVente" />
-								</form>
-							</li>
-							<li>
-								<form method="get", action = "ServArticles">
-									<p>Liste des avis</p>
-									<input type="hidden" , name="op" , value="avisPersonne" />
-								</form>
-							</li>
-							<li>
-								<form method="get", action = "ServDeconnexion">
+								<li>
+								<a href="${pageContext.request.contextPath}/ServArticle?op=articlesEnVente">
+											Article en vente :<%=m.getPropose().size()%></a>
+								</li>
+								<li>
+									<a href="${pageContext.request.contextPath}/V2/synchronous/AjouterArticle.jsp">
+									Ajouter un article</a>
+								</li>
+								<li>
+									<a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">
+									Page de compte</a>
+								</li>
+								<li>
+									<a href="${pageContext.request.contextPath}/ServAvis?op=listeAvisPerso">
+									Liste des avis</a>
+								</li>
+								<li>
+								<!--  <form method="get", action = "ServDeconnexion">
 									<p class="button-style">Déconnexion</p>
 									<input type="hidden"/>
-								</form>
+								</form>-->
+								<a href="${pageContext.request.contextPath}/ServDeconnexion">Deconnexion</a>
 							</li>
 							</ul>
 						</section>
-							
-						
-						
-
 						<% }%>
 					</div>
 
@@ -189,9 +181,6 @@
 
 
 			<%HashSet<Article> art = (HashSet<Article>) m.getPropose();
-			//Article Hollande = new Article("hollande", 0.1, "flamby", "P2Intergiciel/WebContent/V2/Synchronous/images/fr.jpg", new java.sql.Date(new java.util.Date().getTime()), new Membre());
-			//HashSet<Article> art = new HashSet<Article>();
-			//art.add(Hollande);
 			if (art.isEmpty()){
 				out.print("aucun article  à disposition pour la catégorie demandée");
 			}
@@ -199,42 +188,19 @@
 								
 								<section>
 								<div id="box-6" class="box">
-								<form method="get", action = "ServArticle">
-									<img id="image-6" src= "<%a.getImage();%>"/> <span
-										class="caption scale-caption">
-										<h3><%out.println(a.getNom()); %></h3>
-										<input type="hidden" , name="op" , value="articleEnVue" />
-									</span>
-									</form>
+								<a href ="${pageContext.request.contextPath}/ServArticle?op=articleEnVue">
+									<img id="image-6" src= "<%a.getImage();%>"/> 
+									<span class="caption scale-caption">
+									<h3><%=a.getNom()%></h3>
+								</span>
+								</a>
 								</div>
 								</section>
 								
 			<%
 			}}
 			%>
-
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-								<section>
-								<div id="box-6" class="box">
-									<img id="image-6" src="images/cham.jpg" /> <span
-										class="caption scale-caption">
-										<h3>Gentil Chameau</h3>
-										<p>Chameau de compétition, éxécute le 0 à 30km/h en 6.5s,
-											trés sympathique</p>
-									</span>
-								</div>
-								</section>
-								
-								
+					
 							</div>
 						</div>
 					</div>

@@ -92,27 +92,38 @@
 			<div class="5grid-layout">
 				<div class="row">
 					<div class="3u" id="sidebar1">
+					
+					
 						<section>
-							<h2>Articles</h2>
-							<div class="article">
-								<ul class="niveau1">
-									<li>Electroménager
-										<ul class="niveau2">
-											<li>Machine à laver</li>
-											<li>Aspirateur</li>
-										</ul>
-									</li>
-									<li>Informatique
-										<ul class="niveau2">
-											<li>Tablette</li>
-											<li>Portable</li>
-										</ul>
-									</li>
-									<li>Outillage</li>
-									<li>Son-Vidéo</li>
-								</ul>
+						<div class="article">
+						<h2>Articles</h2>
+						<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");
+						%>
+						<ul class="niveau1">
+						<%if(cat != null){
+						
+						for (Categorie c : cat){
+							%>													
+								<li><% out.print(c.getNomCategorie()); %>
+									<ul class="niveau2">
+									<%
+									Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
+									for (Categorie c2: souscat){
+										%>
+										<li><% out.print(c2.getNomCategorie()); %></li>
+
+										<%}%>
+									</ul>
+								</li>
+							
+							<% 			
+						}
+						}
+						%>
+						</ul>			
 							</div>
 						</section>
+						
 						<%
 						if (m != null) {
 
@@ -123,12 +134,7 @@
 							<li>
 								<p>Photo de profil:</p>
 							</li>
-							<img src=<%
-								if(m.getPhotoProfil()!=null){
-									out.println("\""+m.getPhotoProfil()+"\"");
-								}else{%>
-									"${pageContext.request.contextPath}/V2/synchronous/images/197.jpg"
-								<%}%> alt="" class="imgprofile">
+							<img src="<%if(m.getPhotoProfil()!=null){m.getPhotoProfil();}else{out.println("${pageContext.request.contextPath}/V2/synchronous/images/197.jpg");}%>" alt="" class="imgprofile">
 							<li>
 								<p>
 									<strong><%=m.getPrenom()%> <%=m.getNom()%></strong>
@@ -140,30 +146,20 @@
 								</p>
 							</li>
 								<li>
-									<form method="get" action="ServArticles">
-										<p>
-											Article en vente :<%
-											//m.getPropose().size();
-										%>
-										</p>
-										<input type="hidden"  name="op"  value="articlesEnVente" />
-									</form>
+								<a href="${pageContext.request.contextPath}/ServArticle?op=articlesEnVente">
+											Article en vente :<%=m.getPropose().size()%></a>
 								</li>
 								<li>
 									<a href="${pageContext.request.contextPath}/V2/synchronous/AjouterArticle.jsp">
-										Ajouter un article
-									</a>
+									Ajouter un article</a>
 								</li>
 								<li>
 									<a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">
-										Page de compte
-									</a>
+									Page de compte</a>
 								</li>
 								<li>
-									<form method="get"  action="ServArticles">
-										<p>Liste des avis</p>
-										<input type="hidden"  name="op"  value="avisPersonne" />
-									</form>
+									<a href="${pageContext.request.contextPath}/ServAvis?op=listeAvisPerso">
+									Liste des avis</a>
 								</li>
 								<li>
 								<!--  <form method="get", action = "ServDeconnexion">
@@ -213,76 +209,40 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
 	<div class="5grid-layout">
 		<div class="row" id="footer-content">
 			<div class="3u">
 				<section id="box1">
-					<h2 class="current_page_item">
-						<a href="accueil2.jsp">A propos du site</a>
-					</h2>
-					<ul class="style3">
-						<li class="first">
-							<p class="date">
-								<a href="#">10.03.2012</a>
-							</p>
-							<p>
-								<a href="#">Vestibulum sem magna, elementum ut, vestibulum
-									eu, facilisis. Mauris a dolor. Nulla facilisi. Cum sociis
-									natoque penatibus.</a>
-							</p>
-						</li>
-						<li>
-							<p class="date">
-								<a href="#">10.03.2012</a>
-							</p>
-							<p>
-								<a href="#">Pellentesque erat erat, tincidunt in, eleifend,
-									malesuada bibendum. Suspendisse sit amet in eros bibendum
-									condimentum. </a>
-							</p>
-						</li>
-					</ul>
+				<h2 class="current_page_item">
+					<p>&copy;TrocMania</p>
+				</h2>
 				</section>
 			</div>
 			<div class="6u">
 				<section id="box2">
-					<h2>Donec dictum metus</h2>
-					<div class="border-img">
-						<a href="#"><img src="images/pics02.jpg" alt=""></a>
-					</div>
-					<p>Nulla enim eros, porttitor eu, tempus id, varius non, nibh.
-						Duis enim nulla, luctus eu, dapibus lacinia, venenatis id, quam.
-						Vestibulum imperdiet, magna nec eleifend rutrum, nunc lectus
-						vestibulum velit, euismod lacinia quam nisl id lorem. Quisque
-						erat. Vestibulum pellentesque, justo mollis pretium suscipit,
-						justo nulla blandit libero, in blandit augue justo quis nisl.</p>
+				<h2><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">A propos du site</a></h2>
+				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
 				</section>
 			</div>
 			<div class="3u">
 				<section id="box3">
-					<h2>Nulla luctus eleifend</h2>
-					<ul class="style1">
-						<li class="first"><a href="#">Pellentesque quis elit non
-								lectus gravida blandit luctus eleifend purus condimentum.</a></li>
-						<li><a href="#">Lorem ipsum dolor sit amet, consectetuer
-								adipiscing dictum metus in sapien elit.</a></li>
-						<li><a href="#">Phasellus nec dictum metus in sapien erat
-								sit amet nibh pellentesque congue.</a></li>
-						<li><a href="#">Cras vitae metus aliquam risus dictum
-								metus in sapien pellentesque pharetra.</a></li>
-						<li><a href="#">Duis non dictum metus in sapien ante in
-								metus commodo euismod lobortis.</a></li>
-					</ul>
+				<h2>Nous contacter</h2>
+				<ul class="style1">
+					<li class="first"><a href="#">Kevin</a></li>
+					<li><a href="#">Ruddy</a></li>
+					<li><a href="#">Marianne</a></li>
+					<li><a href="#">Alvin</a></li>
+				</ul>
 				</section>
 			</div>
 		</div>
 	</div>
 	<div id="copyright" class="5grid-layout">
 		<section>
-			<p>
-				&copy; Your Site Name | Images: <a href="http://fotogrph.com/">Fotogrph</a>
-				| Design: <a href="http://html5templates.com/">HTML5Templates.com</a>
-			</p>
+			<p>&copy; TrocMania | Images: <a href="http://fotogrph.com/">Fotogrph</a></p>
 		</section>
 	</div>
 </body>
