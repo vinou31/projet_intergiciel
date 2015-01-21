@@ -50,8 +50,7 @@
 					<h1>
 						<a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp" class="mobileUI-site-name">TrocMania</a>
 					</h1>
-					<p>La première forme de commerce au monde revient en version
-						2.0</p>
+					<p>La première forme de commerce au monde revient en version 2.0</p>
 				</div>
 			</div>
 		</div>
@@ -194,7 +193,7 @@
 										<p><%=a.getDatePublication()%></p>
 										<p><%=a.getCritique()%></p>
 										<%if (m != null && m.equals(a.getMembre())){ %>
-										<a href="${pageContext.request.contextPath}/ServAvis?op=supprimerAvis">
+										<a href="${pageContext.request.contextPath}/ServAvis?op=supprimerAvis&idAvis=<%=a.getID()%>">
 											<p>Supprimer cet avis</p></a>
 										<a href="${pageContext.request.contextPath}/ServAvis?op=modifierAvis">
 											<p>modifier cet avis</p></a>
