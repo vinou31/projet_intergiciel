@@ -29,6 +29,7 @@
 </noscript>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
+<script type="text/javascript" src="livevalidation_standalone.compressed.js"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 </head>
 <body>
@@ -146,8 +147,8 @@
 											Confirmer le mot de passe: <input type="text" id="confirmation" name="confirmation" value="" size="20" maxlength="20" class="LV_invalid_field" />
 											<!--<span class=" LV_validation_message LV_invalid">Le mot de passe doit être identique</span>-->
 											<script type="text/javascript">
-												var motDePasse = new LiveValidation('motDePasse',{validMessage : "  OK"});
-												motDePasse.add(Validate.Confirmation,{match : 'confirmation',failureMessage : "  Les mots de passe ne correspondent pas!"});
+												var confirmation = new LiveValidation('confirmation',{validMessage : "  OK"});
+												confirmation.add(Validate.Confirmation,{match : 'motDePasse',failureMessage : "  Les mots de passe ne correspondent pas!"});
 											</script>
 										</p>
 
