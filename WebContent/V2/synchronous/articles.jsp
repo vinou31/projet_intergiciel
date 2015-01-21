@@ -189,20 +189,20 @@
 
 
 			<%HashSet<Article> art = (HashSet<Article>) m.getPropose();
-			Article Hollande = new Article("hollande", 0.1, "flamby", "P2Intergiciel/WebContent/V2/Synchronous/images/fr.jpg", new java.sql.Date(new java.util.Date().getTime()), new Membre());
+			//Article Hollande = new Article("hollande", 0.1, "flamby", "P2Intergiciel/WebContent/V2/Synchronous/images/fr.jpg", new java.sql.Date(new java.util.Date().getTime()), new Membre());
 			//HashSet<Article> art = new HashSet<Article>();
-			art.add(Hollande);
+			//art.add(Hollande);
 			if (art.isEmpty()){
 				out.print("aucun article  à disposition pour la catégorie demandée");
 			}
-				for(Article a : art){%>
+			else {for(Article a : art){%>
 								
 								<section>
 								<div id="box-6" class="box">
 								<form method="get", action = "ServArticle">
 									<img id="image-6" src= "<%a.getImage();%>"/> <span
 										class="caption scale-caption">
-										<h3><%a.getNom(); %></h3>
+										<h3><%out.println(a.getNom()); %></h3>
 										<input type="hidden" , name="op" , value="articleEnVue" />
 									</span>
 									</form>
@@ -210,7 +210,7 @@
 								</section>
 								
 			<%
-				}
+			}}
 			%>
 
 								<section>
@@ -265,7 +265,7 @@
 				<section id="box3">
 				<h2>Nous contacter</h2>
 				<ul class="style1">
-					<li class="first"><a href="#"></a>Kevin</li>
+					<li class="first"><a href="#">Kevin</a></li>
 					<li><a href="#">Ruddy</a></li>
 					<li><a href="#">Marianne</a></li>
 					<li><a href="#">Alvin</a></li>
