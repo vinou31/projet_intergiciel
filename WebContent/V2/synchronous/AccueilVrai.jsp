@@ -1,7 +1,7 @@
 <%@page import="javax.enterprise.context.SessionScoped"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.Collection"%>
+<%@page import="java.util.*"%>
 <%@page import="metier.*"%>
 <!DOCTYPE HTML>
 
@@ -83,26 +83,45 @@
 			<div class="5grid-layout">
 				<div class="row">
 					<div class="3u" id="sidebar1">
+					
+					
 						<section>
-							<h2>Articles</h2>
-							<div class="article">
-								<ul class="niveau1">
-									<li>Electroménager
-										<ul class="niveau2">
-											<li>Machine à laver</li>
-											<li>Aspirateur</li>
-										</ul>
-									</li>
-									<li>Informatique
-										<ul class="niveau2">
-											<li>Tablette</li>
-											<li>Portable</li>
-										</ul>
-									</li>
-									<li>Outillage</li>
-									<li>Son-Vidéo</li>
-								</ul>
-							</div>
+						<h2>Articles</h2>
+						<%Collection<Categorie> cat = (HashSet<Categorie>) request.getAttribute("categorie");
+						%>
+						<ul class="niveau1">
+						<%
+						
+						for (Categorie c : cat){
+							%>							
+								<li><% out.print(c.getNomCategorie()); %>
+									<ul class="niveau2">
+									<%
+									HashSet<Categorie> souscat = (HashSet<Categorie>) c.getSousCategorie();
+									for (Categorie c2: souscat){
+										%>
+										<li><% out.print(c2.getNomCategorie()); %></li>
+
+										<%
+									} %>
+									</ul>
+								</li>
+							
+							<% 			
+						}
+						%>
+						</ul>
+						
+						
+						<div class="article">
+							<ul class="niveau1">
+								<li>Electroménager
+									<ul class="niveau2">
+										<li>Machine à laver</li>
+										<li>Aspirateur</li>
+									</ul>
+								</li>
+
 						</section>
 						
 						
