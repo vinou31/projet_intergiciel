@@ -1,3 +1,8 @@
+<%@page import="javax.enterprise.context.SessionScoped"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
+<%@page import="metier.*"%>
 <!DOCTYPE HTML>
 
 <!--
@@ -15,18 +20,15 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <noscript>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-desktop.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-1200px.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-noscript.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style.css" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style-desktop.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-desktop.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-1200px.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-noscript.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style-desktop.css" />
 </noscript>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
-<script
-	src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
-<script type="text/javascript"
-	src="livevalidation_standalone.compressed.js"></script>
+<script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 </head>
 <body>
@@ -39,7 +41,7 @@
 						<h1>
 							<a href="#" class="mobileUI-site-name">TrocMania</a>
 						</h1>
-						<p>La première forme de commerce au monde revient en version
+						<p>La premiÃ¨re forme de commerce au monde revient en version
 							2.0</p>
 					</div>
 				</div>
@@ -50,8 +52,23 @@
 						<div id="menu-wrapper">
 							<nav class="mobileUI-site-nav">
 								<ul>
-									<li><a href="${pageContext.request.contextPath}/Accueil">Accueil</a></li>
-									<li><a href="${pageContext.request.contextPath}/ServCompte">Compte</a></li>									
+
+							<li><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
+							<%
+								Membre m = (Membre) session.getAttribute("membre");
+								if (m == null) {
+									%>
+									<!-- <li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>
+									<li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a> -->
+									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Inscription.jsp">Inscription</a>
+									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Connexion.jsp">Connexion</a>
+							
+								<%}else {								
+									%>
+									<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
+									<%} %>
+
+									<!-- Modifier les liens -->
 									<li><form class="searchform">
 											<input class="searchfield" type="text"
 												value="Rechercher un article..."
@@ -128,14 +145,14 @@
 														.add(
 																Validate.Presence,
 																{
-																	failureMessage : "   Il semblerait qu'il soit déjà utilisé"
+																	failureMessage : "   Il semblerait qu'il soit dÃ©jÃ  utilisÃ©"
 																});
 											</script>
 										</p>
 
 										<p>
 											Entrer un mot de passe: <input type="password" id="motDePasse" name="motDePasse" value="" size="20"	maxlength="20" /> <br> 
-											<!--<span class=" LV_validation_message LV_invalid">Le mot de passe doit être identique</span>-->
+											<!--<span class=" LV_validation_message LV_invalid">Le mot de passe doit Ãªtre identique</span>-->
 											<script type="text/javascript">
 												var f19 = new LiveValidation(
 														'f19',
@@ -176,7 +193,7 @@
 			</div>
 			<div class="6u">
 				<section id="box2">
-				<h2><a href="${pageContext.request.contextPath}/V2/synchronous/accueil2.jsp">A propos du site</a></h2>
+				<h2><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">A propos du site</a></h2>
 				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
 				</section>
 			</div>
@@ -197,6 +214,6 @@
 		<section>
 			<p>&copy; TrocMania | Images: <a href="http://fotogrph.com/">Fotogrph</a></p>
 		</section>
-</div>
+	</div>
 </body>
 </html>

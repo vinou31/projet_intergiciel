@@ -20,39 +20,59 @@
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
-<form action="ServCompte">
-<%Membre m = (Membre)request.getAttribute("membre"); %>
-</form>
-</head><body class="homepage">
-<div id="wrapper">
-	<header id="header">
-		<div class="5grid-layout">
-			<div class="row">
-				<div class="12u" id="logo"> <!-- Logo -->
-					<h1><a href="${pageContext.request.contextPath}/Accueil" class="mobileUI-site-name">TrocMania</a></h1>
-					<p>La première forme de commerce au monde est de retoure en version 2.0</p>
-				</div>
-			</div>
-		</div>
-		<div class="5grid-layout">
-			<div class="row">
-				<div class="12u" id="menu">
-					<div id="menu-wrapper">
-						<nav class="mobileUI-site-nav">
-							<ul>
-								<li class="current_page_item"><a href="${pageContext.request.contextPath}/Accueil">Accueil</a></li>
-								<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
-								<li><form class="searchform">
-									<input class="searchfield" type="text" value="Rechercher un article..." onfocus="if (this.value == 'Rechercher un article...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Rechercher un article...';}">
-									<input class="searchbutton" type="button" value="OK">
-								</form></li>
-							</ul>
-						</nav>
+</head>
+<body>
+	<div id="wrapper">
+		<header id="header">
+			<div class="5grid-layout">
+				<div class="row">
+					<div class="12u" id="logo">
+						<!-- Logo -->
+						<h1>
+							<a href="#" class="mobileUI-site-name">TrocMania</a>
+						</h1>
+						<p>La première forme de commerce au monde revient en version
+							2.0</p>
 					</div>
 				</div>
 			</div>
-		</div>
-	</header>
+			<div class="5grid-layout">
+				<div class="row">
+					<div class="12u" id="menu">
+						<div id="menu-wrapper">
+							<nav class="mobileUI-site-nav">
+								<ul>
+
+							<li><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
+							<%
+								Membre m = (Membre) session.getAttribute("membre");
+								if (m == null) {
+									%>
+									<!-- <li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>
+									<li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a> -->
+									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Inscription.jsp">Inscription</a>
+									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Connexion.jsp">Connexion</a>
+							
+								<%}else {								
+									%>
+									<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
+									<%} %>
+
+									<!-- Modifier les liens -->
+									<li><form class="searchform">
+											<input class="searchfield" type="text"
+												value="Rechercher un article..."
+												onfocus="if (this.value == 'Rechercher un article...') {this.value = '';}"
+												onblur="if (this.value == '') {this.value = 'Rechercher un article...';}">
+											<input class="searchbutton" type="button" value="OK">
+										</form></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
 	
 				<div class="6u mobileUI-main-content">
 				<div id="content">
@@ -123,10 +143,39 @@
 			</div>
 		</div>
 	</div>
+			<div class="5grid-layout">
+		<div class="row" id="footer-content">
+			<div class="3u">
+				<section id="box1">
+				<h2 class="current_page_item">
+					<p>&copy;TrocMania</p>
+				</h2>
+				</section>
+			</div>
+			<div class="6u">
+				<section id="box2">
+				<h2><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">A propos du site</a></h2>
+				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
+				</section>
+			</div>
+			<div class="3u">
+				<section id="box3">
+				<h2>Nous contacter</h2>
+				<ul class="style1">
+					<li class="first"><a href="#">Kevin</a></li>
+					<li><a href="#">Ruddy</a></li>
+					<li><a href="#">Marianne</a></li>
+					<li><a href="#">Alvin</a></li>
+				</ul>
+				</section>
+			</div>
+		</div>
+	</div>
 	<div id="copyright" class="5grid-layout">
 		<section>
 			<p>&copy; TrocMania | Images: <a href="http://fotogrph.com/">Fotogrph</a></p>
 		</section>
+	</div>
 
 </body>
 </html>

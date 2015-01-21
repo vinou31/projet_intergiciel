@@ -64,7 +64,10 @@
 									out.print("<li><a href=\"${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>");
 									out.print("<li><a href=\"${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a>");
 								}
-							%>
+								else {								
+									%>
+									<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
+									<%} %>
 
 							<li><form class="searchform">
 									<input class="searchfield" type="text"
@@ -87,51 +90,34 @@
 
 
 						<section>
+						<div class="article">
 						<h2>Articles</h2>
-						<%
-							Collection<Categorie> cat = (HashSet<Categorie>) request.getAttribute("categorie");
+						<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");
 						%>
 						<ul class="niveau1">
-							<%
-								for (Categorie c : cat) {
-							%>
-							<li>
-								<%
-									out.print(c.getNomCategorie());
-								%>
-								<ul class="niveau2">
-									<%
-										HashSet<Categorie> souscat = (HashSet<Categorie>) c.getSousCategorie();
-											for (Categorie c2 : souscat) {
-									%>
-									<li>
-										<%
-											out.print(c2.getNomCategorie());
-										%>
-									</li>
-
-									<%
-											}
-									%>
-								</ul>
-							</li>
-
-							<%
-								}
-							%>
-						</ul>
-
-
-						<div class="article">
-							<ul class="niveau1">
-								<li>Electroménager
+						<%if(cat != null){
+						
+						for (Categorie c : cat){
+							%>													
+								<li><% out.print(c.getNomCategorie()); %>
 									<ul class="niveau2">
-										<li>Machine à laver</li>
-										<li>Aspirateur</li>
+									<%
+									Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
+									for (Categorie c2: souscat){
+										%>
+										<li><% out.print(c2.getNomCategorie()); %></li>
+
+										<%}%>
 									</ul>
 								</li>
+							
+							<% 			
+						}
+						}
+						%>
+						</ul>			
+							</div>
 						</section>
-
 
 
 						<%
@@ -139,46 +125,50 @@
 
 						%>
 						<section>
-						<h2>
-						<a href="${pageContext.request.contextPath}/V2/synchronous/GestionCompte.jsp">Informations sur le Compte</a>
-						</h2>
+						<h2>Informations sur Compte</h2>
 						<ul>
 							<li>
-								<p>Photo de profil</p>
+								<p>Photo de profil:</p>
 							</li>
-							<img src=<%m.getPhotoProfil();%> alt="" class="imgprofile">
+							<img src="<%if(m.getPhotoProfil()!=null){m.getPhotoProfil();}else{out.println("${pageContext.request.contextPath}/V2/synchronous/images/197.jpg");}%>" alt="" class="imgprofile">
 							<li>
 								<p>
-									<strong><%m.getPrenom(); out.print(" "); m.getNom(); %></strong>
+									<strong><%=m.getPrenom()%> <%=m.getNom()%></strong>
 								</p>
 							</li>
 							<li>
 								<p>
-									<strong><%m.getPseudonyme();%></strong>
+									<strong><%=m.getPseudonyme()%></strong>
 								</p>
 							</li>
-							<li>
-								<form method="get", action = "ServArticles">
-									<p>Article en vente :<%m.getPropose().size();%></p>
-									<input type="hidden" , name="op" , value="articlesEnVente" />
-								</form>
-							</li>
-							<li>
-								<form method="get", action = "ServArticles">
-									<p>Liste des avis</p>
-									<input type="hidden" , name="op" , value="avisPersonne" />
-								</form>
-							</li>
-							<li>
-								<form method="get", action = "ServDeconnexion">
+								<li>
+								<a href="${pageContext.request.contextPath}/ServArticle?op=articlesEnVente">
+											Article en vente :<%=m.getPropose().size()%></a>
+								</li>
+								<li>
+									<a href="${pageContext.request.contextPath}/V2/synchronous/AjouterArticle.jsp">
+									Ajouter un article</a>
+								</li>
+								<li>
+									<a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">
+									Page de compte</a>
+								</li>
+								<li>
+									<a href="${pageContext.request.contextPath}/ServAvis?op=listeAvisPerso">
+									Liste des avis</a>
+								</li>
+								<li>
+								<!--  <form method="get", action = "ServDeconnexion">
 									<p class="button-style">Déconnexion</p>
 									<input type="hidden"/>
-								</form>
+								</form>-->
+								<a href="${pageContext.request.contextPath}/ServDeconnexion">Deconnexion</a>
 							</li>
 							</ul>
 						</section>
+						<% }%>
 				</div>
-				<%} %>
+
 				
 				<div class="9u mobileUI-main-content">
 					<div id="content">
@@ -193,23 +183,17 @@
 									</ul>
 									
 									
-								<h2><% out.println(request.getAttribute("nom")); %></h2>
-								<img src= "<%out.println(request.getAttribute("img")); %>" alt="" class="imgarticle">
-								<p>Prix proposé: <%out.println(request.getAttribute( "prix" ));%></p>
-								<p>Descrpition de l'article: <%out.println("description");%></p>
-								<p>Vendeur: <%out.println(request.getAttribute( "vendeur" ));%></p>
+								<h2><%=request.getAttribute("nom")%></h2>
+								<img src= "<%=request.getAttribute("img")%>" alt="" class="imgarticle">
+								<p>Prix proposé: <%=request.getAttribute( "prix")%></p>
+								<p>Descrpition de l'article: <%=request.getAttribute("description")%></p>
+								<p>Vendeur: <%=request.getAttribute( "vendeur" )%></p>
 								<div id="carte" style="width:800px;height:400px;"></div>
 								<div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
 								
 								<% if (m != null && m.getNom().equals(request.getAttribute("vendeur"))){ %>
-								<form method="get", action = "ServArticle">
-									<p>Supprimer cet article de la vente</p>
-									<input type="hidden" , name="op" , value="supprimerArticle" />
-								</form>
-								<form method="get", action = "ServArticle">
-									<p>modifier cet article</p>
-									<input type="hidden" , name="op" , value="modifierArticle" />
-								</form>
+									<a href="${pageContext.request.contextPath}/ServArticle?op=supprimerArticle"><p>Supprimer cet article de la vente</p></a>
+									<a href="${pageContext.request.contextPath}/ServArticle?op=modifierArticle"><p>modifier cet article</p></a>
 								<%} %>
 								
 								
