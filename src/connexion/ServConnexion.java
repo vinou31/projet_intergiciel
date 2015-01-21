@@ -20,7 +20,7 @@ import metier.Membre;
 @WebServlet("/ServConnexion")
 public class ServConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String SESSION = "session";
+	private static final String SESSION = "membre";
 	private String vue;
        
 	@EJB

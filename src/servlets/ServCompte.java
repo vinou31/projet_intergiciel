@@ -46,8 +46,8 @@ public class ServCompte extends HttpServlet {
 		switch(op){
 		case "gestionCompte" :
 			HttpSession session = req.getSession();
-			Membre m = (Membre)session.getAttribute("Membre");
-			req.setAttribute("Membre", m);
+			Membre m = (Membre)session.getAttribute("membre");
+			req.setAttribute("membre", m);
 			req.getRequestDispatcher("/GestionCompte.jsp").forward(req, resp);
 			break;
 			default : System.out.println("coucou");
