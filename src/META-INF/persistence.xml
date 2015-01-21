@@ -12,11 +12,11 @@
                 <provider>org.hibernate.ejb.HibernatePersistence</provider>
                 <jta-data-source>java:/jboss/datasources/ExampleDS</jta-data-source>
                 
-               <class>intergiciel.Article</class>
-               <class>intergiciel.Avis</class>
-               <class>intergiciel.Membre</class>
-               <class>intergiciel.Troc</class>
-               <class>intergiciel.Categorie</class>
+               <class>metier.Article</class>
+               <class>metier.Avis</class>
+               <class>metier.Membre</class>
+               <class>metier.Troc</class>
+               <class>metier.Categorie</class>
 
                 
                 <properties>
