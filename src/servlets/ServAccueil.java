@@ -12,9 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import facades.FacadeAccueil;
 
+
 @WebServlet("/Accueil")
 public class ServAccueil extends HttpServlet {
-	
+	public static int defaut = 0;
 	@EJB
 	FacadeAccueil facadeAccueil;
 
@@ -36,8 +37,9 @@ public class ServAccueil extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		//req.getRequestDispatcher("V2/synchronous/AccueilVrai.jsp").forward(req, resp);
-		
+		if (defaut==0){
 		facadeAccueil.initialiserBD();
+		defaut++;}
 		req.setAttribute("article", facadeAccueil.getArticles());
 		req.setAttribute("categorie", facadeAccueil.getCategories());
 		this.getServletContext().getRequestDispatcher("/V2/synchronous/AccueilVrai.jsp").forward(req, resp);
