@@ -35,10 +35,11 @@ public class ServAccueil extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		req.setAttribute("article", facadeAccueil.getArticles());
 		//req.getRequestDispatcher("V2/synchronous/AccueilVrai.jsp").forward(req, resp);
 		
 		facadeAccueil.initialiserBD();
+		req.setAttribute("article", facadeAccueil.getArticles());
+		req.setAttribute("categorie", facadeAccueil.getCategories());
 		this.getServletContext().getRequestDispatcher("/V2/synchronous/AccueilVrai.jsp").forward(req, resp);
 		//req.getRequestDispatcher("/V2/synchronous/AccueilVrai.jsp").forward(req, resp);
 		/*String op = req.getParameter("op");

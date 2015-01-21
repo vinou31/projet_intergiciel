@@ -1,3 +1,4 @@
+<%@page import="metier.Article"%>
 <%@page import="metier.Membre"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -20,7 +21,7 @@
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 <form action="ServCompte">
-<%Membre m = (Membre)session.getAttribute("membre"); %>
+<%Membre m = (Membre)request.getAttribute("membre"); %>
 </form>
 </head><body class="homepage">
 <div id="wrapper">
@@ -28,7 +29,7 @@
 		<div class="5grid-layout">
 			<div class="row">
 				<div class="12u" id="logo"> <!-- Logo -->
-					<h1><a href="V2/synchronous/acceuil.html" class="mobileUI-site-name">TrocMania</a></h1>
+					<h1><a href="${pageContext.request.contextPath}/Accueil" class="mobileUI-site-name">TrocMania</a></h1>
 					<p>La première forme de commerce au monde est de retoure en version 2.0</p>
 				</div>
 			</div>
@@ -39,8 +40,8 @@
 					<div id="menu-wrapper">
 						<nav class="mobileUI-site-nav">
 							<ul>
-								<li class="current_page_item"><a href="index.html">Homepage</a></li>
-								<li><a href="servlets/ServCompte">Compte</a></li>
+								<li class="current_page_item"><a href="${pageContext.request.contextPath}/Accueil">Accueil</a></li>
+								<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
 								<li><form class="searchform">
 									<input class="searchfield" type="text" value="Rechercher un article..." onfocus="if (this.value == 'Rechercher un article...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Rechercher un article...';}">
 									<input class="searchbutton" type="button" value="OK">
@@ -56,22 +57,34 @@
 				<div class="6u mobileUI-main-content">
 				<div id="content">
 					<section>
-					<form action="ServCompte?op=modif" method="get">
+					<form action="ServCompte" method="get">
 						<div class="post">
 						<%if (m != null){%>						
 					<h2>Compte de :<%=m.getNom() %></h2>
 							<div class="attributCompte">
 							<li>Numéro de téléphone : 
-							<input class="searchfield" id="telephone" type="text" value=<%=m.getTelephone() %> onfocus="if (this.value == <%=m.getTelephone() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getTelephone() %>;}"></li>
+							<input class="searchfield" name="telephone" type="text" value=<%=m.getTelephone() %>  onblur="if (this.value !=<%=m.getTelephone()%>) {this.value = <%=m.getTelephone() %>;}"></li>
 							<li>Pseudonyme : 
-							<input class="searchfield" id="pseudo" type="text" value=<%=m.getPseudonyme() %> onfocus="if (this.value == <%=m.getPseudonyme() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getPseudonyme() %>;}"></li>
+							<input class="searchfield" name="pseudo" type="text" value=<%=m.getPseudonyme() %> onfocus="if (this.value == <%=m.getPseudonyme() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getPseudonyme() %>;}"></li>
 							<li>Mail : 
-							<input class="searchfield" id="mail" type="text" value=<%=m.getMail() %> onfocus="if (this.value == <%=m.getMail() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMail() %>;}"></li>
+							<input class="searchfield" name="mail" type="text" value=<%=m.getMail() %> onfocus="if (this.value == <%=m.getMail() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMail() %>;}"></li>
 							<li>Adresse : 
-							<input class="searchfield" id="adresse" type="text"  value=<%=m.getAdresse() %> onfocus="if (this.value == <%=m.getAdresse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getAdresse() %>;}"></li>
+							<input class="searchfield" name="adresse" type="text"  value=<%=m.getAdresse() %> onfocus="if (this.value == <%=m.getAdresse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getAdresse() %>;}"></li>
 							<li>Mot de passe :
-							<input class="searchfield" id="mdp" type="password" value=<%=m.getMotDePasse() %> onfocus="if (this.value == <%=m.getMotDePasse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMotDePasse() %>;}"></li>
-							<input type="submit" id="EnregistrerModification" value="Enregistrer Modification" >
+							<input class="searchfield" name="mdp" type="password" value=<%=m.getMotDePasse() %> onfocus="if (this.value == <%=m.getMotDePasse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMotDePasse() %>;}"></li>
+							<input type="submit" id="EnregistrerModification" value="Enregistrer Modification" name="op" >
+							
+							
+							Vos articles :
+							<%if (m.getPropose().size() == 0) { %>
+							 Vous n'avez proposé encore aucun article
+							 <input type="submit" value="proposer un article" id="ProposerUnArticle" name="op">
+							
+							 <%} else { %>
+							 	<%for(Article a : m.getPropose()){%>
+							 	<img alt=<%=a.getNom() %> src=<%=a.getImage() %>>
+							 	<%}%>
+							 	<%}%>	 	
 							<%} else { %>
 								Vous allez être redirigé là où vous pouvez vous inscrire
 								<jsp:forward page="Inscription.jsp"></jsp:forward>
