@@ -28,7 +28,7 @@ public class Categorie {
 	@OneToMany(mappedBy="parent", fetch=FetchType.EAGER)
 	private Set<Categorie> sousCategorie;
 
-	@ManyToMany
+	@ManyToMany(mappedBy="articles", fetch=FetchType.EAGER)
 	private Set<Article> articles;
 	
 	public Categorie(){
@@ -61,7 +61,7 @@ public class Categorie {
 	}
 	
 	public void setParent(Categorie c){
-		this.parent = c;
+		this.parent=c;
 	}
 
 	public int getID() {
