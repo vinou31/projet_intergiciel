@@ -44,20 +44,20 @@ public class ServArticles extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Collection<Article> articles;
 		Integer op = (Integer) request.getAttribute("op");
 		if(op==0) {
+			//Articles de l'utilisateur
 			HttpSession session = request.getSession();
 			Membre m = (Membre) session.getAttribute("session");
-			Collection<Article> articles = facadeArticle.getArticles(m.getID());
-			
+			articles = facadeArticle.getArticles(m.getID());
 		}else{
-			String categorie = (String) request.getParameter("categorie");
-			String sousCategorie = (String) request.getParameter("sousCategorie");
-			Collection<Categorie> categories = facadeArticle.getCategories();
-			facadeArticle.getSousCategorie(sousCategorie);
+			//Articles d'une categorie
+			int idCat = Integer.parseInt(request.getParameter("idCat"));
+			articles = facadeArticle.getCategories(idCat);
 		}
-		
-
+		request.setAttribute("articles", articles);
+		request.getRequestDispatcher("articles.jsp").forward(request, response);
 	}
 
 }
