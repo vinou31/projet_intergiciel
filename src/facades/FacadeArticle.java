@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.ejb.Stateful;
-import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
@@ -37,20 +36,6 @@ public class FacadeArticle {
 		res.setDateDepot(dateDepot);
 		res.setPossesseur(possesseur);*/
 		return this.em.find(Article.class,id);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public Collection<String> getCategories(){
-		return (Collection<String>)em.createNativeQuery("SELECT DISTINCT Categorie FROM Article;").getResultList();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public Collection<String> getSousCategorie(String categorie) {
-		return (Collection<String>)em.createNativeQuery("SELECT DISTINCT sousCategorie FROM Article WHERE Categorie="+categorie+";").getResultList();
-	}
-	
-	public Collection<Article> getArticles(Integer idPossesseur) {
-		return (Collection<Article>)em.createNativeQuery("SELECT * FROM Article WHERE possesseur="+ idPossesseur +";", Article.class);
 	}
 
 }

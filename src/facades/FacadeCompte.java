@@ -50,6 +50,10 @@ public class FacadeCompte {
 		
 	}
 	
+	public void modifierPhoto(Membre m, String chemin) {
+		em.find(Membre.class, m.getID()).setPhotoProfil(chemin);
+	}
+	
 	public void modifierNom(Membre m, String newNom){
 		em.find(Membre.class, m.getID()).setNom(newNom);
 	}
@@ -102,7 +106,7 @@ public class FacadeCompte {
 /////////////////////////////////////////////////////////////////////////////////////
 	private static final String CHAMP_NOM    = "nom";
 	private static final String CHAMP_MAIL  = "mail";
-    private static final String CHAMP_PASS   = "motdepasse";
+    private static final String CHAMP_PASS   = "motDePasse";
     private static final String CHAMP_CONF   = "confirmation";
     private static final String CHAMP_PRENOM   = "prenom";
     private static final String CHAMP_VILLE   = "ville";
