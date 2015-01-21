@@ -2,7 +2,7 @@
 <%@page import="java.sql.SQLClientInfoException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import=metier.*"%>
+<%@ page import="metier.*"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -95,21 +95,21 @@
 					
 						<section>
 						<h2>Articles</h2>
-						<%HashSet<Categorie> cat = (HashSet<Categorie>) FacadeArticle.getCategorie();
+						<%Collection<Categorie> cat = (HashSet<Categorie>) request.getAttribute("categorie");
 						%>
 						<ul class="niveau1">
 						<%
 						
 						for (Categorie c : cat){
 							%>							
-								<li>Electroménager
+								<li><% out.print(c.getNomCategorie()); %>
 									<ul class="niveau2">
 									<%
 									HashSet<Categorie> souscat = (HashSet<Categorie>) c.getSousCategorie();
 									for (Categorie c2: souscat){
 										%>
-										<li>Machine à laver</li>
-										<li>Aspirateur</li>
+										<li><% out.print(c2.getNomCategorie()); %></li>
+
 										<%
 									} %>
 									</ul>
@@ -129,16 +129,7 @@
 										<li>Aspirateur</li>
 									</ul>
 								</li>
-								<li>Informatique
-									<ul class="niveau2">
-										<li>Tablette</li>
-										<li>Portable</li>
-									</ul>
-								</li>
-								<li>Outillage</li>
-								<li>Son-Vidéo</li>
-							</ul>
-						</div>
+
 						</section>
 
 						<%
@@ -197,9 +188,9 @@
 							<div id="mainwrapper">
 
 
-			<%//HashSet<Article> art = (HashSet<Article>) m.getPropose();
+			<%HashSet<Article> art = (HashSet<Article>) m.getPropose();
 			Article Hollande = new Article("hollande", 0.1, "flamby", "P2Intergiciel/WebContent/V2/Synchronous/images/fr.jpg", new java.sql.Date(new java.util.Date().getTime()), new Membre());
-			HashSet<Article> art = new HashSet<Article>();
+			//HashSet<Article> art = new HashSet<Article>();
 			art.add(Hollande);
 			if (art.isEmpty()){
 				out.print("aucun article  à disposition pour la catégorie demandée");
@@ -209,7 +200,7 @@
 								<section>
 								<div id="box-6" class="box">
 								<form method="get", action = "ServArticle">
-									<img id="image-6" src= <%a.getImage();%> /> <span
+									<img id="image-6" src= "<%a.getImage();%>"/> <span
 										class="caption scale-caption">
 										<h3><%a.getNom(); %></h3>
 										<input type="hidden" , name="op" , value="articleEnVue" />
