@@ -22,17 +22,17 @@
 <meta name="keywords" content="" />
 <noscript>
 	<link rel="stylesheet"
-		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core.css" />
+		href="${pageContext.request.contextPath}/V2/Synchronous/css/5grid/core.css" />
 	<link rel="stylesheet"
-		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core-desktop.css" />
+		href="${pageContext.request.contextPath}/V2/Synchronous/css/5grid/core-desktop.css" />
 	<link rel="stylesheet"
-		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core-1200px.css" />
+		href="${pageContext.request.contextPath}/V2/Synchronous/css/5grid/core-1200px.css" />
 	<link rel="stylesheet"
-		href="${pageContext.request.ContextPath}/V2/Synchronous/css/5grid/core-noscript.css" />
+		href="${pageContext.request.contextPath}/V2/Synchronous/css/5grid/core-noscript.css" />
 	<link rel="stylesheet"
-		href="${pageContext.request.ContextPath}/V2/Synchronous/css/style.css" />
+		href="${pageContext.request.contextPath}/V2/Synchronous/css/style.css" />
 	<link rel="stylesheet"
-		href="${pageContext.request.ContextPath}/WebContent/V2/Synchronous/css/style-desktop.css" />
+		href="${pageContext.request.contextPath}/WebContent/V2/Synchronous/css/style-desktop.css" />
 </noscript>
 <script src="css/5grid/jquery.js"></script>
 <script
@@ -51,7 +51,7 @@
 				<div class="12u" id="logo">
 					<!-- Logo -->
 					<h1>
-						<a href="${pageContext.request.ContextPath}/V2/synchronous/AccueilVrai.jsp" class="mobileUI-site-name">TrocMania</a>
+						<a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp" class="mobileUI-site-name">TrocMania</a>
 					</h1>
 					<p>La première forme de commerce au monde revient en version
 						2.0</p>
@@ -64,12 +64,12 @@
 					<div id="menu-wrapper">
 						<nav class="mobileUI-site-nav">
 						<ul>
-							<li><a href="${pageContext.request.ContextPath}/V2/synchronous/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
+							<li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
 							<%
 								Membre m = (Membre) session.getAttribute("session");
 								if (m == null) {
-									out.print("<li><a href=\"${pageContext.request.ContextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>");
-									out.print("<li><a href=\"${pageContext.request.ContextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a>");
+									out.print("<li><a href=\"${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>");
+									out.print("<li><a href=\"${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a>");
 								}
 							%>
 
@@ -91,8 +91,36 @@
 			<div class="5grid-layout">
 				<div class="row">
 					<div class="3u" id="sidebar1">
+					
+					
 						<section>
 						<h2>Articles</h2>
+						<%HashSet<Categorie> cat = (HashSet<Categorie>) FacadeArticle.getCategorie();
+						%>
+						<ul class="niveau1">
+						<%
+						
+						for (Categorie c : cat){
+							%>							
+								<li>Electroménager
+									<ul class="niveau2">
+									<%
+									HashSet<Categorie> souscat = (HashSet<Categorie>) c.getSousCategorie();
+									for (Categorie c2: souscat){
+										%>
+										<li>Machine à laver</li>
+										<li>Aspirateur</li>
+										<%
+									} %>
+									</ul>
+								</li>
+							
+							<% 			
+						}
+						%>
+						</ul>
+						
+						
 						<div class="article">
 							<ul class="niveau1">
 								<li>Electroménager
@@ -118,7 +146,9 @@
 
 						%>
 						<section>
-						<h2>Informations sur Compte</h2>
+						<h2>
+						<a href="${pageContext.request.contextPath}/V2/synchronous/GestionCompte.jsp">Informations sur le Compte</a>
+						</h2>
 						<ul>
 							<li>
 								<p>Photo de profil</p>
@@ -172,7 +202,7 @@
 			HashSet<Article> art = new HashSet<Article>();
 			art.add(Hollande);
 			if (art.isEmpty()){
-				out.print("auncun article  à disposition pour la catégorie demandée");
+				out.print("aucun article  à disposition pour la catégorie demandée");
 			}
 				for(Article a : art){%>
 								
@@ -236,7 +266,7 @@
 			</div>
 			<div class="6u">
 				<section id="box2">
-				<h2><a href="${pageContext.request.ContextPath}/V2/synchronous/AccueilVrai.jsp">A propos du site</a></h2>
+				<h2><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">A propos du site</a></h2>
 				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
 				</section>
 			</div>
