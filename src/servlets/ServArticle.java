@@ -45,18 +45,35 @@ public class ServArticle extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer id = (Integer) request.getAttribute("idArticle");
-		Article article = facadeArticle.findArticle(id);
-		request.setAttribute("vendeur",article.getPossesseur().getNom());
-		request.setAttribute("description",article.getDescription());
-		request.setAttribute("nom",article.getNom());
-		request.setAttribute("img",article.getImage());
-		request.setAttribute("prix", article.getPrixPropose());
+		String op = (String)request.getParameter("op");
 		HttpSession session = request.getSession();
-		Membre m = (Membre) session.getAttribute("session");
-		request.setAttribute("start",m.getVille());
-		request.setAttribute("end",article.getPossesseur().getVille());
-		request.getRequestDispatcher("article.jsp").forward(request, response);
+		Membre m = (Membre) session.getAttribute("membre");
+		switch(op){
+		case "articleEnVue" :
+			Integer id = Integer.parseInt((String)request.getParameter("idArticle"));
+			Article article = facadeArticle.findArticle(id);
+			request.setAttribute("vendeur",article.getPossesseur().getNom());
+			request.setAttribute("description",article.getDescription());
+			request.setAttribute("nom",article.getNom());
+			request.setAttribute("img",article.getImage());
+			request.setAttribute("prix", article.getPrixPropose());
+			request.setAttribute("start",m.getVille());
+			request.setAttribute("end",article.getPossesseur().getVille());
+			request.setAttribute("id", id);
+			request.getRequestDispatcher("/V2/synchronous/article.jsp").forward(request, response);
+			break;
+		case "supprimerArticle" :
+			Integer idsupp = Integer.parseInt((String)request.getParameter("id"));
+			facadeArticle.supprimerArticle(idsupp);
+			request.getRequestDispatcher("/ServArticles?op=mes+articles").forward(request, response);
+			break;
+		case "modifierArticle" :
+			Integer idmodif = Integer.parseInt((String)request.getParameter("id"));
+			request.setAttribute("id", idmodif);
+			request.getRequestDispatcher("/Accueil").forward(request, response);
+			break;
+		}
+
 	}
 
 }

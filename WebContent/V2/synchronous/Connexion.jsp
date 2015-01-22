@@ -34,90 +34,14 @@
 <body>
 	<div id="wrapper">
 		<header id="header">
-			<div class="5grid-layout">
-				<div class="row">
-					<div class="12u" id="logo">
-						<!-- Logo -->
-						<h1>
-							<a href="${pageContext.request.contextPath}/Accueil" class="mobileUI-site-name">TrocMania</a>
-						</h1>
-						<p>La première forme de commerce au monde revient en version
-							2.0</p>
-					</div>
-				</div>
-			</div>
-			<div class="5grid-layout">
-				<div class="row">
-					<div class="12u" id="menu">
-						<div id="menu-wrapper">
-							<nav class="mobileUI-site-nav">
-								<ul>
-
-							<li><a href="${pageContext.request.contextPath}/Accueil">Accueil</a></li>
-							<%
-								Membre m = (Membre) session.getAttribute("membre");
-								if (m == null) {
-									%>
-									<!-- <li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>
-									<li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a> -->
-									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Inscription.jsp">Inscription</a>
-									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Connexion.jsp">Connexion</a>
-							
-								<%}else {								
-									%>
-									<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
-									<%} %>
-
-									<!-- Modifier les liens -->
-									<li><form class="searchform">
-											<input class="searchfield" type="text"
-												value="Rechercher un article..."
-												onfocus="if (this.value == 'Rechercher un article...') {this.value = '';}"
-												onblur="if (this.value == '') {this.value = 'Rechercher un article...';}">
-											<input class="searchbutton" type="button" value="OK">
-										</form></li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
+			<%@ include file="header.jsp" %>
 		</header>
 		<div id="page">
 			<div class="5grid-layout">
 				<div class="row">
-					<div class="3u" id="sidebar1">
-												<section>
-						<div class="article">
-						<h2>Articles</h2>
-						<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");
-						%>
-						<ul class="niveau1">
-						<%if(cat != null){
-						
-						for (Categorie c : cat){
-							%>													
-								<li><% out.print(c.getNomCategorie()); %>
-									<ul class="niveau2">
-									<%
-									Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
-									for (Categorie c2: souscat){
-										%>
-										<li><% out.print(c2.getNomCategorie()); %></li>
-
-										<%}%>
-									</ul>
-								</li>
-							
-							<% 			
-						}
-						}
-						%>
-						</ul>			
-							</div>
-						</section>
-
-						
+					<div class="3u" id="sidebar1">	
+					    <%@ include file="menuArticles.jsp" %>
+					    <%@ include file="infoCompte.jsp" %>
 					</div>
 
 

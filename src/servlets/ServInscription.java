@@ -1,6 +1,7 @@
 package servlets;
 
 
+import facades.FacadeAccueil;
 import facades.FacadeCompte;
 
 import java.io.IOException;
@@ -34,6 +35,9 @@ public class ServInscription extends HttpServlet {
     @EJB
     FacadeCompte f;
     
+    @EJB
+	FacadeAccueil facadeAccueil;
+    
     public ServInscription() {
         super();
         // TODO Auto-generated constructor stub
@@ -51,7 +55,10 @@ public class ServInscription extends HttpServlet {
 //			this.getServletContext().getRequestDispatcher( "/listeMembres.jsp" ).forward( request, response );
 //		}
 //		 //getServletContext ou request ?
-		this.getServletContext().getRequestDispatcher( "/V2/synchronous/AccueilVrai.jsp" ).forward( request, response );
+		request.setAttribute("categorie", facadeAccueil.getCategories());
+		
+		
+		this.getServletContext().getRequestDispatcher( "/V2/synchronous/Inscription.jsp" ).forward( request, response );
 	}
 
 	/**
@@ -75,6 +82,7 @@ public class ServInscription extends HttpServlet {
 //		        }
 		        
 		        //Collection<Membre> lm = f.getMembre();
+		            request.setAttribute("categorie", facadeAccueil.getCategories());
 				
 		        /* Stockage du formulaire et du bean dans l'objet request */
 		        request.setAttribute( ATT_FORM, f );

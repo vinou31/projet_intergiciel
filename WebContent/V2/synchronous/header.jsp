@@ -5,13 +5,14 @@
 <%@ page import="metier.*"%>
 <%@ page import="java.util.*"%>
 
+
 <div class="5grid-layout">
 	<div class="row">
 		<div class="12u" id="logo">
 			<!-- Logo -->
 			<h1>
 				<a
-					href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp"
+					href="${pageContext.request.contextPath}/Accueil"
 					class="mobileUI-site-name">TrocMania</a>
 			</h1>
 			<p>La première forme de commerce au monde revient en version 2.0</p>
@@ -25,18 +26,19 @@
 				<nav class="mobileUI-site-nav">
 					<ul>
 						<li><a
-							href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/AccueilVrai.jsp">Accueil</a></li>
+							href="${pageContext.request.contextPath}/Accueil">Accueil</a></li>
 						<%
-								Membre m = (Membre) session.getAttribute("session");
-								if (m == null) {
-									out.print("<li><a href=\"${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>");
-									out.print("<li><a href=\"${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a>");
-								}
+								Membre m = (Membre) session.getAttribute("membre");
+								if (m == null) {%>
+									<li><a href="${pageContext.request.contextPath}/ServInscription">Inscription</a>
+									<li><a href="${pageContext.request.contextPath}/ServConnexion">Connexion</a>
+								<%}
 								else {								
 									%>
 						<li><a
 							href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
 						<%} %>
+						<li><a href="${pageContext.request.contextPath}/ServArticles?op=articlesEnVente">Articles</a></li>
 
 						<li><form class="searchform">
 								<input class="searchfield" type="text"

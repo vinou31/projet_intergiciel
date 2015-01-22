@@ -77,8 +77,10 @@ public class FacadeAccueil {
 		a.setDescription("testArtcle");
 		a.setDateDepot(d2);
 		a.setNom("testArticle");
-		a.setPossesseur(m3);
+		a.setImage("V2/synchronous/images/JPEG.jpg");
 		em.persist(a);
+		a.setPossesseur(m3);
+		
 		
 		Categorie c = new Categorie("ordinateur");
 		Categorie c2 = new Categorie("Acer");

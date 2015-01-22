@@ -24,7 +24,7 @@ public class FacadeGestionArticles {
 		Article a = new Article();
 		a.setNom(req.getParameter(CHAMP_NOM));
 		a.setDescription(req.getParameter(CHAMP_DESCRIPTION));
-		int prix = Integer.parseInt(req.getParameter(CHAMP_PRIX));
+		int prix = 0;
 		a.setPrixPropose(prix);
 		a.setImage(chemin);
 		a.setPossesseur(m);

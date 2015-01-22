@@ -24,54 +24,7 @@
 <body>
 	<div id="wrapper">
 		<header id="header">
-			<div class="5grid-layout">
-				<div class="row">
-					<div class="12u" id="logo">
-						<!-- Logo -->
-						<h1>
-							<a href="#" class="mobileUI-site-name">TrocMania</a>
-						</h1>
-						<p>La première forme de commerce au monde revient en version
-							2.0</p>
-					</div>
-				</div>
-			</div>
-			<div class="5grid-layout">
-				<div class="row">
-					<div class="12u" id="menu">
-						<div id="menu-wrapper">
-							<nav class="mobileUI-site-nav">
-								<ul>
-
-							<li><a href="${pageContext.request.contextPath}/Accueil">Accueil</a></li>
-							<%
-								Membre m = (Membre) session.getAttribute("membre");
-								if (m == null) {
-									%>
-									<!-- <li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Inscription.jsp\">Inscription</a>
-									<li><a href="${pageContext.request.contextPath}/V2/synchronous/V2/synchronous/Connexion.jsp\">Connexion</a> -->
-									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Inscription.jsp">Inscription</a>
-									<li><a href="${pageContext.request.contextPath}/V2/synchronous/Connexion.jsp">Connexion</a>
-							
-								<%}else {								
-									%>
-									<li><a href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">Compte</a></li>
-									<%} %>
-
-									<!-- Modifier les liens -->
-									<li><form class="searchform">
-											<input class="searchfield" type="text"
-												value="Rechercher un article..."
-												onfocus="if (this.value == 'Rechercher un article...') {this.value = '';}"
-												onblur="if (this.value == '') {this.value = 'Rechercher un article...';}">
-											<input class="searchbutton" type="button" value="OK">
-										</form></li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
+			<%@ include file="header.jsp" %>
 		</header>
 	
 				<div class="6u mobileUI-main-content">
@@ -94,15 +47,15 @@
 							<input class="searchfield" name="mdp" type="password" value=<%=m.getMotDePasse() %> onfocus="if (this.value == <%=m.getMotDePasse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMotDePasse() %>;}"></li>
 							<li> Photo de profil :
 							<input type="file" name="file" id="file" size="60"/></li>
-							<input type="submit" value="Enregistrer Modification" id="EnregistrerModification" name="op"/>
+							<p class="button-style"><input type="submit" value="Enregistrer Modification" id="EnregistrerModification" name="op"/></p>
 							
 							Vos articles :
 							<%if (m.getPropose().size() == 0) { %>
 							 Vous n'avez proposé encore aucun article
-							 <input type="submit" value="proposer un article" id="ProposerUnArticle" name="op">
+							 <p class="button-style"><input type="submit" value="proposer un article" id="ProposerUnArticle" name="op"></p>
 							
 							 <%} else { %>
-							 	<input type="submit" value="mes articles" id="ProposerUnArticle" name="op">
+							 	<p class="button-style"><input type="submit" value="mes articles" id="ProposerUnArticle" name="op"></p>
 							 	<%}%>	 	
 							<%} else { %>
 								Vous allez être redirigé là où vous pouvez vous inscrire

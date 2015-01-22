@@ -4,14 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="metier.*"%>
 <%@ page import="java.util.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<!--
-	Synchronous: A responsive HTML5 website template by HTML5Templates.com
-	Released for free under the Creative Commons Attribution 3.0 license (html5templates.com/license)
-	Visit http://html5templates.com for more great templates or follow us on Twitter @HTML5T
--->
-
+<!DOCTYPE HTML >
 <html>
 <head>
 <title>TrocMania</title>
@@ -19,30 +12,22 @@
 <meta name="description" content="" />
 <meta name="keywords" content="" />
 <noscript>
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/V2/Synchronous/css/5grid/core.css" />
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/V2/Synchronous/css/5grid/core-desktop.css" />
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/V2/Synchronous/css/5grid/core-1200px.css" />
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/V2/Synchronous/css/5grid/core-noscript.css" />
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/V2/Synchronous/css/style.css" />
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/WebContent/V2/Synchronous/css/style-desktop.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-desktop.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-1200px.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/5grid/core-noscript.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style-desktop.css" />
 </noscript>
-<script src="css/5grid/jquery.js"></script>
-<script
-	src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
+<script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 </head>
-
 <body>
 
 
 
-	<div id="wrapper">
+	<div id="wrapper"> 
 		<header id="header">
 			<%@ include file="header.jsp" %>
 		</header>
@@ -60,7 +45,7 @@
 							<div id="mainwrapper">
 
 
-			<%HashSet<Article> art = (HashSet<Article>) m.getPropose();
+			<%Collection<Article> art = (Collection<Article>) request.getAttribute("articles");
 			if (art.isEmpty()){
 				out.print("aucun article  à disposition pour la catégorie demandée");
 			}
@@ -68,9 +53,9 @@
 								
 								<section>
 								<div id="box-6" class="box">
-								<a href ="${pageContext.request.contextPath}/ServArticle?op=articleEnVue">
-									<img id="image-6" src= "<%a.getImage();%>"/> 
-									<span class="caption scale-caption">
+								<a href ="${pageContext.request.contextPath}/ServArticle?op=articleEnVue&idArticle=<%=a.getID()%>">
+									<img id="image-6" src="${pageContext.request.contextPath}/<%=a.getImage()%>"/> 
+									<span class="caption scale-caption">								
 									<h3><%=a.getNom()%></h3>
 								</span>
 								</a>

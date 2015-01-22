@@ -7,7 +7,7 @@
 
 <section>
 	<div class="article">
-		<h2>Articles</h2>
+		<a href="${pageContext.request.contextPath}/ServArticles?op=articlesEnVente"><h2>Articles</h2></a>
 		<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");
 						%>
 		<ul class="niveau1">

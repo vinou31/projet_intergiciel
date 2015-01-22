@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 
+
 import metier.Article;
 import metier.Categorie;
 import metier.Membre;
@@ -40,6 +41,14 @@ public class FacadeArticle {
 		return this.em.find(Article.class,id);
 	}
 	
+	public void supprimerArticle(int id) {
+		em.remove(em.find(Article.class, id));
+	}
+	
+	public void modifierNom() {
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	public Collection<String> getCategories(){
 		return (Collection<String>)em.createNativeQuery("SELECT DISTINCT Categorie FROM Article;").getResultList();
@@ -50,11 +59,11 @@ public class FacadeArticle {
 		return (Collection<String>)em.createNativeQuery("SELECT DISTINCT sousCategorie FROM Article WHERE Categorie="+categorie+";").getResultList();
 	}
 	
-	public Collection<Article> getArticles(Integer idPossesseur) {
-		return (Collection<Article>)em.createNativeQuery("SELECT * FROM Article WHERE possesseur="+ idPossesseur +";", Article.class);
+	public Collection<Article> getArticles() {
+		return em.createQuery("from Article", Article.class).getResultList();
 	}
 	
-	public Collection<Article> getCategories(int idC){
+	public Collection<Article> getArticlesFromCategories(int idC){
 		return em.find(Categorie.class, idC).getArticles();
 	}
 

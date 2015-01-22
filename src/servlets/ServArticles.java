@@ -51,25 +51,35 @@ public class ServArticles extends HttpServlet {
 		Collection<Article> articles = null;
 		//Integer op = (Integer) request.getAttribute("op");
 		HttpSession session = request.getSession();
-		Membre m = (Membre) session.getAttribute("session");
+		Membre m = (Membre) session.getAttribute("membre");
 		String op = (String) request.getParameter("op");
 		switch(op){
-		case "mes articles" :
+		case "articlesEnVente" :
 			//Articles de l'utilisateur
-			articles = facadeArticle.getArticles(m.getID());
+			articles = facadeArticle.getArticles();
 			request.setAttribute("articles", articles);
-			request.getRequestDispatcher("articles.jsp").forward(request, response);
+			request.getRequestDispatcher("/V2/synchronous/articles.jsp").forward(request, response);
+			break;
+		case "articleEnVenteCat" :
+			Integer idCat = Integer.parseInt((String)request.getParameter("idCat"));
+			articles = facadeArticle.getArticlesFromCategories(idCat);
+			request.setAttribute("articles", articles);
+			request.getRequestDispatcher("/V2/synchronous/articles.jsp").forward(request, response);
 			break;
 		case "ajout" :
 			request.setAttribute("categorie", facadeAccueil.getCategories());
 			request.getRequestDispatcher("/V2/synchronous/AjouterArticle.jsp").forward(request, response);
 			break;
+		case "mes articles" :
+			request.setAttribute("articles", m.getPropose());
+			request.getRequestDispatcher("/V2/synchronous/articles.jsp").forward(request, response);
+			break;
 		default :
 			//Articles d'une categorie
-			int idCat = Integer.parseInt(request.getParameter("idCat"));
-			articles = facadeArticle.getCategories(idCat);
+			//int idCat = Integer.parseInt(request.getParameter("idCat"));
+			//articles = facadeArticle.getCategories(idCat);
 			request.setAttribute("articles", articles);
-			request.getRequestDispatcher("articles.jsp").forward(request, response);
+			request.getRequestDispatcher("/V2/synchronous/articles.jsp").forward(request, response);
 		}
 
 	}
