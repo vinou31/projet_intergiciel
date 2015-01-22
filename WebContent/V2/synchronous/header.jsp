@@ -40,12 +40,12 @@
 						<%} %>
 						<li><a href="${pageContext.request.contextPath}/ServArticles?op=articlesEnVente">Articles</a></li>
 
-						<li><form class="searchform">
-								<input class="searchfield" type="text"
+						<li><form class="searchform" action="${pageContext.request.contextPath}/ServRecherche">
+								<input class="searchfield" type="text" name="search" id="search"
 									value="Rechercher un article..."
 									onfocus="if (this.value == 'Rechercher un article...') {this.value = '';}"
 									onblur="if (this.value == '') {this.value = 'Rechercher un article...';}">
-								<input class="searchbutton" type="button" value="OK">
+								<input class="searchbutton" type="submit" value="OK">
 							</form></li>
 					</ul>
 				</nav>
