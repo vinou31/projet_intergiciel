@@ -43,7 +43,7 @@ public class ServRecherche extends HttpServlet {
 		String search = request.getParameter("search");
 		Collection<Article> articles = facadeArticle.getArticles();
 		request.setAttribute("articles", articles);
-		request.getRequestDispatcher("/V2/synchronous/articles.jsp");
+		request.getRequestDispatcher("/V2/synchronous/articles.jsp").forward(request, response);
 	}
 
 }
