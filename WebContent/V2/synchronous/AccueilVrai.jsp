@@ -11,6 +11,12 @@
 	Visit http://html5templates.com for more great templates or follow us on Twitter @HTML5T
 -->
 
+
+
+
+
+
+
 <html>
 <head>
 <title>TrocMania</title>
@@ -25,6 +31,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style-desktop.css" />
 </noscript>
+   <link rel="stylesheet" href="stylesMenu.css">
+   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="scriptMenu.js"></script>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
