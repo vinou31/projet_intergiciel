@@ -1,6 +1,5 @@
 package servlets;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.ejb.EJB;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import metier.Membre;
-import facades.FacadeGestionArticles;
+import facades.FacadeArticle;
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
 maxFileSize=1024*1024*10,      // 10MB
 maxRequestSize=1024*1024*50)   // 50MB
@@ -27,7 +26,7 @@ public class ServSupprimerArticle extends HttpServlet{
 	public static final String VUE = "/formFichier.jsp";
 	
 	@EJB
-	FacadeGestionArticles fga;
+	FacadeArticle fga;
 	/**
 	 * Name of the directory where uploaded files will be saved, relative to the
 	 * web application directory.

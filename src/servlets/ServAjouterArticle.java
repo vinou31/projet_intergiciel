@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import metier.Membre;
-import facades.FacadeGestionArticles;
+import facades.FacadeAccueil;
+import facades.FacadeArticle;
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
 maxFileSize=1024*1024*10,      // 10MB
 maxRequestSize=1024*1024*50)   // 50MB
@@ -27,7 +28,11 @@ public class ServAjouterArticle extends HttpServlet{
 	public static final String VUE = "/formFichier.jsp";
 	
 	@EJB
-	FacadeGestionArticles fga;
+	FacadeArticle fga;
+	
+	@EJB
+	FacadeAccueil fa;
+
 	/**
 	 * Name of the directory where uploaded files will be saved, relative to the
 	 * web application directory.
@@ -48,6 +53,7 @@ public class ServAjouterArticle extends HttpServlet{
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		this.doPost(request, response);
 	}
 
 	/**
@@ -58,7 +64,14 @@ public class ServAjouterArticle extends HttpServlet{
 		// gets absolute path of the web application
 		HttpSession session = request.getSession();
 		Membre m = (Membre)session.getAttribute("membre");
-		String appPath = request.getServletContext().getRealPath("");
+		String op = (String)request.getParameter("op");
+		switch (op){
+		case "launch" :
+			request.setAttribute("categorie", fa.getCategories());
+			request.getRequestDispatcher("/V2/synchronous/AjouterArticle.jsp").forward(request, response);
+			break;
+		case "Ajouter l'article" :
+		String appPath = request.getContextPath()+"/V2/synchronous/images";
 		// constructs path of the directory to save uploaded file
 		String savePath = appPath + File.separator + m.getPseudonyme();
 
@@ -85,9 +98,12 @@ public class ServAjouterArticle extends HttpServlet{
 		
 		fga.ajouterArticle(request, m, chemin);
 
+		request.setAttribute("categorie", fa.getCategories());
 		request.setAttribute("message", "Votre article a bien été ajouté");
 		//getServletContext().getRequestDispatcher("/resultUpload.jsp").forward(request, response);
 		request.getRequestDispatcher("/Accueil").forward(request, response);
+		break;
+		}
 	}
 
 	/**

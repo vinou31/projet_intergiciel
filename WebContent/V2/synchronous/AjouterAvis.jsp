@@ -58,8 +58,7 @@
 									</p>
 
 									<p>
-										Critique: <input type="text" id="critique"
-											name="critique" value="" />
+										Critique: <textarea name="critique"  cols="40" rows="4" id="description"></textarea>
 									</p>
 
 									<input type="submit" value="Ajouter l'avis" class="sansLabel" />

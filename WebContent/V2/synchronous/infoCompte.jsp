@@ -35,7 +35,7 @@
 			href="${pageContext.request.contextPath}/ServArticles?op=mes+articles">
 				Article en vente :<%=m.getPropose().size()%></a></li>
 		<li><a
-			href="${pageContext.request.contextPath}/V2/synchronous/AjouterArticle.jsp">
+			href="${pageContext.request.contextPath}/ServAjouterArticle?op=launch">
 				Ajouter un article</a></li>
 		<li><a
 			href="${pageContext.request.contextPath}/ServCompte?op=gestionCompte">

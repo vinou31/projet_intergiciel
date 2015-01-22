@@ -60,7 +60,7 @@ public class ServArticles extends HttpServlet {
 			request.setAttribute("articles", articles);
 			request.getRequestDispatcher("/V2/synchronous/articles.jsp").forward(request, response);
 			break;
-		case "articleEnVenteCat" :
+		case "articlesEnVenteCat" :
 			Integer idCat = Integer.parseInt((String)request.getParameter("idCat"));
 			articles = facadeArticle.getArticlesFromCategories(idCat);
 			request.setAttribute("articles", articles);

@@ -59,16 +59,29 @@
 
 
 									<p>
-										Description de l'article: <input type="text" id="description"
-											name="description" value="" />
+										Description de l'article: <textarea name="critique"  cols="40" rows="4" id="description"></textarea>
 									</p>
 
 									<p>
 										Ajoutez l'image: <input type="file" name="file" size="60" /><br />
 									</p>
+									
+									<p>
+										Donnez un prix: <input type="number" name="prix" size="60" /><br />
+									</p>
 
-
-									<input type="submit" value="Ajouter l'article" class="sansLabel" />
+									<select name="categorieArticle" id="categorieArticle">
+										
+										<%//Collection<Categorie> cate = (Collection<Categorie>)request.getAttribute("sousCat");
+										for(Categorie c : cat){
+											if(c.getSousCategorie().isEmpty()){%>
+											<option value="<%=c.getNomCategorie()%>"><%=c.getNomCategorie()%></option>
+										<%} 
+										}%>
+									</select>
+									
+									 
+									<input type="submit" value="Ajouter l'article" class="sansLabel" name="op" />
 								</fieldset>
 
 							</form>

@@ -73,13 +73,7 @@ public class FacadeAccueil {
 		em.persist(m3);
 		
 		
-		Article a = new Article();
-		a.setDescription("testArtcle");
-		a.setDateDepot(d2);
-		a.setNom("testArticle");
-		a.setImage("V2/synchronous/images/JPEG.jpg");
-		em.persist(a);
-		a.setPossesseur(m3);
+
 		
 		
 		Categorie c = new Categorie("ordinateur");
@@ -96,7 +90,15 @@ public class FacadeAccueil {
 		em.persist(c4);
 		em.persist(c5);
 
-		
+		Article a = new Article();
+		a.setDescription("testArtcle");
+		a.setDateDepot(d2);
+		a.setNom("testArticle");
+		a.setPrixPropose(0);
+		a.setEstdeType(c2);
+		a.setImage("V2/synchronous/images/JPEG.jpg");
+		em.persist(a);
+		a.setPossesseur(m3);	
 
 		
 		

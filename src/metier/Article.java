@@ -29,8 +29,9 @@ private Set<Avis> avis;
 @ManyToOne
 private Categorie estdeType;
 
-@OneToMany(mappedBy="article", fetch=FetchType.EAGER)
-private Set<Troc> articles;
+/*@OneToMany(mappedBy="article", fetch=FetchType.EAGER)
+private Set<Troc> articles;*/
+
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
 private int ID;

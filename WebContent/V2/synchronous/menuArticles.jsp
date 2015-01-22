@@ -17,13 +17,16 @@
 							%>
 			<li>
 				<% out.print(c.getNomCategorie()); %>
-				<ul class="niveau2">
+				<ul class="niveau2"> 
+				
 					<%
-									Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
-									for (Categorie c2: souscat){
-										%>
+					Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
+					for (Categorie c2: souscat){
+					%>
 					<li>
+					<a href="${pageContext.request.contextPath}/ServArticles?op=articlesEnVenteCat&idCat=<%=c2.getID()%>">
 						<% out.print(c2.getNomCategorie()); %>
+						</a>
 					</li>
 
 					<%}%>

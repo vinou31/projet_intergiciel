@@ -28,7 +28,7 @@ public class Categorie {
 	@OneToMany(mappedBy="parent", fetch=FetchType.EAGER)
 	private Set<Categorie> sousCategorie;
 
-	@ManyToMany(mappedBy="articles", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="estdeType", fetch=FetchType.EAGER)
 	private Set<Article> articles;
 	
 	public Categorie(){
