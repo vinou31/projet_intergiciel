@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import facades.FacadeAccueil;
 import facades.FacadeAvis;
 import metier.Article;
 import metier.Categorie;
@@ -25,6 +26,9 @@ import metier.Avis;
 	public class ServAvis extends HttpServlet {
 		@EJB
 		FacadeAvis facadeAvis;
+		
+		@EJB
+		FacadeAccueil facadeAccueil;
 		
 		private static final long serialVersionUID = 1L;
 	       
@@ -46,7 +50,11 @@ import metier.Avis;
 		 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 		 */
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			HttpSession session = request.getSession();
+			Membre m = (Membre)session.getAttribute("membre");
 			String op = (String) request.getAttribute("op");
+			request.setAttribute("categorie", facadeAccueil.getCategories());
+			request.setAttribute("membre", m);
 			if(op.equals("ajouterAvis")) {	
 				request.getRequestDispatcher("/V2/synchronous/ajouterAvis.jsp").forward(request, response);
 				
@@ -57,8 +65,6 @@ import metier.Avis;
 				request.getRequestDispatcher("/V2/synchronous/avis.jsp").forward(request, response);
 			}
 			else if (op.equals("listeAvisPerso")){
-				HttpSession session = request.getSession();
-				Membre m = (Membre) session.getAttribute("session");
 				Collection<Avis> avisM = facadeAvis.getAvis(m);
 			}
 			

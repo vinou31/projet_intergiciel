@@ -15,6 +15,7 @@ import javax.servlet.http.Part;
 
 import metier.Membre;
 import connexion.FacadeConnexion;
+import facades.FacadeAccueil;
 import facades.FacadeCompte;
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
 maxFileSize=1024*1024*10,      // 10MB
@@ -26,6 +27,9 @@ public class ServCompte extends HttpServlet {
 	FacadeCompte facadecompte;
 	@EJB
 	FacadeConnexion facadeconnexion;
+	
+	@EJB
+	FacadeAccueil facadeAccueil;
 	/**
 	 * 
 	 */
@@ -49,6 +53,8 @@ public class ServCompte extends HttpServlet {
 		String op = (String)req.getParameter("op");
 		HttpSession session = req.getSession();
 		Membre m = (Membre)session.getAttribute("membre");
+		req.setAttribute("categorie", facadeAccueil.getCategories());
+		req.setAttribute("membre", m);
 		
 		if(op==null){
 			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
@@ -74,39 +80,31 @@ public class ServCompte extends HttpServlet {
 			facadecompte.modifierMotDePasse(m, inter);
 			
 			///////////gestion de la photo de profil///////////
-			String appPath = req.getServletContext().getRealPath("");
-			// constructs path of the directory to save uploaded file
-			String savePath = appPath + File.separator + m.getPseudonyme();
+			String appPath = req.getServletContext().getRealPath(
+					"/V2/synchronous/images");
+			String savePath = appPath + File.separator;
+			String copiePath = "/home/aboucher2/workspace_jee/intergiciel/WebContent/V2/synchronous/images/";
 
-			// creates the save directory if it does not exists
-			File fileSaveDir = new File(savePath);
-			if (!fileSaveDir.exists()) {
-				fileSaveDir.mkdir();
-			}
-			//creation du chemin absolu
+			String saveFile = null;
+			String nomImage;
+			String fileName = "";
 			String chemin = "";
-			String fileName =  "";
+
 			for (Part part : req.getParts()) {
 				fileName = extractFileName(part);
-				if (!fileName.equals("")) {	
-					chemin = savePath + File.separator + fileName;
+				if (!fileName.equals("")) {
+
+					chemin = savePath + fileName;
 					part.write(chemin);
+					chemin = copiePath + fileName;
+					part.write(chemin);
+					saveFile = fileName;
 				}
 			}
-			if(true){
-				System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-				System.out.println("chemin = "+chemin);
-				System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-			}
-			m.setPhotoProfil(chemin);
-			facadecompte.modifierPhoto(m, chemin);
+			facadecompte.modifierPhoto(m, req.getContextPath()+"/V2/synchronous/images/"+ saveFile);
 			m = facadecompte.getMembre(m);
-			
-			///////////////////////////////////////////////
-			
-			
-			req.setAttribute("membre", m);
 			session.setAttribute("membre", m);
+			req.setAttribute("message", "Votre article a bien été ajouté");
 			req.getRequestDispatcher("/V2/synchronous/GestionCompte.jsp").forward(req, resp);
 			break;
 		case "proposer un article" :

@@ -68,27 +68,12 @@ public class ServInscription extends HttpServlet {
 		// TODO Auto-generated method stub
 				/* Préparation de l'objet formulaire */
 				String vue = null;
+	        	HttpSession session = request.getSession();
 				
 		        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
-		        Membre utilisateur = f.inscrireUtilisateur( request );
-//		        if(f.getErreurs().isEmpty()){
-		        	HttpSession session = request.getSession();
-		            session.setAttribute("membre", utilisateur);
-		            vue = "/V2/synchronous/AccueilVrai.jsp";
-		            request.setAttribute("nbPseudoIdentiques", f.estDejaPresent(utilisateur.getPseudonyme()));
-			        
-//		        }else{
-//		        	vue = "/V2/synchronous/Inscription.jsp";
-//		        }
+		        Membre m = f.inscrireUtilisateur( request );  
 		        
-		        //Collection<Membre> lm = f.getMembre();
-		            request.setAttribute("categorie", facadeAccueil.getCategories());
-				
-		        /* Stockage du formulaire et du bean dans l'objet request */
-		        request.setAttribute( ATT_FORM, f );
-		        request.setAttribute( ATT_USER, utilisateur );		        
-		        
-		        this.getServletContext().getRequestDispatcher( vue ).forward( request, response );
+		        request.getRequestDispatcher("/Accueil").forward( request, response );
 	}
 
 }

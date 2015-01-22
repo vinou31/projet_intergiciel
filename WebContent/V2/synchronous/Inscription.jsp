@@ -53,9 +53,11 @@
 							</header>
 							<div class="inscription">
 								<form method="post" action="${pageContext.request.contextPath}/ServInscription">
-								<fieldset>
+									<fieldset>
 										<legend>Informations de compte</legend>
 										<!-- Titre du fieldset -->
+
+
 										<p>
 											Pseudonyme: <input type="text" id="pseudonyme" name="pseudonyme" value="" size="20" maxlength="20" />
 											<script type="text/javascript">

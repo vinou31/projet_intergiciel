@@ -53,6 +53,8 @@ public class ServArticles extends HttpServlet {
 		HttpSession session = request.getSession();
 		Membre m = (Membre) session.getAttribute("membre");
 		String op = (String) request.getParameter("op");
+		request.setAttribute("categorie", facadeAccueil.getCategories());
+		request.setAttribute("membre", m);
 		switch(op){
 		case "articlesEnVente" :
 			//Articles de l'utilisateur
@@ -72,7 +74,6 @@ public class ServArticles extends HttpServlet {
 			request.getRequestDispatcher("/V2/synchronous/articles.jsp").forward(request, response);
 			break;
 		case "ajout" :
-			request.setAttribute("categorie", facadeAccueil.getCategories());
 			request.getRequestDispatcher("/V2/synchronous/AjouterArticle.jsp").forward(request, response);
 			break;
 		case "mes articles" :

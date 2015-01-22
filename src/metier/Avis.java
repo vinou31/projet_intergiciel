@@ -17,8 +17,6 @@ public class Avis {
 	@ManyToOne
 	private Membre membre;
 	
-	@ManyToOne
-	private Article article;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -70,13 +68,7 @@ public class Avis {
 		ID = iD;
 	}
 
-	public Article getArticle() {
-		return article;
-	}
 
-	public void setArticle(Article article) {
-		this.article = article;
-	}
 	
 	
 

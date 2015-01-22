@@ -11,12 +11,6 @@
 	Visit http://html5templates.com for more great templates or follow us on Twitter @HTML5T
 -->
 
-
-
-
-
-
-
 <html>
 <head>
 <title>TrocMania</title>
@@ -31,11 +25,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/css/style-desktop.css" />
 </noscript>
-   <link rel="stylesheet" href="stylesMenu.css">
-   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   <script src="scriptMenu.js"></script>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
+
+
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 </head>
 <body>
@@ -56,19 +49,20 @@
 								<div class="post">
 									<h2>Bienvenue sur TrocMania !!!</h2>
 									<p>
-										Description du site.... Cette plateforme d'échange a été
-										développé dans le cadre d'un projet d'intergicielle à
-										l'INP-ENSEEIHT Toulouse. Date création et origine Vous pouvez
-										dés à présent <a href="http://html5templates.com/">consulter
-											les articles</a> du site.
+										TrocMania est un site de troc, d'échange et de vente en ligne. Il vous
+										permettra de trouver des personnes intéressées par ce que vous proposez 
+										et les personnes vous contacteront.
 									</p>
+									<%if(m == null){ %>
 									<p>&nbsp;</p>
-									<p>L'inscription est rapide blablabla.... Mode marchand de
-										tapis</p>
+									<p>L'inscription est rapide, n'hésitez pas à consulter notre catalogue d'articles
+									pour voir ce qui pourrait vous intéresser.</p>
 									<p>&nbsp;</p>
+									
 									<p class="button-style">
-										<a href="#">Je m'inscris immédiatement</a>
+										<a href="${pageContext.request.contextPath}/ServInscription">Je m'inscris immédiatement</a>
 									</p>
+									<%} %>
 								</div>
 							</section>
 							<section>
@@ -93,7 +87,7 @@
 			</div>
 			<div class="6u">
 				<section id="box2">
-				<h2><a href="${pageContext.request.contextPath}/V2/synchronous/AccueilVrai.jsp">A propos du site</a></h2>
+				<h2><a href="${pageContext.request.contextPath}/Accueil">A propos du site</a></h2>
 				<p>Tout savoir sur le merveilleux univers de TrocMania!</p>
 				</section>
 			</div>

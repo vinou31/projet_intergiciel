@@ -416,12 +416,12 @@ width: 60%;
  
 /********************************************/
 /* La Barre d'articles */
-
+/*
   .article ul ul {display: none; position: relative; left: 100%; top: -1px; margin:auto; padding: 0px; border: 0px solid grey;}
-  .article li {background-color: #FFFFFF;list-style-type: none; position: relative; width: 100%; height : 50px; padding: 2px; /*margin: auto;*/text-align: center; overflow:visible;vertical-align: middle;}
+  .article li {background-color: #FFFFFF;list-style-type: none; position: relative; width: 100%; height : 50px; padding: 2px; /*margin: auto;*/  /*    text-align: center; overflow:visible;vertical-align: middle;}
   .article li li {height : 25px;position:relative;top:-10px}
   .article li:hover {background-color: #FFFF70;border-radius: 4px;}
-  .article li:hover ul.niveau2, li li:hover ul.niveau3 {display: block}
+  .article li:hover ul.niveau2, li li:hover ul.niveau3 {display: block}*/
   /*.article li.plus {background-position:right; background-image: url(illustrations/fdroite.gif); background-repeat: no-repeat; border-bottom: 1px solid grey;}*/
  /******************************************/
 

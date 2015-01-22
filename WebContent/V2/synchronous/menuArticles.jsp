@@ -9,13 +9,12 @@
 	<div class="article">
 		<a href="${pageContext.request.contextPath}/ServArticles?op=articlesEnVente"><h2>Articles</h2></a>
 		<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");%>
-		<div id='cssmenu'>
-		<ul>
+		<ul class="niveau1">
 			<%if(cat != null){
 						for (Categorie c : cat){%>
-			<li class='has-sub'>
+			<li>
 				<span><% out.print(c.getNomCategorie()); %></span>
-				<ul> 
+				<ul class="niveau2"> 
 					<%
 					Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
 					for (Categorie c2: souscat){
@@ -31,5 +30,4 @@
 			<% 	}}%>
 		</ul>
 		</div>
-	</div>
-</section>
+		</section>

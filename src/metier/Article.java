@@ -17,14 +17,13 @@ public class Article {
 private String description;
 private String image;//Url de l'emplacement de l'image
 private Date dateDepot;
-private int prixPropose;
+private String prixPropose;
 //private Troc prixPropose;
 private String nom;
 @ManyToOne
 private Membre possesseur;
 
-@OneToMany(mappedBy="article", fetch=FetchType.EAGER)
-private Set<Avis> avis;
+
 
 @ManyToOne
 private Categorie estdeType;
@@ -113,11 +112,11 @@ public void setNom(String nom) {
 	this.nom = nom;
 }
 
-public int getPrixPropose() {
+public String getPrixPropose() {
 	return prixPropose;
 }
 
-public void setPrixPropose(int prixPropose) {
+public void setPrixPropose(String prixPropose) {
 	this.prixPropose = prixPropose;
 }
 

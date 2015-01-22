@@ -31,7 +31,7 @@ public class ServAjouterArticle extends HttpServlet{
 	FacadeArticle fga;
 	
 	@EJB
-	FacadeAccueil fa;
+	FacadeAccueil facadeAccueil;
 
 	/**
 	 * Name of the directory where uploaded files will be saved, relative to the
@@ -63,46 +63,43 @@ public class ServAjouterArticle extends HttpServlet{
 			HttpServletResponse response) throws ServletException, IOException {
 		// gets absolute path of the web application
 		HttpSession session = request.getSession();
-		Membre m = (Membre)session.getAttribute("membre");
-		String op = (String)request.getParameter("op");
-		switch (op){
-		case "launch" :
-			request.setAttribute("categorie", fa.getCategories());
-			request.getRequestDispatcher("/V2/synchronous/AjouterArticle.jsp").forward(request, response);
+		Membre m = (Membre) session.getAttribute("membre");
+		String op = (String) request.getParameter("op");
+		request.setAttribute("categorie", facadeAccueil.getCategories());
+		request.setAttribute("membre", m);
+		switch (op) {
+		case "launch":
+			request.getRequestDispatcher("/V2/synchronous/AjouterArticle.jsp")
+					.forward(request, response);
 			break;
-		case "Ajouter l'article" :
-		String appPath = request.getContextPath()+"/V2/synchronous/images";
-		// constructs path of the directory to save uploaded file
-		String savePath = appPath + File.separator + m.getPseudonyme();
+		case "Ajouter l'article":
+			String appPath = request.getServletContext().getRealPath(
+					"/V2/synchronous/images");
+			String savePath = appPath + File.separator;
+			String copiePath = "/home/aboucher2/workspace_jee/intergiciel/WebContent/V2/synchronous/images/";
 
-		// creates the save directory if it does not exists
-		File fileSaveDir = new File(savePath);
-		if (!fileSaveDir.exists()) {
-			fileSaveDir.mkdir();
-		}
+			String saveFile = null;
+			String nomImage;
+			String fileName = "";
+			String chemin = "";
 
-		String nomImage;
-		String fileName = "";
-		String chemin = "";
-		System.out.println("oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
-		for (Part part : request.getParts()) {
-			fileName = extractFileName(part);
-			if (!fileName.equals("")) {
-				
-				chemin = savePath + File.separator + fileName;
-				part.write(chemin);
+			for (Part part : request.getParts()) {
+				fileName = extractFileName(part);
+				if (!fileName.equals("")) {
+
+					chemin = savePath + fileName;
+					part.write(chemin);
+					chemin = copiePath + fileName;
+					part.write(chemin);
+					saveFile = fileName;
+				}
 			}
-		}
-//		String chemin =  savePath + File.separator + fileName;
-//		System.out.print("chemin : " + chemin);
-		
-		fga.ajouterArticle(request, m, chemin);
 
-		request.setAttribute("categorie", fa.getCategories());
-		request.setAttribute("message", "Votre article a bien été ajouté");
-		//getServletContext().getRequestDispatcher("/resultUpload.jsp").forward(request, response);
-		request.getRequestDispatcher("/Accueil").forward(request, response);
-		break;
+			fga.ajouterArticle(request, m, saveFile);
+			session.setAttribute("membre", m);
+			request.setAttribute("message", "Votre article a bien été ajouté");
+			request.getRequestDispatcher("/Accueil").forward(request, response);
+			break;
 		}
 	}
 

@@ -22,6 +22,9 @@
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/stylesMenu.css">
+   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="${pageContext.request.contextPath}/V2/synchronous/scriptMenu.js"></script>
 </head>
 <body>
 
@@ -54,7 +57,7 @@
 								<section>
 								<div id="box-6" class="box">
 								<a href ="${pageContext.request.contextPath}/ServArticle?op=articleEnVue&idArticle=<%=a.getID()%>">
-									<img id="image-6" src="${pageContext.request.contextPath}/<%=a.getImage()%>"/> 
+									<img id="image-6" src="<%=a.getImage()%>"/> 
 									<span class="caption scale-caption">								
 									<h3><%=a.getNom()%></h3>
 								</span>

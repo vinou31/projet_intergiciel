@@ -59,7 +59,8 @@
 
 
 									<p>
-										Description de l'article: <textarea name="critique"  cols="40" rows="4" id="description"></textarea>
+										Description de l'article: </p>
+										<p><textarea name="description"  cols="40" rows="4" id="description"></textarea>
 									</p>
 
 									<p>
@@ -72,10 +73,10 @@
 
 									<select name="categorieArticle" id="categorieArticle">
 										
-										<%//Collection<Categorie> cate = (Collection<Categorie>)request.getAttribute("sousCat");
+										<%//Collection<Categorie> cate = (Collection<Categorie>)request.getAttribute("categorie");
 										for(Categorie c : cat){
-											if(c.getSousCategorie().isEmpty()){%>
-											<option value="<%=c.getNomCategorie()%>"><%=c.getNomCategorie()%></option>
+											for(Categorie sc : c.getSousCategorie()){%>
+											<option value="<%=sc.getNomCategorie()%>"><%=sc.getNomCategorie()%></option>
 										<%} 
 										}%>
 									</select>

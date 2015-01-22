@@ -30,7 +30,7 @@
 				<div class="6u mobileUI-main-content">
 				<div id="content">
 					<section>
-					<form action="ServCompte" method="get">
+					<form action="ServCompte" method="post" enctype="multipart/form-data">
 						<div class="post">
 						<%if (m != null){%>						
 					<h2>Compte de :<%=m.getNom() %></h2>
@@ -47,15 +47,15 @@
 							<input class="searchfield" name="mdp" type="password" value=<%=m.getMotDePasse() %> onfocus="if (this.value == <%=m.getMotDePasse() %>) {this.value = '';}" onblur="if (this.value == '') {this.value = <%=m.getMotDePasse() %>;}"></li>
 							<li> Photo de profil :
 							<input type="file" name="file" id="file" size="60"/></li>
-							<p class="button-style"><input type="submit" value="Enregistrer Modification" id="EnregistrerModification" name="op"/></p>
-							
-							Vos articles :
+							<p class="button-style"><!-- <a href="${pageContext.request.contextPath}/ServCompte?op=Enregistrer+Modification"/>Enregistrer Modification</a></p>-->
+							<input type="submit" name="op" value="Enregistrer Modification" id="op"/> 
+			 				Vos articles :
 							<%if (m.getPropose().size() == 0) { %>
 							 Vous n'avez proposé encore aucun article
-							 <p class="button-style"><input type="submit" value="proposer un article" id="ProposerUnArticle" name="op"></p>
+							 <p class="button-style"><a href="${pageContext.request.contextPath}/ServAjouterArticle?op=launch">proposer un article</a></p>
 							
 							 <%} else { %>
-							 	<p class="button-style"><input type="submit" value="mes articles" id="ProposerUnArticle" name="op"></p>
+							 	<p class="button-style"><a href="${pageContext.request.contextPath}/ServArticles?op=mes+articles">mes articles</a></p>
 							 	<%}%>	 	
 							<%} else { %>
 								Vous allez être redirigé là où vous pouvez vous inscrire

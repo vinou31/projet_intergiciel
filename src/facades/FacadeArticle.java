@@ -52,6 +52,10 @@ public class FacadeArticle {
 		return (Collection<String>)em.createNativeQuery("SELECT DISTINCT Categorie FROM Article;").getResultList();
 	}
 	
+	public Categorie getCategorie(String nomc){
+		return  em.createQuery("from Categorie where nomCategorie='"+nomc+"'", Categorie.class).getSingleResult();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public Collection<String> getSousCategorieFacade(String categorie) {
 		return (Collection<String>)em.createNativeQuery("SELECT DISTINCT sousCategorie FROM Article WHERE Categorie="+categorie+";").getResultList();
@@ -75,21 +79,20 @@ public class FacadeArticle {
 		return em.createQuery("FROM Categorie WHERE parent IS NOT NULL", Categorie.class).getResultList();
 	}
 	
-	public void ajouterArticle(HttpServletRequest req, Membre m, String chemin){
+	public void ajouterArticle(HttpServletRequest req, Membre m, String file){
 		Article a = new Article();
 		a.setNom(req.getParameter(CHAMP_NOM));
 		a.setDescription(req.getParameter(CHAMP_DESCRIPTION));
 		//int prix = 0;
-		int prix  = Integer.parseInt(req.getParameter("prix"));
-		a.setPrixPropose(prix);
-		a.setImage(chemin);
-		
+		a.setPrixPropose(req.getParameter("prix"));
+		a.setImage(req.getContextPath() + "/V2/synchronous/images/" + file);
+		a.setEstdeType(em.find(Categorie.class, getCategorie(req.getParameter("categorieArticle")).getID() ));
 		java.util.Date d1 = new java.util.Date();
 		java.sql.Date d2 = new java.sql.Date(d1.getTime());
 		a.setDateDepot(d2);
 		em.persist(a);
-		//a.setPossesseur(m);
-		m.getPropose().add(a);
+		a.setPossesseur(em.find(Membre.class, m.getID()));
+		//em.find(Membre.class, m.getID()).getPropose().add(em.find(Article.class, a.getID()));
 	}
 	
 	public void supprimerArticle(HttpServletRequest req){

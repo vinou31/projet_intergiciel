@@ -1,6 +1,5 @@
 package servlets;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.ejb.EJB;
@@ -9,10 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import metier.Membre;
-import facades.FacadeGestionArticles;
+import facades.FacadeArticle;
 
 public class ServAjouterAvis {
 	private static final long serialVersionUID = 1L;
@@ -21,7 +19,7 @@ public class ServAjouterAvis {
 	public static final String VUE = "/formFichier.jsp";
 	
 	@EJB
-	FacadeGestionArticles fga;
+	FacadeArticle fga;
 	/**
 	 * Name of the directory where uploaded files will be saved, relative to the
 	 * web application directory.

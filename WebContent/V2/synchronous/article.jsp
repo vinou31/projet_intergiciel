@@ -29,6 +29,11 @@
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANmySB4ly_bpVRrVFPRsnOQ0x65rkLVms&libraries=geometry&sensor=false"></script>
+		<script src="http://openlayers.org/api/OpenLayers.js"></script>
+	   <link rel="stylesheet" href="${pageContext.request.contextPath}/V2/synchronous/stylesMenu.css">
+   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="${pageContext.request.contextPath}/V2/synchronous/scriptMenu.js"></script>	
 </head>
 <body>
 <div id="wrapper">
@@ -56,16 +61,24 @@
 								<img src= "<%=request.getAttribute("img")%>" alt="" class="imgarticle">
 								<p>Prix proposé: <%=request.getAttribute( "prix")%></p>
 								<p>Descrpition de l'article: <%=request.getAttribute("description")%></p>
-								<p>Vendeur: <%=membre.getNom()%></p>
+								<p>Vendeur: <%=membre.getPseudonyme()%></p>
 								<p>Telephone : <%=membre.getTelephone()%> </p>
 								<p>Adresse : <%=membre.getAdresse() %></p>
 								<div id="carte" style="width:800px;height:400px;"></div>
 								<div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
+								<%if(m.getID()==membre.getID()){ %>
+								<p class="button-style"><a href="${pageContext.request.contextPath}/ServArticle?op=supprimerArticle&id=<%=request.getAttribute("id")%>">
+								Supprimer cet article de la vente</a></p>								
+								<%} %>
 								
-								<a href="${pageContext.request.contextPath}/ServArticle?op=supprimerArticle&id=<%=request.getAttribute("id")%>">
-								<p>Supprimer cet article de la vente</p></a>								
 								
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>								
+	
+			<div id="carte" style="width:800px;height:400px;"></div>
+		<div id="map-canvas" style="float:left;width:70%;height:100%;"></div>
+		
+      <input type="submit" onclick="calcRoute();">
+    <div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
@@ -76,23 +89,17 @@ function initialize() {
   var chicago = new google.maps.LatLng(41.850033, -87.6500523);
   var mapOptions = {
     zoom: 6,
-    center: chicago,
-  };
+    center: chicago
+  }
   map = new google.maps.Map(document.getElementById('carte'), mapOptions);
   directionsDisplay.setMap(map);
-  calcRoute();
 }
 
 function calcRoute() {
-  /*var start = 'Marspich';
-  var end = 'Metz';*/
-  <%
-  	String start = (String) request.getAttribute("start");
-    String end = (String) request.getAttribute("end");
-  %>
-  var start = <%=start%>;
-  var end = <%=end%>;
-  var waypts = [];
+	 
+	  var start ='<%=m.getVille()%>';
+	  var end ='<%=membre.getVille()%>';
+ /* var waypts = [];
   var checkboxArray = document.getElementById('waypoints');
   for (var i = 0; i < checkboxArray.length; i++) {
     if (checkboxArray.options[i].selected == true) {
@@ -100,12 +107,11 @@ function calcRoute() {
           location:checkboxArray[i].value,
           stopover:true});
     }
-  }
+  }*/
 
   var request = {
       origin: start,
       destination: end,
-      waypoints: waypts,
       optimizeWaypoints: true,
       travelMode: google.maps.TravelMode.DRIVING
   };
@@ -115,17 +121,59 @@ function calcRoute() {
       var route = response.routes[0];
       var summaryPanel = document.getElementById('directions_panel');
       summaryPanel.innerHTML = '';
+      // For each route, display summary information.
       for (var i = 0; i < route.legs.length; i++) {
         var routeSegment = i + 1;
+        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';
+        summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
         summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
       }
     }
   });
 }
 
-google.maps.event.addDomListener(window, 'load', calcRoute);
+google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
+	
+	
+	
+	<!--  
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>		
+	<input type="submit" onclick="initialize();">						
+    <script>
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var chicago = new google.maps.LatLng(41.850033, -87.6500523);
+  var mapOptions = {
+    zoom: 6,
+    center: chicago
+  };
+  map = new google.maps.Map(document.getElementById('carte'), mapOptions);
+  directionsDisplay.setMap(map);
+
+
+  
+  var request = {
+      origin: start,
+      destination: end,
+      travelMode: google.maps.TravelMode.DRIVING
+  };
+
+  
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+    </script>-->
 								
 								
 								

@@ -58,39 +58,12 @@
 
 
 										<p>
-											Pseudonyme: <input type="text" id="pseudonyme" name="pseudonyme" value="" size="20" maxlength="20" />
-											<script type="text/javascript">
-												var f1 = new LiveValidation(
-														'f1',
-														{
-															validMessage : "  OK"
-														});
-												f1
-														.add(
-																Validate.Presence,
-																{
-																	failureMessage : "   Il semblerait qu'il soit déjà utilisé"
-																});
-											</script>
+											Pseudonyme: <input type="text" id="pseudonyme" name="pseudonyme" value="" size="20" maxlength="20" />											
 										</p>
 
 										<p>
 											Entrer un mot de passe: <input type="password" id="motDePasse" name="motDePasse" value="" size="20"	maxlength="20" /> <br> 
-											<!--<span class=" LV_validation_message LV_invalid">Le mot de passe doit être identique</span>-->
-											<script type="text/javascript">
-												var f19 = new LiveValidation(
-														'f19',
-														{
-															validMessage : "  OK"
-														});
-												f19
-														.add(
-																Validate.Confirmation,
-																{
-																	match : 'myPasswordField',
-																	failureMessage : "  Les mots de passe ne correspondent pas!"
-																});
-											</script>
+											<!--<span class=" LV_validation_message LV_invalid">Le mot de passe doit être identique</span>-->									
 										</p>
 
 										

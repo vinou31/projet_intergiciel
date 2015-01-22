@@ -9,8 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import metier.Article;
+import metier.Membre;
+import facades.FacadeAccueil;
 import facades.FacadeArticle;
 
 /**
@@ -20,6 +23,9 @@ import facades.FacadeArticle;
 public class ServRecherche extends HttpServlet {
 	@EJB
 	FacadeArticle facadeArticle;
+	
+	@EJB
+	FacadeAccueil facadeAccueil;
 	private static final long serialVersionUID = 1L;
 
     /**
@@ -40,6 +46,10 @@ public class ServRecherche extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Membre m = (Membre) session.getAttribute("membre");
+		request.setAttribute("categorie", facadeAccueil.getCategories());
+		request.setAttribute("membre", m);
 		String search = request.getParameter("search");
 		Collection<Article> articles = facadeArticle.getArticlesNom(search);
 		request.setAttribute("articles", articles);
