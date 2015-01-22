@@ -9,7 +9,7 @@
 	<div class="article">
 		<a href="${pageContext.request.contextPath}/ServArticles?op=articlesEnVente"><h2>Articles</h2></a>
 		<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");%>
-		<div class="cssmenu">
+		<div id="cssmenu">
 		<ul>
 			<%if(cat != null){
 						for (Categorie c : cat){%>

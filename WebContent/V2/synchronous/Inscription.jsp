@@ -29,7 +29,7 @@
 </noscript>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/V2/synchronous/css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
-<script type="text/javascript" src="livevalidation_standalone.compressed.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/livevalidation_standalone.compressed.js"></script>
 <!--[if IE 9]><link rel="stylesheet" href="css/style-ie9.css" /><![endif]-->
 </head>
 <body>
@@ -53,11 +53,9 @@
 							</header>
 							<div class="inscription">
 								<form method="post" action="${pageContext.request.contextPath}/ServInscription">
-									<fieldset>
+								<fieldset>
 										<legend>Informations de compte</legend>
 										<!-- Titre du fieldset -->
-
-
 										<p>
 											Pseudonyme: <input type="text" id="pseudonyme" name="pseudonyme" value="" size="20" maxlength="20" />
 											<script type="text/javascript">
