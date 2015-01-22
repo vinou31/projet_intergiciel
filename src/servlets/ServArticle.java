@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import connexion.FacadeConnexion;
 import metier.Article;
 import metier.Membre;
+import facades.FacadeAccueil;
 import facades.FacadeArticle;
 import facades.FacadeCompte;
 
@@ -26,6 +27,8 @@ public class ServArticle extends HttpServlet {
 	@EJB
 	FacadeArticle facadeArticle;
 	
+	@EJB	
+	FacadeAccueil	facadeAccueil;
 	private static final long serialVersionUID = 1L;
 
     /**
@@ -48,11 +51,13 @@ public class ServArticle extends HttpServlet {
 		String op = (String)request.getParameter("op");
 		HttpSession session = request.getSession();
 		Membre m = (Membre) session.getAttribute("membre");
+		request.setAttribute("categorie", facadeAccueil.getCategories());
+		request.setAttribute("membre", m);
 		switch(op){
 		case "articleEnVue" :
 			Integer id = Integer.parseInt((String)request.getParameter("idArticle"));
 			Article article = facadeArticle.findArticle(id);
-			request.setAttribute("vendeur",article.getPossesseur().getNom());
+			request.setAttribute("vendeur",article.getPossesseur());
 			request.setAttribute("description",article.getDescription());
 			request.setAttribute("nom",article.getNom());
 			request.setAttribute("img",article.getImage());
@@ -60,6 +65,8 @@ public class ServArticle extends HttpServlet {
 			request.setAttribute("start",m.getVille());
 			request.setAttribute("end",article.getPossesseur().getVille());
 			request.setAttribute("id", id);
+			request.setAttribute("start", m.getVille());
+			request.setAttribute("end", article.getPossesseur().getVille());
 			request.getRequestDispatcher("/V2/synchronous/article.jsp").forward(request, response);
 			break;
 		case "supprimerArticle" :

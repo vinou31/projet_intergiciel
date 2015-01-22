@@ -48,24 +48,22 @@
 							<div class="post">
 							
 									<ul class="breadcrumb">
-										<li><a href="#">Articles</a></li>
-										<li><a href="#">Véhicules</a></li>
-										<li><a href="#">Vivant</a></li>
-										<li><a href="#">Chameau</a></li>
+										
 									</ul>
 									
-									
+									<%Membre membre = (Membre)request.getAttribute("vendeur"); %>
 								<h2><%=request.getAttribute("nom")%></h2>
 								<img src= "<%=request.getAttribute("img")%>" alt="" class="imgarticle">
 								<p>Prix proposé: <%=request.getAttribute( "prix")%></p>
 								<p>Descrpition de l'article: <%=request.getAttribute("description")%></p>
-								<p>Vendeur: <%=request.getAttribute( "vendeur" )%></p>
+								<p>Vendeur: <%=membre.getNom()%></p>
+								<p>Telephone : <%=membre.getTelephone()%> </p>
+								<p>Adresse : <%=membre.getAdresse() %></p>
 								<div id="carte" style="width:800px;height:400px;"></div>
 								<div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
 								
-								<a href="${pageContext.request.contextPath}/ServArticle?op=supprimerArticle&id=<%=request.getAttribute("id")%>"><p>Supprimer cet article de la vente</p></a>
-								<a href="${pageContext.request.contextPath}/ServArticle?op=modifierArticle&id=<%=request.getAttribute("id")%>"><p>modifier cet article</p></a>																											
-								
+								<a href="${pageContext.request.contextPath}/ServArticle?op=supprimerArticle&id=<%=request.getAttribute("id")%>">
+								<p>Supprimer cet article de la vente</p></a>								
 								
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>								
     <script>
