@@ -79,24 +79,12 @@
 					<div class="3u" id="sidebar1">
 						<section>
 							<h2>Articles</h2>
+							
 							<div class="article">
-								<ul class="niveau1">
-									<li>Electroménager
-										<ul class="niveau2">
-											<li>Machine à laver</li>
-											<li>Aspirateur</li>
-										</ul>
-									</li>
-									<li>Informatique
-										<ul class="niveau2">
-											<li>Tablette</li>
-											<li>Portable</li>
-										</ul>
-									</li>
-									<li>Outillage</li>
-									<li>Son-Vidéo</li>
-								</ul>
+							<%@ include file="menuArticles.jsp" %>
+								
 							</div>
+							
 						</section>
 
 						<section>
