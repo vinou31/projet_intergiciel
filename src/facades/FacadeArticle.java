@@ -62,7 +62,8 @@ public class FacadeArticle {
 	}
 	
 	public Collection<Article> getArticlesNom(String nom) {
-		return em.createQuery("FROM Article WHERE nom LIKE "+ nom +";",Article.class).getResultList();
+		return em.createQuery("FROM Article WHERE nom LIKE '%"+ nom +"%'",Article.class).getResultList();
+		
 	}
 	
 	public Collection<Article> getArticlesFromCategories(int idC){

@@ -41,8 +41,9 @@ public class ServRecherche extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
-		Collection<Article> articles = facadeArticle.getArticles();
+		Collection<Article> articles = facadeArticle.getArticlesNom(search);
 		request.setAttribute("articles", articles);
+		request.setAttribute("op", "afficher");
 		request.getRequestDispatcher("/V2/synchronous/articles.jsp").forward(request, response);
 	}
 

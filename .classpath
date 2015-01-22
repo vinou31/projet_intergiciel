@@ -13,5 +13,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.jboss.ide.eclipse.as.classpath.core.ejb3.classpathContainer/JBoss EAP 6.1+ Runtime Server"/>
+	<classpathentry kind="lib" path="/home/rtheodos/Intergiciels/jboss-eap-6.3/modules/system/layers/base/javax/servlet/api/main/jboss-servlet-api_3.0_spec-1.0.2.Final-redhat-1.jar"/>
+	<classpathentry kind="lib" path="/home/rtheodos/Intergiciels/jboss-eap-6.3/modules/system/layers/base/javax/persistence/api/main/hibernate-jpa-2.0-api-1.0.1.Final-redhat-2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

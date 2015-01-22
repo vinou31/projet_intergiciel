@@ -50,6 +50,7 @@ public class ServArticle extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String op = (String)request.getParameter("op");
 		HttpSession session = request.getSession();
+		//Quand aucun membre est connecté ?acces ville
 		Membre m = (Membre) session.getAttribute("membre");
 		request.setAttribute("categorie", facadeAccueil.getCategories());
 		request.setAttribute("membre", m);
