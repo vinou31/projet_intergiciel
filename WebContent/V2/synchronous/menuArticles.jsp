@@ -8,35 +8,28 @@
 <section>
 	<div class="article">
 		<a href="${pageContext.request.contextPath}/ServArticles?op=articlesEnVente"><h2>Articles</h2></a>
-		<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");
-						%>
-		<ul class="niveau1">
+		<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");%>
+		<div class="cssmenu">
+		<ul>
 			<%if(cat != null){
-						
-						for (Categorie c : cat){
-							%>
-			<li>
+						for (Categorie c : cat){%>
+			<li class='has-sub'>
 				<% out.print(c.getNomCategorie()); %>
-				<ul class="niveau2"> 
-				
+				<ul> 
 					<%
 					Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
 					for (Categorie c2: souscat){
 					%>
 					<li>
 					<a href="${pageContext.request.contextPath}/ServArticles?op=articlesEnVenteCat&idCat=<%=c2.getID()%>">
-						<% out.print(c2.getNomCategorie()); %>
+						<span><% out.print(c2.getNomCategorie()); %></span>
 						</a>
 					</li>
-
 					<%}%>
 				</ul>
 			</li>
-
-			<% 			
-						}
-						}
-						%>
+			<% 	}}%>
 		</ul>
+		</div>
 	</div>
 </section>
