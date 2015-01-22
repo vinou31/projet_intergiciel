@@ -9,12 +9,12 @@
 	<div class="article">
 		<a href="${pageContext.request.contextPath}/ServArticles?op=articlesEnVente"><h2>Articles</h2></a>
 		<%Collection<Categorie> cat = (Collection<Categorie>) request.getAttribute("categorie");%>
-		<div id="cssmenu">
+		<div id='cssmenu'>
 		<ul>
 			<%if(cat != null){
 						for (Categorie c : cat){%>
 			<li class='has-sub'>
-				<% out.print(c.getNomCategorie()); %>
+				<span><% out.print(c.getNomCategorie()); %></span>
 				<ul> 
 					<%
 					Collection<Categorie> souscat = (Collection<Categorie>) c.getSousCategorie();
